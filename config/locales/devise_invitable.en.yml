@@ -1,0 +1,20 @@
+en:
+  devise:
+    invitations:
+      send_instructions: 'An invitation email has been sent to %{email}.'
+      invitation_token_invalid: 'The invitation token provided is not valid!'
+      updated: 'Your password was set successfully. You are now signed in.'
+      no_invitations_remaining: "No invitations remaining"
+    mailer:
+      invitation_instructions:
+        subject: 'Invitation instructions'
+ch:
+  devise:
+    invitations:
+      send_instructions: '邀请信发至%{email}.'
+      invitation_token_invalid: '邀请代码不正确!'
+      updated: '登录成功！'
+      no_invitations_remaining: "没有剩余邀请权利"
+    mailer:
+      invitation_instructions:
+        subject: '您的朋友邀请你加入悟空人才网'

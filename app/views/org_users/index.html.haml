@@ -1,0 +1,21 @@
+%h3 所有注册企业与机构
+
+%table.zebra-striped
+  %tr
+    %th 公司/机构
+    %th 公司人数
+    %th 所属行业
+    %th 总部地点
+    %th
+    %th
+  - for company in @users
+    %tr{:id=>"#{company.id}"}
+      %td= company.org_profile.company_name 
+      %td= company.org_profile.people_count
+      %td= company.org_profile.industry.name
+      %td= company.org_profile.city.fullname
+      %td= bookmark_code(company)
+      %td= link_to "查看", company,:class=>"btn"
+
+.row
+  .span10= paginate @users

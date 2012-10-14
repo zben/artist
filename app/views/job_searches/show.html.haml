@@ -1,0 +1,48 @@
+=render 'ind_users/navigation'
+.row
+  .span3.search
+    =render 'job_searches/form'
+  .span13
+    %h4.list_tabs
+      -if @is_new
+        %span.active 推荐职位
+        =link_to "最新职位", job_search_path("all")
+      -elsif @show_all
+        =link_to "推荐职位", default_jobs_path
+        %span.active 最新职位
+      -else
+        =link_to "推荐职位", default_jobs_path
+        =link_to "最新职位", job_search_path("all")
+        %span.active 搜索结果
+
+    -if @job_posts.empty?
+      -if @is_new
+        没有找到匹配您技能或兴趣的职位。
+        您可以
+        =link_to "添加技能", ind_user_edit_path(current_user, 'skill')
+        ,
+        =link_to "添加感兴趣的行业", ind_user_edit_path(current_user, 'profile')
+        或者
+        =link_to "查看最新职位", job_search_path(:all)
+        。
+      -else
+        请试试别的搜索关键词吧！
+    -else
+      %table.zebra-striped
+        %tr
+          %th{width: 300} 职位
+          %th{width: 300} 公司/机构
+          %th{width: 200} 月薪
+          %th{width: 200} 地点
+          %th{width: 200} 截止日期
+        - for job_post in @job_posts
+          %tr
+            %td
+              =link_to job_post.title,job_post
+              -if job_post.on_promo?
+                %p.one_liner="推荐有奖"
+            %td= job_post.company_name
+            %td= job_post.salary ||'面议'
+            %td= job_post.city.name
+            %td= l job_post.expiration,:format=>:long unless job_post.expiration.nil?
+      =paginate @job_posts

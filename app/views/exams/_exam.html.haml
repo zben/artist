@@ -1,0 +1,13 @@
+.profile_item
+  .row
+    .span5 项目: #{exam.exam_name}
+    .span3 
+      -if exam.score.blank?
+        =""
+      -else  
+        分数: #{exam.score}/#{exam.max_score}       
+    .span4="#{yearmonth(exam.date)}"
+
+
+
+

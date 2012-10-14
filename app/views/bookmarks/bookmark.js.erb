@@ -1,0 +1,5 @@
+<% if @is_bookmarked%> 
+$("a.<%=@bookmarkable.id=%>").text("取消关注");
+<% else %>
+$("a.<%=@bookmarkable.id%>").text("关注");
+<% end %>

@@ -1,0 +1,43 @@
+= semantic_form_for @job_post do |f|
+
+  = f.inputs do
+    .row
+      .span8=f.input :company_name
+      .span3=f.input :industry_id,:as=>:select, :collection=>Industry.all.pinyin_order.map{|x| [t(x.name), x.id]},:prompt => t("Select one")
+      .span2=f.input :company_type, :as=>:select, :collection=>JobPost.company_types_for_select,:prompt => t("Select one")
+    .row
+      .span5=f.input :title
+      .span2=f.input :job_type, :as=>:select, :collection=>JobPost.job_types_for_select,:prompt => t("Select one")
+      .span2=f.input :salary, :as=>:select, :collection=>JobPost.salaries_for_select,:prompt => t("Select one")
+      =render 'shared/city_picker',:f=>f,:city_id=>@job_post.city_id
+    .row
+      .span3=f.input :degree_requirement, :as=>:select, :collection=>JobPost.degree_requirements_for_select, :prompt=>t("Select one")
+      .span2=f.input :years_required, :as=>:select, :collection=>JobPost.years_requireds_for_select,:prompt => t("Select one")
+      .span4
+        =f.label "推广开始日期"
+        =f.date_select :promo_start_date, {prompt: {day: t("Select one"), month: t("Select one"), year: t("Select one")}},{class: "date"}
+      .span4
+        =f.label "推广结束日期"
+        =f.date_select :promo_end_date, {prompt: {day: t("Select one"), month: t("Select one"), year: t("Select one")}},{class: "date"}
+    .row
+      .span13
+        .tiny=f.input :description,:as=>:text,:input_html => { :class => 'autogrow', :rows => 10}
+    .row
+      .span13
+        .tiny=f.input :job_requirement,:as=>:text,:rows=>10,:input_html => { :class => 'autogrow', :rows => 10}
+    .row
+      .span2=f.input :contact_person
+      .span3=f.input :phone_number
+      .span4=f.input :email
+      .span4
+        =f.label :expiration
+        =f.date_select :expiration,{},{:class=>"date"}
+   
+    /.row
+    /  .span13
+    /    =f.input :website,:input_html => { :placeholder => 'http://www.example.com'}
+    =render 'shared/skill_picker',:item=>@job_post
+
+    = f.action :submit, :button_html => { :class=>"btn primary"}
+ 
+

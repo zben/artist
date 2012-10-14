@@ -1,0 +1,10 @@
+.job_post_snippet
+  .row
+    .span5
+      .job_snippet_left
+        .lab=link_to project.title, project
+        .lab=project.province.name
+    .span3
+      =project.project_fields.first.name
+      %br
+      发布于#{time_ago_in_words(project.created_at)}以前

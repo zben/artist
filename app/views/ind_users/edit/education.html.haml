@@ -1,0 +1,40 @@
+/=render 'ind_users/navigation' unless params[:controller]=="ind_users" and params[:action]=="new"
+.row
+  =render 'ind_users/side_nav'
+  .span12.offset1
+    -if @is_new
+      %h2 #{t('Add')} #{t('Education History')}
+    -else
+      %h2 #{t('Update')} #{t('Education History')}
+
+
+    = semantic_nested_form_for @user do |f|
+      = f.error_messages  
+      = hidden_field_tag :current_step, 'education' 
+      = hidden_field_tag :is_new, 'true' if @is_new
+      = f.semantic_fields_for :educations do |education|
+        .list_item_box
+          .row
+            .span6= education.input :school, :placeholder=>"例如： 北京大学"
+          
+            .span2= education.input :degree_type,:as=>:select,:collection=>Education.degree_types_for_select
+            .span3= education.input :GPA, :placeholder=>"例如: 3.8/4"
+           
+          .row
+            .span3= education.input :program, :placeholder=>"例如： 电子工程"
+            
+            .span3.yearmonth=education.input :start_date,:as=>:date, :start_year=>1990, :end_year=>Date.today.year
+            .span3.yearmonth=education.input :end_date,:as=>:date, :start_year=>1990, :end_year=>Date.today.year+5
+          .row
+            .span11=education.input :comment, :as=>:text, :input_html => { :class => 'autogrow', :rows => 3, :cols => 15, :maxlength => 500  },:placeholder=>"选填。可填完成的重要课程，研究，论文和课外活动的业绩"
+          = education.link_to_remove "#{t('Remove')} #{t('Education History')}" 
+        
+      = f.link_to_add "#{t('Add')} #{t('Education History')}", :educations
+      .row
+        .span2= submit_tag "#{@is_new ? t('Next Step') : t('Save Changes')}",:class=>"btn primary"
+
+-if @user.educations.empty?
+  :javascript
+    $(document).ready(function() {
+       $('.add_nested_fields').click();
+    });

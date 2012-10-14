@@ -1,0 +1,47 @@
+.row
+  .span3.search
+    =render 'talent_searches/form'
+  .span13
+    %h4
+      -if @is_new 
+        ="所有人才(#{IndUser.with_ind_profile.count}人)" 
+      -else
+        搜索结果
+
+    -if @users.empty?
+      搜索结果为0,请试试别的搜索参数！
+    -else
+      %table.zebra-striped
+        %thead
+          %tr
+            %th{width:180} 名字
+            %th{width:650} 最近工作/学历
+            %th{width:50} 粉丝
+            %th{width:50} 微博
+        %tbody
+          - for user in @users
+            %tr{:id=>"#{user.id}"}
+              %td{style: "width: 190px; display: inline-block;"}
+                .name
+                  .left= image_tag user.avatar(:small)
+                  .left
+                    %b= link_to user.profile.name(current_user), user
+                    %p="#{user.profile.province.name}, #{user.profile.province.country.name}"
+              %td{width: 650}
+                -if !user.experiences.empty?
+                  -ex = user.experiences[0]
+                  %p
+                    =word_wrap "#{ex.job_title},#{ex.company_name}"
+                    ="(#{l(ex.start_date,format: :short2)}-#{ex.end_date.nil? ? "至今" : l(ex.end_date,format: :short2)})"
+                -if !user.educations.empty?
+                  -ed = user.educations[0]
+                  %p
+                    =word_wrap "#{ed.program} #{ed.degree_type},#{ed.school}"
+                    ="(#{l(ed.start_date,format: :short2)}-#{ed.end_date.nil? ? "至今" : l(ed.end_date,format: :short2)})"
+              %td= user.bookmarkings.count
+
+              %td=link_to user.shouts.count, ind_user_shouts_path(user)
+      = paginate @users
+
+
+

@@ -1,0 +1,13 @@
+#slide_show_container
+  #example
+    #slides
+      .slides_container
+        -subject.photos.each do |photo|
+          =image_tag(photo.photo(:large),alt: "Slide 1", height: "300")
+
+      /%a.prev{:href => "#"}
+      /  %img{:alt => "Arrow Prev", :height => "43", :src => "/assets/img/arrow-prev.png", :width => "24"}/
+      /%a.next{:href => "#"}
+      /  %img{:alt => "Arrow Next", :height => "43", :src => "/assets/img/arrow-next.png", :width => "24"}/
+    /%img#frame{:alt => "Example Frame", :height => "341", :src => "/assets/img/example-frame.png", :width => "739"}
+

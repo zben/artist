@@ -1,0 +1,31 @@
+/=render 'ind_users/navigation' unless params[:controller]=="ind_users" and params[:action]=="new"
+.row
+  =render 'ind_users/side_nav'
+  .span12.offset1
+    -if @is_new
+      %h2 添加考试/获奖/证书
+    -else
+      %h2 更新考试/获奖/证书 
+
+
+    = semantic_nested_form_for @user do |f|
+      = f.error_messages  
+      = hidden_field_tag :current_step, 'exam' 
+      = hidden_field_tag :is_new, 'true' if @is_new
+      = f.semantic_fields_for :exams do |exam|
+        .list_item_box
+          .row
+            .span4= exam.input :exam_name,:placeholder=>"例如: TOFEL, SAT, GRE, GMAT, CFA Level 1"
+            .span2= exam.input :score 
+            .span2= exam.input :max_score 
+            .span3.yearmonth=exam.input :date,:as=>:date,:start_year=>1990, :end_year=>Date.today.year
+          
+          = exam.link_to_remove "删除记录" 
+      = f.link_to_add "添加记录", :exams
+      .row
+        .span2= submit_tag "#{@is_new ? t('Next Step') : t('Save Changes')}",:class=>"btn primary"
+-if @user.exams.empty?
+  :javascript
+    $(document).ready(function() {
+       $('.add_nested_fields').click();
+    });

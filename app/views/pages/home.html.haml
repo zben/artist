@@ -1,0 +1,41 @@
+.home_page
+  .row
+    .span10.image{style: "background-color:#FFF;"}
+      /=image_tag 'homepage-image.png', width: "580"
+      %h1 2012盛夏 名企悬赏招聘
+      %h2 推荐好友, 即有可能获得1000美金奖金
+      -JobPost.on_promo.each do |job|
+        %li
+          .row
+            .span7=link_to job.company_name, job.user
+            .span3=link_to job.title, job
+
+      .right=link_to "点击查看活动详情", pages_referralbonus_path
+    .span6
+      = form_for(User.new, :as => :user, :url => registration_path(:user)) do |f|
+        .row
+          .span2= f.label :email 
+          .span4= f.email_field :email
+        .row
+          .span2= f.label :password
+          .span4= f.password_field :password, placeholder: "至少6个字符,包含字母与数字"
+        .row
+          .span2= f.label :password_confirmation
+          .span4= f.password_field :password_confirmation
+        .row
+          .span2= f.label '用户类别'
+          .span4= f.select :_type, options_for_select([['个人用户','IndUser'],['机构/企业用户','OrgUser']])
+        .row
+          .span2= f.label '邀请码'
+          .span4= text_field_tag :invitation_code, nil, placeholder: "在底部留言。我们将为您发出邀请"
+        .row
+          =render 'pages/agreement'
+          .span4.offset2.agreement_note
+            注册本网站，表示您同意
+            =link_to "网络服务使用协议","",:'data-controls-modal'=>"modal-from-dom",:'data-backdrop'=>"true"
+          .span4.offset2= f.submit "加入悟空人才网", :class => "btn"
+
+  .row
+    .span16.slogan
+      %h2
+        汇集中国优秀企业, 高端职位, 全球华人精英, 创业项目, 等你来发现！

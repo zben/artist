@@ -1,0 +1,19 @@
+#modal-from-dom.modal.hide.fade
+  .modal-header
+    =link_to "&times;".html_safe,'#',:class=>'close'
+    %h3 发送邮件
+  
+  =semantic_form_for :message,:url=>send_message_path do |f| 
+    .modal-body          
+      =f.input :user_id, :as=>:hidden, :value=>@user.id
+      =f.input :content, :label=> "内容", :as=>:text, :input_html => { :class => 'autogrow', :rows => 15}
+      -if current_user.is_a? OrgUser
+        %p 机构联系方式暂时没有向个人用户公开。如需对方回复此留言，请留下您的联系方式。
+    .modal-footer
+      =link_to_function "取消","$('.close').click();", :class=>'btn'
+      =submit_tag "发送",:class=>'btn primary'
+-if params[:message]
+  :javascript
+    $(document).ready(function() {
+      $('a[data-controls-modal="modal-from-dom"]').click();
+    });

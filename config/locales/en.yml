@@ -1,0 +1,22 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+en:
+  errors:
+    format: "%{message}"
+  activerecord:
+    errors:
+      messages:
+        blank: "%{attribute} cannot be blank."
+    models:
+      profile: Profile
+    attributes:
+      profile:
+        residence_country: "Current Country"
+        intro_title: "Headline"
+        intro: "Introduction"
+  Next Step: "Next Step"
+  Save Changes: "Save Changes"
+  Sign in: "Sign in"
+
+ 
