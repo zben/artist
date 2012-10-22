@@ -1,5 +1,5 @@
 # encoding: UTF-8
-class User 
+class User
   include Mongoid::Document
   include Mongoid::Timestamps
 
@@ -45,7 +45,7 @@ class User
     :educations_attributes,:experiences_attributes,:exams_attributes,:languages_attributes,
     :profile_attributes,:usage_attributes,:skill_ids,:_type,
     :avatar,:logo,:chinese_resume,:english_resume,
-    :org_profile_attributes, :old_password, :job_application_ids, :industry_ids
+    :org_profile_attributes, :old_password, :job_application_ids, :industry_ids, :artworks_attributes
 
   embeds_one :profile
   embeds_one :org_profile
@@ -69,7 +69,8 @@ class User
   has_many :job_applications, dependent: :destroy
   #has_many :industries, :through=>:industries_users
   #has_many :interests,:through=>:industries_users
-  has_many :tech_posts  
+  has_many :tech_posts
+  has_many :artworks, autosave: true, dependent: :destroy
  
   accepts_nested_attributes_for :educations,:allow_destroy => true
   accepts_nested_attributes_for :experiences,:allow_destroy => true
@@ -78,6 +79,7 @@ class User
   accepts_nested_attributes_for :profile,:allow_destroy => true
   accepts_nested_attributes_for :org_profile,:allow_destroy => true
   accepts_nested_attributes_for :usage,:allow_destroy => true
+  accepts_nested_attributes_for :artworks,:allow_destroy => true
 
   def matches
     jobs = skills.map{|skill| skill.job_posts.current}.flatten.uniq
@@ -107,9 +109,9 @@ class User
 
   def name
     if is_a? IndUser
-      profile.try(:name) || "匿名用户"
+      profile.try(:name) || "YOU"
     elsif is_a? OrgUser
-      org_profile.try(:company_name) || "匿名公司"
+      org_profile.try(:company_name) || "您"
     end  
   end
 

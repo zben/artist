@@ -5,19 +5,15 @@
         %meta{"http-equiv"=> "content-type", "content"=> "text/html;charset=gb2312"}
         %title 悟空人才
         =stylesheet_link_tag    "application", :debug => false
+        %link{href: 'http://fonts.googleapis.com/css?family=Carrois+Gothic', rel: 'stylesheet', type: 'text/css'}
+
         =javascript_include_tag "application", :debug => false
         = csrf_meta_tags
-        =render "layouts/google_analytics"
     %body{class: "#{controller_action}"}
         =render 'layouts/header'
-        /-if params[:action] == 'home'
-        /    .container
-        /        .row
-        /            .home_page_image
-        /                =image_tag('home_page.png',width: 800) 
         .container.main
-            =render 'layouts/flash',:flash=>flash 
-            = yield 
+            =render 'layouts/flash',:flash=>flash
+            = yield
         =render 'layouts/footer'
-        =debug(params) if Rails.env.development?    
+        =debug(params) if Rails.env.development?
         =render 'layouts/olark'

@@ -1,0 +1,45 @@
+.row
+  .span16.shadow
+    .row
+      .span15.offset1
+        %h2 Upload artwork photos
+        =semantic_nested_form_for @user, url: artworks_path, method: :post do |f|
+          =f.semantic_fields_for :artworks do |a|
+            .list_item_box
+              .row
+                .span4= a.input :title
+                .span1= a.input :year, placeholder: "YYYY"
+                .span2= a.input :type, as: :select, collection: Artwork::PAINTING_TYPES
+                .span3= a.input :base, placeholder: "eg. paper, canvas, wood"
+                .span2= a.input :is_framed, label: "Frame Included", as: :select
+              .row
+                .span2
+                  =a.label "Price"
+                  %span.add-on US$
+                  .price.with_addon= a.input :price, label: false
+                  %span.add-on .00
+
+                .span2
+                  = a.label "Dimensions"
+                  .dimension.with_addon= a.input :height, label: false, placeholder: "H"
+                  %span.add-on " x
+
+                  .dimension.with_addon= a.input :width, label: false, placeholder: "W"
+                  %span.add-on "
+
+                .span2
+                  = a.label "Weight"
+                  .price.with_addon= a.input :weight, label: false
+                  %span.add-on lb.
+
+
+                -a.object.photos.build
+                .span6
+                  = a.semantic_fields_for :photos do |p|
+                    =p.input :photo, required: true
+              -# .row
+              -#   .span14= a.input :description
+              =a.link_to_remove "Remove this artwork"
+          =f.link_to_add "Add artwork", :artworks
+          .row
+            .span2=f.submit "Upload photos", class: "btn primary"

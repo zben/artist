@@ -1,0 +1,47 @@
+.row
+  .span12
+    .image_block
+      =image_tag(@artwork.photos.first.photo.url(:large), width: 670)
+    =link_to "Edit this artwork", edit_artwork_path(@artwork) if current_user == @artwork.ind_user
+  .span4
+    .quote_box.shadow.artist_info_box
+      =image_tag(@artwork.ind_user.avatar.url(:medium))
+      .artist_info
+        %p=link_to @artwork.ind_user.name, @artwork.ind_user
+        %p="美国麻省"
+
+    .quote_box.shadow
+      %p
+        原画价格
+        ="OFD" if @artwork.price_out_of_date && current_user.admin?
+      .price=@artwork.price_in_yuan
+      %p 售价包含原作证书和运费
+      .btn.primary=link_to "订购", ""
+
+    -# .quote_box
+    -#   %p 授权限量版价格
+    -#   .price=@artwork.price_in_yuan(false)
+    -#   %p 售价包含限量版证书和运费
+
+    %table.table.table-striped
+      %tr
+        %td 作品名称
+        %td=@artwork.title
+      %tr
+        %td 作品类型
+        %td=@artwork.type
+      %tr
+        %td 创作年份
+        %td=@artwork.year
+      %tr
+        %td 创作地点
+        %td 美国
+      %tr
+        %td 作品规格
+        %td="#{@artwork.height}\" x #{@artwork.width}\"" + " (#{@artwork.height*2.54.to_i}cm x #{@artwork.width*2.54.to_i}cm)"
+      %tr
+        %td 作品重量
+        %td="#{@artwork.weight} lb." + " (#{@artwork.weight*0.454} kg.)"
+      %tr
+        %td 画框
+        %td=@artwork.is_framed? ? "含框" : "不含框"

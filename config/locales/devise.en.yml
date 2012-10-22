@@ -22,8 +22,8 @@ en:
       timeout: 'Your session expired, please sign in again to continue.'
       inactive: 'Your account was not activated yet.'
     sessions:
-      signed_in: 'Signed in successfully.'
-      signed_out: 'Signed out successfully.'
+      signed_in: '' #'Signed in successfully.'
+      signed_out: '' #'Signed out successfully.'
     passwords:
       send_instructions: 'You will receive an email with instructions about how to reset your password in a few minutes.'
       updated: 'Your password was changed successfully. You are now signed in.'
@@ -76,8 +76,8 @@ ch:
       timeout: '您已登录超时，请重新登录.'
       inactive: '您还没有激活帐户.'
     sessions:
-      signed_in: '登录成功.'
-      signed_out: '退出成功.'
+      signed_in: ""
+      signed_out: ""
     passwords:
       send_instructions: '几分后，您将收到重置密码的电子邮件.'
       updated: '您的密码已修改成功'

@@ -9,13 +9,13 @@ class Photo < Attachment
     has_mongoid_attached_file :photo,
       :path => ':photo/:id/:style.:extension',
       :storage => :s3,
-      :bucket => 'talent-search',
+      :bucket => 'artist-benzhang',
       :s3_credentials => {:access_key_id => ENV['S3_KEY'],:secret_access_key => ENV['S3_SECRET']},
       :styles => {
       :original => ['1920x1680>', :jpg],
       :thumb    => ['100x100',   :jpg],
-      :medium   => ['200x150',    :jpg],
-      :large =>['400x300>', :jpg]
+      :medium   => ['260',    :jpg],
+      :large =>['670', :jpg]
     }
   else
     has_mongoid_attached_file :photo,
@@ -23,8 +23,8 @@ class Photo < Attachment
       :styles => {
       :original => ['1920x1680>', :jpg],
       :thumb    => ['100x100',   :jpg],
-      :medium   => ['200x150',    :jpg],
-      :large =>['400x300>', :jpg]
+      :medium   => ['260',    :jpg],
+      :large =>['670', :jpg]
     }
   end
 

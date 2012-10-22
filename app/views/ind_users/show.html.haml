@@ -1,62 +1,34 @@
-%ul{:class=>"tabs",:"data-tabs"=>"tabs"}
-  %li.active=link_to "个人介绍", @user
-  %li=link_to "微博",ind_user_shouts_path(@user.id) if @user.is_a? IndUser
-  %li=link_to "微博",org_user_shouts_path(@user.id) if @user.is_a? OrgUser
+-# %ul{:class=>"tabs",:"data-tabs"=>"tabs"}
+-#   %li.active=link_to "Biography", @user
+-#   %li=link_to "All Artwork",""
+-# 
+-# .row
+-#   =render 'ind_users/side_nav_public'
+-#   .span8
+-#     %h3="About #{@user.profile.firstname}"
+-#     =raw @user.profile.intro
+-#     %h3="Sample artwork by #{@user.profile.firstname}"
+-#     =raw @user.profile.intro
 
 .row
-  =render 'ind_users/side_nav_public'
-  .span13
-    /%h4 
-    / 个性标题
-    /.edit=link_to raw("<i class='icon-edit icon-white'></i>"),ind_user_edit_path(current_user.id,'profile') if current_user==@user
-    /=@user.profile.intro_title
+  .span16
+    .user_sidebar.shadow
+      =image_tag @user.avatar.url(:large)
 
-    -if true # current_user == @user or !@user.experiences.empty?
-      %h4
-        工作经验
-        .edit=link_to raw("<i class='icon-edit icon-white'></i>"),ind_user_edit_path(current_user.id,'experience') if current_user==@user
-        .edit=link_to_function "查看详情", "$('.toggle:not(.experience_list .toggle)').hide(); $('.experience_list .toggle').toggle(300);" if @user.experiences.detect{|x| !x.description.empty?}
-      .experience_list=@user.experiences.empty? ? "尚未填写" : render(@user.experiences)
+    .user_mainbar.shadow
+      %h1=@user.name
+      %p 美国麻省波士顿    /    12副原画可售   /    20副限量版可售
+      %b 画家介绍
+      %p 例如例如 例如 例如 例如 例如 例如 例如 例如 例如 例如 例如 例如 例如 例如 例如 例如 例如 例如 例如 例如 例如例如 例如例如 例如例如 例如例如 例如例如 例如例如 例如例如 例如例如 例如例如 例如例如 例如例如 例如例如 例如例如 例如例如 例如例如 例如例如 例如例如 例如例如 例如例如 例如
+.row
+  .span16#image_blocks
+    -@user.artworks.each do |a|
+      =link_to a do
+        .image_block
+          =image_tag(a.photos.first.photo.url(:medium), width: 260)
+          .title=a.title == "" ? "Untitled" : a.title
+          .artist
+            .name
+              .image_footer="Submitted #{time_ago_in_words a.created_at} ago"
+              =link_to "  Edit details", edit_artwork_path(a), class: "edit_artwork" if current_user == @user
 
-    -if current_user == @user or !@user.educations.empty?
-      %h4 
-        学历
-        .edit=link_to raw("<i class='icon-edit icon-white'></i>"),ind_user_edit_path(current_user.id,'education') if current_user==@user
-        .edit=link_to_function "查看详情", "$('.toggle:not(.education_list .toggle)').hide(); $('.education_list .toggle').toggle(300);" if @user.educations.detect{|x| !x.comment.empty?}
-      .education_list=@user.educations.empty? ? "尚未填写" : render(@user.educations)
-
-    -if current_user == @user or !@user.exams.empty?
-      %h4 
-        考试/获奖/证书
-        .edit=link_to raw("<i class='icon-edit icon-white'></i>"),ind_user_edit_path(current_user.id,'exam') if current_user==@user
-      =@user.exams.empty? ? "尚未填写": render(@user.exams)
-
-    -if current_user == @user or !@user.languages.empty?
-      %h4 
-        语言能力
-        .edit=link_to raw("<i class='icon-edit icon-white'></i>"),ind_user_edit_path(current_user.id,'language') if current_user==@user
-      =@user.languages.empty? ? "尚未填写" : render(@user.languages)
-
-    -if current_user == @user or !@user.skills.empty?
-      %h4
-        专业技能
-        .edit=link_to raw("<i class='icon-edit icon-white'></i>"),ind_user_edit_path(current_user.id,'skill') if current_user==@user
-      =@user.skills.empty? ? "尚未填写" : render(@user.skills)
-    /%h4
-    /  自我评价
-    /.edit=link_to raw("<i class='icon-edit icon-white'></i>"),ind_user_edit_path(current_user.id,'profile') if current_user==@user'
-    /  .span12=@user.profile.intro
-
-    -if current_user == @user or !@user.industries.empty?
-      %h4
-        感兴趣的行业
-        .edit=link_to raw("<i class='icon-edit icon-white'></i>"),ind_user_edit_path(current_user.id,'profile') if current_user==@user
-      =@user.industries.empty? ? "尚未填写" : render(collection: @user.industries, partial: 'skills/skill', as: :skill)
-    -if @user.projects.present? && SHOW_PROJECT_CIRCLE
-      %h4
-        我的项目
-      %ul
-        -@user.projects.each do |project|
-          %li.no_dot
-            .image=link_to image_tag(project.logo(:medium)), project
-            =link_to project.title, project

@@ -13,7 +13,6 @@ class ApplicationController < ActionController::Base
             logger.info params[:info]
             logger.info params[:info]!='profile'
             if params[:info]!='profile' && params[:action]!='update' 
-              flash[:error]="输入个人基本信息,让我们为您提供更好的服务。"
               redirect_to ind_user_new_path(current_user.id, 'profile') if current_user.is_a? IndUser
               redirect_to org_user_new_path(current_user.id, 'profile') if current_user.is_a? OrgUser
             end

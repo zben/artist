@@ -55,7 +55,6 @@ $(document).ready(function() {
       pause: 2500,
       hoverPause: true
     });
-  $('#items').dataTable();
 
   $('a.bookmark').bind('click',function(){
     $(this).text('加载中...');
@@ -64,5 +63,11 @@ $(document).ready(function() {
   $('#modal-from-dom').modal({
     backdrop: "static"
   });
-
+  var $container = $('#image_blocks');
+  $container.imagesLoaded(function(){
+    $container.masonry({
+      itemSelector : '.image_block',
+      columnWidth : 310
+    });
+  });
 });

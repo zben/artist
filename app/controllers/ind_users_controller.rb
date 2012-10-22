@@ -52,7 +52,8 @@ class IndUsersController < ApplicationController
         redirect_to @user
       else
         @is_new = true
-        redirect_to ind_user_new_path(@user.id,"#{next_step}")
+        # redirect_to ind_user_new_path(@user.id,"#{next_step}")
+        redirect_to new_artwork_path
       end
     else
         @is_new = true unless params[:is_new].nil?

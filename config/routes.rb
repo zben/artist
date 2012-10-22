@@ -1,5 +1,7 @@
 Talent::Application.routes.draw do
 
+  resources :artworks
+  match 'artworks/by/:artist_id' => "artworks#index", as: "artist_artworks"
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
   resources :parks
@@ -84,7 +86,7 @@ Talent::Application.routes.draw do
   get "jobs" => 'pages#jobs'
 
 
-  root :to => 'pages#home' 
+  root :to => 'artworks#index'
 
   match 'job_posts/:id/toggle_promo'=>"job_posts#toggle_promo", as: 'toggle_promo'
 end
