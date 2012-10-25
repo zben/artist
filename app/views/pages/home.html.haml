@@ -1,56 +1,59 @@
 .home_page
-  .row.shadow.white
-    -if I18n.default_locale == :en
-      .span9
-        .works
-          %h2 How does it all work?
-          %ol
-            %li You post the artwork for sale
-            %li Buyer likes your work and orders with us
-            %li We verfiy the artwork is still available and that you approve the sale
-            %li Buyer makes payment and you get paid
-            %li We help you pack and ship your artwork securely
+  .row
+    .span16.shadow
+      .row
+        .span16
+        -if I18n.default_locale == :en
+          .span9
+            .works.content
+              %h2 How does it all work?
+              %ol
+                %li You post the artwork for sale
+                %li Buyer likes your work and orders with us
+                %li We verfiy the artwork is still available and that you approve the sale
+                %li Buyer makes payment and you get paid
+                %li We help you pack and ship your artwork securely
 
-        .why_join
-          %h2 Why join Canvvas?
-          %h3 Expand International Audience
-          %p Have your art viewed by prominent galleries and avid art-lovers in China.
-          %h3 Transparency and Control
-          %p For every offer made, we tell you who is buying and you decide if you want to sell. We make sure you are happy about the sale. No surprises.
-          %h3 Reliability and Trust
-          %p We will never have you part with your artwork without being fully paid, period. We will always respect the copyright of your artwork and your ownership of your painting.
-    -else
-      .span9.normal
-        .works
-          %h2.normal 服务流程
-          %ol
-            %li 您浏览网站上的艺术家，找到您心仪的画作
-            %li 您提交预定愿望，询问任何问题
-            %li 您通过银行转账直接付款
-            %li 我们统一运输艺术品从美国到您指定的目的地地点
+            .why_join.content
+              %h2 Why join Canvvas?
+              %h3 Expand International Audience
+              %p Have your art viewed by prominent galleries and avid art-lovers in China.
+              %h3 Transparency and Control
+              %p For every offer made, we tell you who is buying and you decide if you want to sell. We make sure you are happy about the sale. No surprises.
+              %h3 Reliability and Trust
+              %p We will never have you part with your artwork without being fully paid, period. We will always respect the copyright of your artwork and your ownership of your painting.
+        -else
+          .span9.normal
+            .works
+              %h2.normal 服务流程
+              %ol
+                %li 您浏览网站上的艺术家，找到您心仪的画作
+                %li 您提交预定愿望，询问任何问题
+                %li 您通过银行转账直接付款
+                %li 我们统一运输艺术品从美国到您指定的目的地地点
 
-        .why_join
-          %h2.normal 为什么使用我们的服务
-          %h3 第一手的优秀画家资源
-          %p 我们在美国有专门的人员和画家建立稳定的关系。签约画家在第一时间会将他们的新作公布在我们的网站上。
-          %h3 我们确保画作的质量
-          %p 您可以放心您订购的画作绝对是正品而非任何形式的复制品。所有画作均附正品证书。我们可以协助您和画家直接进行交流。
-          %h3 可靠的运输
-          %p 我们对所有的画作都进行精心包裹，通过正规途径运输，防止运途中的损坏。所有的画作都附有运输保险，要求收件人签收。
-    .span6.normal
-      .join_now
-        %h2.normal=t("join_now_for_free")
-      = form_for(User.new, :as => :user, :url => registration_path(:user)) do |f|
-        .row
-          .span2= f.label :email
-          .span4= f.email_field :email
-        .row
-          .span2= f.label :password
-          .span4= f.password_field :password, placeholder: t("password_prompt")
-        .row
-          .span2= f.label :password_confirmation, t("password_confirmation")
-          .span4= f.password_field :password_confirmation, placeholder: t("password_confirmation_prompt")
-        .row
-          .span4= hidden_field_tag "user[_type]", I18n.default_locale == :en ? "IndUser" : "OrgUser"
-        .row
-          .span4.offset2= f.submit t("sign_up"), :class => "btn"
+            .why_join
+              %h2.normal 为什么使用我们的服务
+              %h3 第一手的优秀画家资源
+              %p 我们在美国有专门的人员和画家建立稳定的关系。签约画家在第一时间会将他们的新作公布在我们的网站上。
+              %h3 我们确保画作的质量
+              %p 您可以放心您订购的画作绝对是正品而非任何形式的复制品。所有画作均附正品证书。我们可以协助您和画家直接进行交流。
+              %h3 可靠的运输
+              %p 我们对所有的画作都进行精心包裹，通过正规途径运输，防止运途中的损坏。所有的画作都附有运输保险，要求收件人签收。
+        .span6.normal
+          .join_now.content
+            %h2.normal=t("join_now_for_free")
+          = form_for(User.new, :as => :user, :url => registration_path(:user)) do |f|
+            .row
+              .span2= f.label :email
+              .span4= f.email_field :email
+            .row
+              .span2= f.label :password
+              .span4= f.password_field :password, placeholder: t("password_prompt")
+            .row
+              .span2= f.label :password_confirmation, t("password_confirmation")
+              .span4= f.password_field :password_confirmation, placeholder: t("password_confirmation_prompt")
+            .row
+              .span4= hidden_field_tag "user[_type]", I18n.default_locale == :en ? "IndUser" : "OrgUser"
+            .row
+              .span4.offset2= f.submit t("sign_up"), :class => "btn"

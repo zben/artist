@@ -30,13 +30,13 @@ class ApplicationController < ActionController::Base
     def user_specific_path(resource)
       if current_user._type=="IndUser"
           if current_user.profile
-            ind_user_overview_path
+            artworks_path
           else
             ind_user_new_path(current_user.id,'profile')
           end
         else
           if current_user.org_profile
-            org_user_job_posts_path(current_user.id)
+            artworks_path
           else
             org_user_new_path(current_user.id,'profile')
           end

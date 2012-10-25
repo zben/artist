@@ -1000,8 +1000,8 @@ a.edit_artwork{
 .works, .why_join{
   font-size: 15px;
   p{font-size: 15px;color:#9D9D9D}
-  border-left: 5px solid red;
-  padding-left: 10px;
+  padding-left: 30px;
+  padding-right: 20px;
   h2{
     font-weight: bold;
     font-size: 30px;
@@ -1009,7 +1009,6 @@ a.edit_artwork{
   }
 }
 .why_join{
-  border-left-color: green;
   h2{color: green}
 }
 .join_now h2{
@@ -1027,5 +1026,8 @@ h1, h2, h3, h4, h5, h6{
   min-height: 800px;
 }
 .row{
+  float: left;
+}
+form{
   float: left;
 }
