@@ -1,34 +1,26 @@
-%h2=t('Sign up')
+.row
+  .span16.shadow
+    .row
+      .offset1.span15
+        %h2=t('Sign up')
 
-= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
-  = devise_error_messages!
+        = form_for(User.new, :as => :user, :url => registration_path(:user)) do |f|
+          = devise_error_messages!
+          .row
+            .span2= f.label :email
+            .span4= f.email_field :email
+          .row
+            .span2= f.label :password
+            .span4= f.password_field :password, placeholder: t("password_prompt")
+          .row
+            .span2= f.label :password_confirmation, t("password_confirmation")
+            .span4= f.password_field :password_confirmation, placeholder: t("password_confirmation_prompt")
+          .row
+            .span4= hidden_field_tag "user[_type]", I18n.default_locale == :en ? "IndUser" : "OrgUser"
+          .row
+            .span4.offset2= f.submit t("sign_up"), :class => "btn"
 
-  .row
-    .span2= f.label :email 
-    .span4= f.email_field :email,:placeholder=> "使用学校或公司邮件地址"
-  .row
-    .span2= f.label :password
-    .span4= f.password_field :password 
-  .row
-    .span2= f.label :password_confirmation
-    .span4= f.password_field :password_confirmation
-  
-  .row
-    .span2= f.label '用户类别'
-    .span4= f.select :_type, options_for_select([['个人用户','IndUser'],['机构/企业用户','OrgUser']])
-  .row
-    .span2= f.label '邀请码'
-    .span4= text_field_tag :invitation_code  
-  =render 'pages/agreement'
-  .row
-    %p.span4.offset1
-      =check_box_tag 'agreement','true'    
-      =t('I agree to') 
-      =link_to t('the service terms'),"",:'data-controls-modal'=>"modal-from-dom",:'data-backdrop'=>"true"
-  .row
-    = f.submit t("Agree to service terms first"),:class=>"span4 offset1 btn primary disabled agreement",:disabled=>"disabled"
-
-= render :partial => "devise/shared/links" 
+        = render :partial => "devise/shared/links" 
 
 
 

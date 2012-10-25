@@ -29,8 +29,6 @@
                 .span3= p.input :province_id, required: true, label: "State", :as=>:select, :collection => Province.all, :prompt => t("Select one")
 
               .row
-                .span5=image_tag @user.avatar(:small) unless params[:action]=="new"
-              .row
                 .span3
                   =p.input :phone, placeholder: "617-888-8888"
                 .span7
@@ -38,10 +36,12 @@
               .row
                 .span5
                   =f.input :avatar, label: "Face Photo"
-                -# .span2
-                -#   = f.label "Remove Avatar"
-                -#   = check_box_tag :remove_avatar, 1, false
+              .row
+                .span5=image_tag @user.avatar(:large)
               .row
                 .span10= p.input :intro, label: "Introduction", :as=>:text,:input_html => { :class => 'autogrow', :rows => 5, :cols => 20, :maxlength => 500  },:hint=>"Describe your specialty in the themes and forms of your artwork. Mention any local, national and internationl recognition, awards or major art shows. Mention any notable galleries you have worked with. We will translate your introduction to Chinese for free."
+              -if current_user.admin?
+                .row
+                  .span10= p.input :intro_ch, label: "Chinese introduction", :as=>:text,:input_html => { :class => 'autogrow', :rows => 5, :cols => 20, :maxlength => 500  }
           .row
             .span2= submit_tag "#{@is_new ? t('Next Step') : t('Save Changes')}",:class=>"btn primary"

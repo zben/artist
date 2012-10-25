@@ -17,6 +17,7 @@ class OrgProfile
   field :phone_number
   field :email
   field :website
+  field :address
   as_enum :company_type, :"国企"=>1, :"民企"=>2, :"外企"=>3, :"非营利组织"=>4, :"学术研究机构"=>5
 
   belongs_to :industry
@@ -28,11 +29,10 @@ class OrgProfile
 #  field :city_id, type: Integer
 #  field :province_id, type: Integer
 #  field :industry_id, type: Integer
-  
-  validates :company_name, :short_description, :people_count,:contact_person,:phone_number,:email,:website,:province_id,:industry_id, :company_type,  :presence=>true
-  validates :email, email: true
+
+  validates :contact_person,:phone_number, :province_id, :presence=>true
 
   def name
-    company_name
+    contact_person
   end
 end

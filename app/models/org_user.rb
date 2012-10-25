@@ -1,5 +1,7 @@
+#encoding: UTF-8
 class OrgUser < User
   include Mongoid::Paperclip
+    has_many :orders
     has_many :bookmarks, :foreign_key=>"user_id"
     has_many :bookmarkings, :class_name=>"Bookmark", as: :bookmarkable
 
@@ -74,5 +76,9 @@ class OrgUser < User
 
     def avatar *args
       logo *args
+    end
+
+    def name
+      org_profile.present? ? org_profile.contact_person : "您"
     end
 end

@@ -9,19 +9,34 @@
       .artist_info
         %p=link_to @artwork.ind_user.name, @artwork.ind_user
         %p="美国麻省"
+    -if current_user.is_a? OrgUser
 
-    .quote_box.shadow
-      %p
-        原画价格
-        ="OFD" if @artwork.price_out_of_date && current_user.admin?
-      .price=@artwork.price_in_yuan
-      %p 售价包含原作证书和运费
-      .btn.primary=link_to "订购", ""
+      .quote_box.shadow
+        %p
+          原画价格
+          ="OFD" if @artwork.price_out_of_date && current_user.admin?
+        .price=@artwork.price_in_yuan
+        %p 售价包含原作证书和运费
+        #real_order
+          -if @artwork.real_ordered_by current_user
+            %p 谢谢您 请等候我们的电话
+          -else
+            =form_for Order.new, remote: true do |f|
+              =f.hidden_field :artwork_id, value: @artwork.id.to_s
+              #real_order=f.submit "询问", class: "btn primary"
+        %p#real_message
 
-    -# .quote_box
-    -#   %p 授权限量版价格
-    -#   .price=@artwork.price_in_yuan(false)
-    -#   %p 售价包含限量版证书和运费
+      .quote_box{style: "height:90px;"}
+        %p 授权限量版复制品
+        #copy_order
+          -if @artwork.copy_ordered_by current_user
+            %p 谢谢您 请等候我们的电话
+          -else
+            =form_for Order.new, remote: true do |f|
+              =f.hidden_field :artwork_id, value: @artwork.id.to_s
+              =f.hidden_field :is_for_real, value: false
+              #real_order=f.submit "询问", class: "btn primary"
+        %p#copy_message
 
     %table.table.table-striped
       %tr

@@ -1,54 +1,34 @@
-
 .row
-  =render 'org_users/side_nav'
-  .span13
+  .span16.shadow
+    .row
+      .span15.offset1
 
-    -if params[:action] == 'new'
-      %h2 #{t("Create")}#{t("org_profile")}
-    -else
-      %h2 #{t("Update")}#{t("org_profile")}
-
-
-    = semantic_nested_form_for @user do |f|
-      = hidden_field_tag :current_step, 'profile'
-      = hidden_field_tag :is_new, 'true' if @is_new
-      
-      = f.semantic_fields_for :org_profile  do |p| 
-        = p.inputs do
-          .row
-            .span11= p.input :company_name
-          .row
-            .span3= p.input :industry_id, :required=>true, :as=>:select, :collection=>Industry.all.pinyin_order.map{|x| [t(x.name), x.id]},:prompt => t("Select one")   
-            .span2= p.input :people_count, :as=>:select, :collection=> OrgProfile.people_counts_for_select,:prompt => t("Select one")   
-            = render 'shared/city_picker',:f=>p, :city_id=>@user.org_profile.city_id
-            .span2= p.input :company_type, :required=>true, :as=>:select, :collection => OrgProfile.company_types_for_select, :prompt=>t('Select one')
-          .row
-            .span11= p.input :short_description, :as=>:text,:input_html => { :class => 'autogrow', :rows => 5, :cols => 20 }
-            
-          .row
-            .span11.tiny= p.input :long_description, :as=>:text,:input_html => { :class => 'autogrow', :rows => 15, :cols => 20 }
-          .row
-          .row  
-            .span3= p.input :contact_person
-            .span4= p.input :email
-            .span4= p.input :phone_number
-          .row  
-            .span11= p.input :website
-              
-          .row
-            .span5 
-              =f.input :logo
-            .span2
-              = f.label "删除商标"
-              = check_box_tag :remove_avatar, 1, false
-          .row
-            .span5=image_tag @user.logo(:medium) 
+        -if params[:action] == 'new'
+          %h2 #{t("Create")}#{t("org_profile")}
+        -else
+          %h2 #{t("Update")}#{t("org_profile")}
 
 
-      .row.span16.actions
-        .span2.offset6= submit_tag "#{@is_new ? t('Next Step') : t('Save Changes')}",:class=>"btn primary"
-      
+        = semantic_nested_form_for @user do |f|
+          = hidden_field_tag :current_step, 'profile'
+          = hidden_field_tag :is_new, 'true' if @is_new
+          -@user.build_org_profile if @user.org_profile.nil?
+          = f.semantic_fields_for :org_profile  do |p| 
+            = p.inputs do
+              .row
+                .span3= p.input :contact_person
+                .span4= p.input :phone_number
+                = render 'shared/city_picker',:f=>p, :city_id=>@user.org_profile.city_id
+              .row
+                .span11= p.input :address, hint: '请务必填写正确的电话号码以便我们联系您。准确完整的地址有助于画作的顺利到达。'
+              =link_to_function "如果您是画廊或其他机构,请点击此处提供机构信息","$('.company_info').toggle(300);"
+              %br
+              %br
+              .company_info{style: "display:none;"}
+                .row
+                  .span7= p.input :company_name
+                .row
+                  .span7= p.input :website
 
-
-
-	
+          .row.span16.actions
+            .span4= submit_tag "#{@is_new ? t('Next Step') : t('Save Changes')}",:class=>"btn primary"

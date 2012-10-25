@@ -162,6 +162,9 @@ GEM
       tzinfo (~> 0.3.22)
     mongoid-paperclip (0.0.7)
       paperclip (>= 2.3.6)
+    mongoid_auto_increment (0.1.0)
+      mongoid
+      mongoid_auto_increment
     mongoid_fulltext (0.5.7)
       unicode_utils (~> 1.0.0)
     multi_json (1.3.6)
@@ -299,6 +302,7 @@ DEPENDENCIES
   mocha
   mongoid
   mongoid-paperclip
+  mongoid_auto_increment
   mongoid_fulltext
   nested_form!
   nifty-generators

@@ -4,8 +4,7 @@
 .row
   .span16
     -@ind_users.each do |artist|
-      -20.times do
-        =link_to artist do
-          .artist_block.shadow
-            =image_tag artist.avatar.url(:large)
-            %h4=artist.name
+      =link_to artist do
+        .artist_block.shadow
+          =image_tag artist.avatar.url(:large)
+          %h4=artist.name

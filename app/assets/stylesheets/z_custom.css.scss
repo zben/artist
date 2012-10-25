@@ -669,20 +669,7 @@ span.view_all{
     a{color: #fff;text-decoration: none;}
   }
 }
-.slogan{
-  margin-bottom: 20px;
-  padding: 10px;
-  padding-bottom: 0px;
-  width: 920px;
-  .btn.primary{
-    width: 150px;
-    height: 25px;
-    text-align: center;
-    font-weight: normal;
-    padding: 5px;
-    margin-top: 5px;
-  }
-}
+
 li#ind_user_industries_input{
   ol{
     width:100%;
@@ -947,20 +934,6 @@ body.ind_users.show{
   margin: 5px 5px;
   padding: 0px 10px;;
   width: 890px;
-
-  // background-image: linear-gradient(bottom, rgb(4,158,196) 21%, rgb(86,202,222) 56%);
-  // background-image: -o-linear-gradient(bottom, rgb(4,158,196) 21%, rgb(86,202,222) 56%);
-  // background-image: -moz-linear-gradient(bottom, rgb(4,158,196) 21%, rgb(86,202,222) 56%);
-  // background-image: -webkit-linear-gradient(bottom, rgb(4,158,196) 21%, rgb(86,202,222) 56%);
-  // background-image: -ms-linear-gradient(bottom, rgb(4,158,196) 21%, rgb(86,202,222) 56%);
-
-  // background-image: -webkit-gradient(
-  //   linear,
-  //   left bottom,
-  //   left top,
-  //   color-stop(0.21, rgb(4,158,196)),
-  //   color-stop(0.56, rgb(86,202,222))
-  // );
   background-color: orange;
 
   h2{
@@ -972,12 +945,10 @@ body.ind_users.show{
     font-weight: normal;
   }
   .btn{
-    margin-bottom: 5px;
-    width: 80px;
-    font-weight: bold;
     font-size: 1.2em;
     float: right;
-    margin-top: 7px;
+    height: 20px;
+    margin: 7px;
   }
 
 }
@@ -1047,4 +1018,14 @@ a.edit_artwork{
 }
 .normal h2, .normal h3{
   font-weight: normal;
+}
+
+h1, h2, h3, h4, h5, h6{
+  font-weight:normal;
+}
+.span16.shadow{
+  min-height: 800px;
+}
+.row{
+  float: left;
 }

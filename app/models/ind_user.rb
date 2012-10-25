@@ -31,7 +31,7 @@ class IndUser < User
         :s3_credentials => {:access_key_id => ENV['S3_KEY'],:secret_access_key => ENV['S3_SECRET']},
         :styles => {
           :original => ['1920x1680>', :jpg],
-          :small    => ['25x25#',   :jpg],
+          :small    => ['30x30#',   :jpg],
           :medium   => ['70x70#',    :jpg],
           :large    => ['150x150#',   :jpg]
         }
@@ -41,7 +41,7 @@ class IndUser < User
 
         :styles => {
           :original => ['1920x1680>', :jpg],
-          :small    => ['25x25#',   :jpg],
+          :small    => ['30x30#',   :jpg],
           :medium   => ['70x70#',    :jpg],
           :large    => ['150x150#',   :jpg]
         }

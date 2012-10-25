@@ -4,9 +4,14 @@
       .slogan.shadow
         %h2=t("slogan")
         =link_to t('learn_more'), new_user_session_path
+        -if I18n.locale == :en
+          =link_to "/buyer_entrance" do
+            .btn 买家入口
+        -else
+          =link_to "/artists_entrance" do
+            .btn Artist Entrance
         =link_to new_user_session_path do
           .btn.primary=t("sign_up")
-
 .row
   .span16#image_blocks
     -@artworks.each do |a|

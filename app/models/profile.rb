@@ -21,6 +21,7 @@ class Profile
   field :website
   field :gallery
   field :address
+  field :intro_ch
 #  has_mongoid_attached_file :avatar,
 #  :styles => {
 #    :original => ['1920x1680>', :jpg],
@@ -28,7 +29,6 @@ class Profile
 #    :medium   => ['200x150',    :jpg]
 
 #  }
-#    
 
   validates :firstname, :lastname, :birthday, :gender, :province_id, :phone, :address, :city, :province_id, :presence=>true
   #validates :intro, :intro_title, :presence=>true

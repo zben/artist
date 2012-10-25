@@ -1,25 +1,24 @@
 #encoding: UTF-8
+
 class OrgUsersController < ApplicationController
   include ApplicationHelper
   before_filter :authenticate!
-  
+
   def index
     @users = OrgUser.all.with_org_profile.page(params[:page]).per(10)
   end
-  
+
   def show
     @user = OrgUser.find(params[:id])
-
   end
-  
+
   def new 
     @user = OrgUser.find(params[:id])
     @user.build_org_profile if @user.org_profile.nil?
     @is_new = true
     render "org_users/edit/#{params[:info]}"
   end
- 
-  
+
   def edit
     @user = User.find(params[:id])
     authorize! :manage, @user
@@ -45,14 +44,12 @@ class OrgUsersController < ApplicationController
       render "org_users/edit/#{params[:current_step]}"
     end
   end
-  
 
-  
   def job_posts 
     @user = User.find(params[:id])  
     @job_posts = JobPost.where(:user_id=>params[:id])
   end
-  
+
   def tech_posts
     @user = User.find(params[:id])
     @tech_posts=TechPost.where(:user_id=>params[:id])
@@ -62,7 +59,7 @@ class OrgUsersController < ApplicationController
       @users = current_user.bookmarked("IndUser")
       @users = Kaminari.paginate_array(@users).page(params[:page]).per(10)
   end
-  
+
   def shouts
     @user = User.find(params[:id])
     @shouts = @user.shouts.page(params[:page]).per(10) 

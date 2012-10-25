@@ -17,9 +17,16 @@
 
     .user_mainbar.shadow
       %h1=@user.name
-      %p 美国麻省波士顿    /    12副原画可售   /    20副限量版可售
-      %b 画家介绍
-      %p 例如例如 例如 例如 例如 例如 例如 例如 例如 例如 例如 例如 例如 例如 例如 例如 例如 例如 例如 例如 例如 例如例如 例如例如 例如例如 例如例如 例如例如 例如例如 例如例如 例如例如 例如例如 例如例如 例如例如 例如例如 例如例如 例如例如 例如例如 例如例如 例如例如 例如例如 例如例如 例如
+      %p="美国 / #{@user.profile.province.name_en} / #{@user.profile.city}"
+      画家简介
+      -if @user.profile.intro_ch.present?
+        %p=@user.profile.intro_ch
+      -else
+        %p=@user.profile.intro
+
+-if current_user == @user && @user.artworks.empty?
+  You don't have any artwork presented yet,
+  =link_to "Start upload some artwork. It is easy and quick", new_artwork_path
 .row
   .span16#image_blocks
     -@user.artworks.each do |a|

@@ -1,7 +1,7 @@
 %div.topbar
   .topbar-inner
     .container
-      =link_to "ARTonSHIP",root_path, :class=>"brand"
+      =link_to image_tag("logo.png", width: 120), root_path, :class=>"brand", style: "margin-top: -14px;"
       %ul.nav.main_nav
         %li{class: "#{is_active?("ind_users#")}"}=link_to t("Artists"),ind_users_path
         %li{class: "#{is_active?("artworks#index")}"}=link_to t("Artwork"), artworks_path

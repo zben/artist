@@ -1,5 +1,17 @@
 Talent::Application.routes.draw do
 
+  get "orders/index"
+
+  get "orders/show"
+
+  get "orders/create"
+
+  get "orders/edit"
+
+  get "orders/update"
+
+  get "orders/destroy"
+
   resources :artworks
   match 'artworks/by/:artist_id' => "artworks#index", as: "artist_artworks"
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
@@ -89,4 +101,8 @@ Talent::Application.routes.draw do
   root :to => 'artworks#index'
 
   match 'job_posts/:id/toggle_promo'=>"job_posts#toggle_promo", as: 'toggle_promo'
+  match "/artists_entrance" => "artworks#index", defaults: { locale: :en }
+  match "/buyer_entrance" => "artworks#index", defaults: { locale: :ch }
+  resources :orders
+  match "/cancel_oder/:id" => "orders#cancel", as: "cancel_order"
 end

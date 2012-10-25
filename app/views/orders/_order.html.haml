@@ -1,0 +1,10 @@
+%tr
+  %td
+    =image_tag order.artwork.photos.first.photo.url(:thumb)
+    =order.artwork.title
+  %td=order.is_for_real? ? "真品" : '授权限量版'
+  %td=l order.created_at, format: :short
+  %td=t(order.status.to_s)
+  %td
+    =link_to "取消", cancel_order_path(order.id) if order.status == :placed
+

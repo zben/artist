@@ -4,6 +4,7 @@ class Artwork
   include Mongoid::Timestamps
 
   has_many :photos, autosave: true, dependent: :destroy, as: :attachable
+  has_many :orders
   belongs_to :ind_user
   field :title
   field :description
@@ -18,6 +19,8 @@ class Artwork
   field :width, type: Integer
   field :is_framed, type: Boolean
   field :weight, type: Float
+  field :sold, type: Boolean, default: false
+  auto_increment :number, seed: 1000
 
   PAINTING_TYPES = %w{
     Oil
@@ -63,5 +66,13 @@ class Artwork
 
   def price_out_of_date
     self.price_updated_at.to_i >= self.sale_price_updated_at.to_i
+  end
+
+  def real_ordered_by user
+    orders.where(org_user_id: user.id, is_for_real: true).present?
+  end
+
+  def copy_ordered_by user
+    orders.where(org_user_id: user.id, is_for_real: false).present?
   end
 end
