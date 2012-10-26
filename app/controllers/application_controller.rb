@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
     def authenticate!
         session[:user_return_to] = request.path
         if !user_signed_in?
-            flash[:notice]="请先登录"
+            flash[:notice] = t("devise.failure.unauthenticated")
             redirect_to new_user_session_path
         elsif current_user.profile.nil? && current_user.org_profile.nil?
             logger.info params[:info]
@@ -24,6 +24,8 @@ class ApplicationController < ActionController::Base
     end
 
     def after_sign_in_path_for(resource)
+      cookies[:locale] = resource.is_a?(OrgUser) ? :ch : :en
+      I18n.default_locale = cookies[:locale]
       stored_location_for(resource) || user_specific_path(resource)
     end
 

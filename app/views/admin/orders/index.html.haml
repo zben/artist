@@ -1,0 +1,41 @@
+.row
+  .span16.shadow
+    %h2 Manage Orders
+    %table.table.zebra-striped.order
+      %tr
+        %td{width: 40} Order ID
+        %td{width: 50}
+        %td{width: 100} Artwork
+        %td{width: 40} Type
+        %td{width: 100} Artist
+        %td{width: 60} Buyer
+        %td{width: 100} Status
+        %td{width: 60} Quote
+        %td{width: 100} Paid Price(RMB)
+        %td{width: 300} Comment
+      -@orders.each do |order|
+        %tr
+          %td=order.number
+          %td
+            =image_tag order.artwork.photos.first.photo(:thumb), height: 50
+          %td
+            =link_to order.artwork.title, order.artwork
+          %td=order.is_for_real ? "Original" : "Copy"
+          %td=link_to order.artwork.ind_user.name, order.artwork.ind_user
+          %td=link_to order.org_user.org_profile.contact_person, order.org_user
+          %td=best_in_place order, :status, type: :select,
+            collection: Order.statuses_for_select.map{|x| [x[1],x[1]]},
+            path: admin_order_path(order),
+            ok_button: "OK", cancel_button: "Cancel"
+
+          %td=order.artwork.sale_price
+
+          %td=best_in_place order, :payment,
+            path: admin_order_path(order),
+            nil: "Same as quote"
+
+          %td=best_in_place order, :comment,
+            path: admin_order_path(order), type: :textarea,
+            nil: "click to add comment",
+            ok_button: "OK",
+            cancel_button: "Cancel"

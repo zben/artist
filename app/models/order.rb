@@ -18,6 +18,8 @@ class Order
   field :receipt_date, type: DateTime
   auto_increment :number, seed: 1000
 
+  default_scope desc(:created_at)
+
   after_save :update_artwork
 
   def update_artwork

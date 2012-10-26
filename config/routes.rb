@@ -14,7 +14,7 @@ Talent::Application.routes.draw do
 
   resources :artworks
   match 'artworks/by/:artist_id' => "artworks#index", as: "artist_artworks"
-  mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
+  #mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
   resources :parks
 
@@ -105,4 +105,11 @@ Talent::Application.routes.draw do
   match "/buyer_entrance" => "artworks#index", defaults: { locale: :ch }
   resources :orders
   match "/cancel_oder/:id" => "orders#cancel", as: "cancel_order"
+
+  namespace :admin do
+    resources :artworks
+    resources :orders
+    resources :ind_users
+    resources :org_users
+  end
 end

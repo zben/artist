@@ -9,7 +9,7 @@
       .artist_info
         %p=link_to @artwork.ind_user.name, @artwork.ind_user
         %p="美国麻省"
-    -if current_user.is_a? OrgUser
+    -if current_user.is_a?(OrgUser) || current_user.admin?
 
       .quote_box.shadow
         %p

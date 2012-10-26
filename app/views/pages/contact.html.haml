@@ -1,20 +1,12 @@
-.row.content
-  -if I18n.default_locale == :en
-    .span16.normal
-      %h1 Contact us
-      .row
-        .span11
-          %p
-            %b E-mail:
-            =mail_to "americanarthouse@gmail.com"
-  -else
-    .span16.normal
-      %h1 联系我们
-      .row
-        .span11
-          %p
-            %b E-mail:
-            =mail_to "americanarthouse@gmail.com"
-
-
-
+.row
+  .span16.shadow
+    .row
+      .span8.offset1
+        -if I18n.locale == :ch
+          %h2{style: "color: purple"} 联系我们
+          %p 如果您对我们网站上任何画家,画作, 价格, 运输有任何的疑问, 欢迎您向我们提出。我们的电子邮件是
+          %h2{style: "color: #777"} support@canvvas.com
+        -else
+          %h2{style: "color: purple"} Contact us
+          %p If you have any questions about how to use the website, price your artwork or if you have any concerns about working with us, feel free to email us.
+          %h2{style: "color: #777"} support@canvvas.com

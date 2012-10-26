@@ -5,7 +5,7 @@
         .span16
         -if I18n.default_locale == :en
           .span9
-            .works.content
+            .works
               %h2 How does it all work?
               %ol
                 %li You post the artwork for sale
@@ -14,7 +14,7 @@
                 %li Buyer makes payment and you get paid
                 %li We help you pack and ship your artwork securely
 
-            .why_join.content
+            .why_join
               %h2 Why join Canvvas?
               %h3 Expand International Audience
               %p Have your art viewed by prominent galleries and avid art-lovers in China.
@@ -28,20 +28,21 @@
               %h2.normal 服务流程
               %ol
                 %li 您浏览网站上的艺术家，找到您心仪的画作
-                %li 您提交预定愿望，询问任何问题
+                %li 您提交订购愿望，我们将联系您解答您的疑问
                 %li 您通过银行转账直接付款
-                %li 我们统一运输艺术品从美国到您指定的目的地地点
+                %li 我们从美国快递艺术品到您指定的目的地地点
 
             .why_join
-              %h2.normal 为什么使用我们的服务
+              %h2.normal 服务优势
               %h3 第一手的优秀画家资源
-              %p 我们在美国有专门的人员和画家建立稳定的关系。签约画家在第一时间会将他们的新作公布在我们的网站上。
+              %p 作为首家对接美国画家和中国艺术市场的交易平台, 我们在美国有专门的团队和画家保持合作关系。签约画家在第一时间将他们的新的作品公布在我们的网站上,供您欣赏和选购。
               %h3 我们确保画作的质量
-              %p 您可以放心您订购的画作绝对是正品而非任何形式的复制品。所有画作均附正品证书。我们可以协助您和画家直接进行交流。
-              %h3 可靠的运输
-              %p 我们对所有的画作都进行精心包裹，通过正规途径运输，防止运途中的损坏。所有的画作都附有运输保险，要求收件人签收。
+              %p 我们所有的作品带有包含艺术家签名的正品证书(Authenticity Certificate)。我们也可以协助您和画家直接进行远程交流,确保您的放心。
+              %h3 可靠的运输与支付
+              %p 我们对所有的画作都进行精心包裹，通过正规渠道运输，确保途中作品不会受到损坏。所有的画作都附有运输保险，并要求收件人签收。如果您在我们寄出作品前改变购买意向,我们在2天之内转帐返还原款。如果您在作品寄出后改变购买,你只需要支付相关运输费用。
+
         .span6.normal
-          .join_now.content
+          .join_now
             %h2.normal=t("join_now_for_free")
           = form_for(User.new, :as => :user, :url => registration_path(:user)) do |f|
             .row
@@ -57,3 +58,11 @@
               .span4= hidden_field_tag "user[_type]", I18n.default_locale == :en ? "IndUser" : "OrgUser"
             .row
               .span4.offset2= f.submit t("sign_up"), :class => "btn"
+          -if I18n.locale == :ch
+            %h2{style: "color: purple"} 联系我们
+            %p 如果您对我们网站上任何画家,画作, 价格, 运输有任何的疑问, 欢迎您向我们提出。我们的电子邮件是
+            %h2{style: "color: #777"} support@canvvas.com
+          -else
+            %h2{style: "color: purple"} Contact us
+            %p If you have any questions about how to use the website, price your artwork or if you have any concerns about working with us, feel free to email us.
+            %h2{style: "color: #777"} support@canvvas.com

@@ -1,4 +1,12 @@
 GIT
+  remote: git://github.com/bernat/best_in_place.git
+  revision: 966213713c903d977ee4950a8f53b646173d81b4
+  specs:
+    best_in_place (1.1.2)
+      jquery-rails
+      rails (~> 3.1)
+
+GIT
   remote: git://github.com/lwe/simple_enum.git
   revision: d854e5d1caa498a5cac82e9ec90a1216b33012a1
   specs:
@@ -281,6 +289,7 @@ PLATFORMS
 DEPENDENCIES
   active_hash
   aws-sdk
+  best_in_place!
   bourbon (~> 1.4.0)
   bson_ext
   cancan

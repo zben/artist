@@ -6,9 +6,11 @@
 //
 //= require jquery
 //= require jquery_ujs
-// require dataTables/jquery.dataTables
 //= require_tree .
 //= require tinymce-jquery
+//= require best_in_place
+//= require best_in_place.purr
+
 $(document).ready(function() {
   $('#skill_picker').click(function(event){ 
     if($(this).text() == '查看所有技能'){
@@ -70,4 +72,7 @@ $(document).ready(function() {
       columnWidth : 310
     });
   });
+
+  jQuery(".best_in_place").best_in_place();
+
 });

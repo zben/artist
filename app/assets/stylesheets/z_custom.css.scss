@@ -1023,11 +1023,31 @@ h1, h2, h3, h4, h5, h6{
   font-weight:normal;
 }
 .span16.shadow{
-  min-height: 800px;
+  min-height: 500px;
 }
 .row{
   float: left;
 }
 form{
   float: left;
+}
+.span16.shadow{
+  padding-top: 30px;
+}
+form .row{
+  clear: both;
+}
+input[type='submit']{
+  margin-top: 20px;
+}
+.login.primary.btn{
+  margin-top: 0px;
+  height: 25px;
+}
+p{
+  font-size:15px;
+  line-height: 20px;
+}
+h2{
+  color: green;
 }

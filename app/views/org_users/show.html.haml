@@ -2,7 +2,7 @@
   .span16.shadow
     .row
       .span15.offset1
-        %h2 您的订单
+        %h2 订单纪录
         -if @user.orders.empty?
           =link_to "感谢您的加入。现在就去看看我们的作品吧", artworks_path
         -else

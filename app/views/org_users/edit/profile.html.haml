@@ -21,14 +21,14 @@
                 = render 'shared/city_picker',:f=>p, :city_id=>@user.org_profile.city_id
               .row
                 .span11= p.input :address, hint: '请务必填写正确的电话号码以便我们联系您。准确完整的地址有助于画作的顺利到达。'
-              =link_to_function "如果您是画廊或其他机构,请点击此处提供机构信息","$('.company_info').toggle(300);"
-              %br
-              %br
-              .company_info{style: "display:none;"}
-                .row
-                  .span7= p.input :company_name
-                .row
-                  .span7= p.input :website
+              .row
+                .span16=link_to_function "如果您是画廊或其他机构,请点击此处提供机构信息","$('.company_info').toggle(300);"
+              .row.company_info{style: "display:none;"}
+                .span16
+                  .row
+                    .span7= p.input :company_name
+                  .row
+                    .span7= p.input :website
 
           .row.span16.actions
             .span4= submit_tag "#{@is_new ? t('Next Step') : t('Save Changes')}",:class=>"btn primary"
