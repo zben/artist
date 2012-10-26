@@ -136,4 +136,8 @@ class User
       super
     end
   end
+
+  def is_artist?
+    self._type="IndUser" && !self.admin?
+  end
 end

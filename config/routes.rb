@@ -14,6 +14,7 @@ Talent::Application.routes.draw do
 
   resources :artworks
   match 'artworks/by/:artist_id' => "artworks#index", as: "artist_artworks"
+  match 'artworks/by/:artist_id/edit' => "artworks#edit", as: "edit_artist_artworks"
   #mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
   resources :parks
@@ -111,5 +112,9 @@ Talent::Application.routes.draw do
     resources :orders
     resources :ind_users
     resources :org_users
+  end
+
+  namespace :manage do
+    resources :artworks
   end
 end

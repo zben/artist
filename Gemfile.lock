@@ -318,6 +318,7 @@ DEPENDENCIES
   pg
   rails (= 3.1.1)
   rails_admin
+  remotipart (~> 1.0)
   sass-rails (~> 3.1.0)
   seedbank
   simple_enum!

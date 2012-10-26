@@ -33,13 +33,15 @@
                   %span.add-on lb.
 
 
-                -a.object.photos.build
-                .span6
+                -a.object.photos.build if a.object.photos.empty?
+                .span4
                   = a.semantic_fields_for :photos do |p|
                     =p.input :photo, required: true
-              -# .row
-              -#   .span14= a.input :description
-              =a.link_to_remove "Remove this artwork"
-          =f.link_to_add "Add artwork", :artworks
+                .span2
+                  =a.input :for_sale, as: :select
+              .row
+                .span7=a.link_to_remove "Remove this artwork"
+          .row
+            .span16=f.link_to_add "Add artwork", :artworks
           .row
             .span2=f.submit "Upload photos", class: "btn primary"

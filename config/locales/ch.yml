@@ -404,3 +404,8 @@ ch:
   shipped: "已发货"
   delivered: "已收到"
   forgot_password: "重设密码"
+
+  see_profile: "订单纪录"
+  update_password: "更改密码"
+  update_info: "更新买家信息"
+  logout: "退出"

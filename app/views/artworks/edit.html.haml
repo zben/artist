@@ -1,45 +1,51 @@
-%h2 Edit Artwork
 .row
-  .span15
-    =semantic_nested_form_for @artwork do |a|
-      .list_item_box
-        .row
-          .span4= a.input :title
-          .span1= a.input :year, placeholder: "YYYY"
-          .span2= a.input :type, as: :select, collection: Artwork::PAINTING_TYPES
-          .span3= a.input :base, placeholder: "eg. paper, canvas, wood"
-          .span2= a.input :is_framed, label: "Frame Included", as: :select
-        .row
-          .span2
-            =a.label "Price"
-            %span.add-on US$
-            .price.with_addon= a.input :price, label: false
-            %span.add-on .00
-          -if current_user.admin?
+  .span16.shadow
+    %h2 Edit Artwork
+    .row
+      .span16
+        -current_user.artworks.each do |artwork|
+          .row
             .span2
-              =a.label "Sale Price #{@artwork.generate_sale_price}"
-              %span.add-on RMB
-              .price.with_addon= a.input :sale_price, label: false
+              .artwork_image=link_to image_tag(artwork.photos.first.photo(:thumb)), artwork
+            .span14
+              =semantic_nested_form_for artwork, remote: true do |a|
+                .list_item_box
+                  .row
+                    .span4= a.input :title
+                    .span1= a.input :year, placeholder: "YYYY"
+                    .span2= a.input :type, as: :select, collection: Artwork::PAINTING_TYPES
+                    .span2= a.input :base, placeholder: "eg. paper, canvas"
+                    .span2= a.input :is_framed, label: "Frame Included", as: :select
+                    .span2= a.input :for_sale, label: "For Sale", as: :select
+                  .row
+                    .span2
+                      =a.label "Price"
+                      %span.add-on US$
+                      .price.with_addon= a.input :price, label: false
+                      %span.add-on .00
+                    -if current_user.admin?
+                      .span2
+                        =a.label "Sale Price #{@artwork.generate_sale_price}"
+                        %span.add-on RMB
+                        .price.with_addon= a.input :sale_price, label: false
 
-          .span2
-            = a.label "Dimensions"
-            .dimension.with_addon= a.input :height, label: false, placeholder: "H"
-            %span.add-on " x
+                    .span2
+                      = a.label "Dimensions"
+                      .dimension.with_addon= a.input :height, label: false, placeholder: "H"
+                      %span.add-on " x
 
-            .dimension.with_addon= a.input :width, label: false, placeholder: "W"
-            %span.add-on "
+                      .dimension.with_addon= a.input :width, label: false, placeholder: "W"
+                      %span.add-on "
 
-          .span2
-            = a.label "Weight"
-            .price.with_addon= a.input :weight, label: false
-            %span.add-on lb.
+                    .span2
+                      = a.label "Weight"
+                      .price.with_addon= a.input :weight, label: false
+                      %span.add-on lb.
 
 
-          .span4
-            = a.semantic_fields_for :photos do |p|
-              =p.input :photo, required: true
-        -# .row
-        -#   .span14= a.input :description
-      .row
-        .span2=a.submit "Upload artwork", class: "btn primary"
-
+                    -# .span3
+                    -#   = a.semantic_fields_for :photos do |p|
+                    -#     =p.input :photo, required: true, input_html: {size: 20}
+                    .span6
+                      =a.submit "Update artwork", class: "btn primary"
+                      .message{id: "message_#{artwork.id}"}

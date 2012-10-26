@@ -366,9 +366,11 @@ a.remove_nested_fields, a.add_nested_fields{
 }
 .list_item_box{
   background-color:#C7EEFE;
-  padding: 5px 10px;
+  padding: 0px 10px;
+  padding-bottom: 0px;
   margin-bottom:10px;
-  width: 700px;
+  width: 760px;
+  height: 150px;
 }
 .left{
   float:left;
@@ -1051,4 +1053,29 @@ h2{
 }
 .join_now form{
 float: left;
+}
+.topbar input[type='submit']:hover{
+  background-color: rgba(255,255,255,0);
+}
+#artwork_photos_attributes_0_photo{width: 40px}
+.artwork_image{
+  margin: 0px -15px 0px 10px;
+  height: 150px;
+  background-color: #aaa;
+  text-align: center;
+  img{
+    margin-top: 20px;
+  }
+}
+.update_artwork{
+  text-align: right;
+}
+.message.success{color: green}
+.message.failure{color: red}
+a.remove_nested_fields{margin-top:-10px;}
+.span16.shadow > h2{padding-left:10px;}
+li.fragment select.date{
+  width: 100px;
+  display: block;
+  width: 100%;
 }

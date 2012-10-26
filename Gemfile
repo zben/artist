@@ -43,6 +43,7 @@ gem "aws-sdk",            :require => "aws/s3"
 gem 'thin'
 gem 'mongoid_auto_increment'
 gem 'best_in_place', github: 'bernat/best_in_place'
+gem 'remotipart', '~> 1.0'
 
 group :production do
   # gems specifically for Heroku go here

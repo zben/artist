@@ -41,3 +41,9 @@ en:
   contact_us: "Contact us"
   aboutus: "About us"
   forgot_password: "Reset password"
+
+  see_profile: "My Hompage"
+  manage_artwork: "Manage My Artwork"
+  update_info: "Update Artist Profile"
+  update_password: "Change Password"
+  logout: "Logout"

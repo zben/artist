@@ -53,10 +53,10 @@
         %td 美国
       %tr
         %td 作品规格
-        %td="#{@artwork.height}\" x #{@artwork.width}\"" + " (#{@artwork.height*2.54.to_i}cm x #{@artwork.width*2.54.to_i}cm)"
+        %td="#{@artwork.height}\" x #{@artwork.width}\"" + " (#{@artwork.height.to_i*2.54.to_i}cm x #{@artwork.width.to_i*2.54.to_i}cm)" if @artwork.height && @artwork.weight
       %tr
         %td 作品重量
-        %td="#{@artwork.weight} lb." + " (#{@artwork.weight*0.454} kg.)"
+        %td="#{@artwork.weight.to_f} lb." + " (#{@artwork.weight.to_f*0.454} kg.)"
       %tr
         %td 画框
         %td=@artwork.is_framed? ? "含框" : "不含框"

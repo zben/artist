@@ -13,12 +13,13 @@
             %li{:class=>"#{is_active?("work#new")}"}=link_to "Upload work", new_artwork_path
             %li{:class=>"#{is_active?("invitation#new")}"}=link_to "Invite Artists", new_invitation_path(:user)
           %li{:class=>"dropdown #{is_active?("users#edit")}",:"data-dropdown"=>"dropdown"}
-            =link_to_function current_user.name,'$(".dropdown-menu.setting").toggle()', :class=>"dropdown-toggle" 
+            =link_to current_user.name, "", :class=>"dropdown-toggle" 
             %ul.dropdown-menu.setting
-              %li=link_to "订单纪录",current_user
-              %li=link_to "更新密码",user_edit_path(current_user.id,'account') 
-              %li=link_to "更新买家信息",user_edit_path(current_user.id,'profile')
-              %li=link_to "退出",destroy_user_session_path,:method => :delete if user_signed_in?
+              %li=link_to t("see_profile"),current_user
+              %li=link_to t("manage_artwork"), edit_artist_artworks_path(current_user.id) if current_user.is_artist?
+              %li=link_to t("update_info"),user_edit_path(current_user.id,'profile')
+              %li=link_to t("update_password"),user_edit_path(current_user.id,'account') 
+              %li=link_to t("logout"),destroy_user_session_path,:method => :delete if user_signed_in?
       -else
         = form_for User.new, :url => '/users/sign_in' do |f|
           %ul.nav.login
@@ -47,5 +48,3 @@
       $(this).hide();
     }
   );
-              %li=link_to "Invite artists",new_invitation_path(:user)
-              %li=link_to "Log out",destroy_user_session_path,:method => :delete if user_signed_in?

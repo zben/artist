@@ -20,6 +20,7 @@ class Artwork
   field :is_framed, type: Boolean
   field :weight, type: Float
   field :sold, type: Boolean, default: false
+  field :for_sale, type: Boolean, default: true
   auto_increment :number, seed: 1000
 
   PAINTING_TYPES = %w{
@@ -52,7 +53,7 @@ class Artwork
   end
 
   def generate_sale_price
-    yuan = (price * 6.3)
+    yuan = (price.to_i * 6.3)
     rounded = yuan.round(-2) -1
   end
 

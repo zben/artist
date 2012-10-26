@@ -10,6 +10,7 @@
 //= require tinymce-jquery
 //= require best_in_place
 //= require best_in_place.purr
+//= require jquery.remotipart
 
 $(document).ready(function() {
   $('#skill_picker').click(function(event){ 
