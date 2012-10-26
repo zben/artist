@@ -44,25 +44,25 @@
         .span6.normal
           .join_now
             %h2.normal=t("join_now_for_free")
-          = form_for(User.new, :as => :user, :url => registration_path(:user)) do |f|
-            .row
-              .span2= f.label :email
-              .span4= f.email_field :email
-            .row
-              .span2= f.label :password
-              .span4= f.password_field :password, placeholder: t("password_prompt")
-            .row
-              .span2= f.label :password_confirmation, t("password_confirmation")
-              .span4= f.password_field :password_confirmation, placeholder: t("password_confirmation_prompt")
-            .row
-              .span4= hidden_field_tag "user[_type]", I18n.default_locale == :en ? "IndUser" : "OrgUser"
-            .row
-              .span4.offset2= f.submit t("sign_up"), :class => "btn"
-          -if I18n.locale == :ch
-            %h2{style: "color: purple"} 联系我们
-            %p 如果您对我们网站上任何画家,画作, 价格, 运输有任何的疑问, 欢迎您向我们提出。我们的电子邮件是
-            %h2{style: "color: #777"} support@canvvas.com
-          -else
-            %h2{style: "color: purple"} Contact us
-            %p If you have any questions about how to use the website, price your artwork or if you have any concerns about working with us, feel free to email us.
-            %h2{style: "color: #777"} support@canvvas.com
+            = form_for(User.new, :as => :user, :url => registration_path(:user)) do |f|
+              .row
+                .span2= f.label :email
+                .span4= f.email_field :email
+              .row
+                .span2= f.label :password
+                .span4= f.password_field :password, placeholder: t("password_prompt")
+              .row
+                .span2= f.label :password_confirmation, t("password_confirmation")
+                .span4= f.password_field :password_confirmation, placeholder: t("password_confirmation_prompt")
+              .row
+                .span4= hidden_field_tag "user[_type]", I18n.default_locale == :en ? "IndUser" : "OrgUser"
+              .row
+                .span4.offset2= f.submit t("sign_up"), :class => "btn"
+            -if I18n.locale == :ch
+              %h2{style: "color: purple"} 联系我们
+              %p 如果您对我们网站上任何画家,画作, 价格, 运输有任何的疑问, 欢迎您向我们提出。我们的电子邮件是
+              %h2{style: "color: #777"} support@canvvas.com
+            -else
+              %h2{style: "color: purple"} Contact us
+              %p If you have any questions about how to use the website, price your artwork or if you have any concerns about working with us, feel free to email us.
+              %h2{style: "color: #777"} support@canvvas.com
