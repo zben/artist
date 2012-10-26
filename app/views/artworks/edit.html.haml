@@ -16,7 +16,6 @@
                     .span2= a.input :type, as: :select, collection: Artwork::PAINTING_TYPES
                     .span2= a.input :base, placeholder: "eg. paper, canvas"
                     .span2= a.input :is_framed, label: "Frame Included", as: :select
-                    .span2= a.input :for_sale, label: "For Sale", as: :select
                   .row
                     .span2
                       =a.label "Price"
@@ -42,10 +41,11 @@
                       .price.with_addon= a.input :weight, label: false
                       %span.add-on lb.
 
+                    .span2= a.input :for_sale, label: "For Sale", as: :select
 
                     -# .span3
                     -#   = a.semantic_fields_for :photos do |p|
                     -#     =p.input :photo, required: true, input_html: {size: 20}
-                    .span6
+                    .span3
                       =a.submit "Update artwork", class: "btn primary"
                       .message{id: "message_#{artwork.id}"}
