@@ -1028,9 +1028,6 @@ h1, h2, h3, h4, h5, h6{
 .row{
   float: left;
 }
-form{
-  float: left;
-}
 .span16.shadow{
   padding-top: 30px;
 }
@@ -1050,4 +1047,5 @@ p{
 }
 h2{
   color: green;
+  display: block;
 }

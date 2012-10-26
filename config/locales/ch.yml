@@ -403,3 +403,4 @@ ch:
   paid: "已支付"
   shipped: "已发货"
   delivered: "已收到"
+  forgot_password: "重设密码"

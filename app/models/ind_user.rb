@@ -6,6 +6,7 @@ class IndUser < User
     has_and_belongs_to_many :industries
     scope :with_ind_profile, where(:profile.ne=>nil)
     has_many :artworks, autosave: true
+    default_scope where(:admin.ne => true)
 
   accepts_nested_attributes_for :educations,:allow_destroy => true
   accepts_nested_attributes_for :experiences,:allow_destroy => true
