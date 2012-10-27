@@ -27,9 +27,10 @@
 -if current_user == @user && @user.artworks.empty?
   You don't have any artwork presented yet,
   =link_to "Start upload some artwork. It is easy and quick", new_artwork_path
-.row
-  .span16#image_blocks
-    -@user.artworks.each do |a|
+
+-content_for :widescreen do
+  #image_blocks
+    -@artworks.each do |a|
       =link_to a do
         .image_block
           =image_tag(a.photos.first.photo.url(:medium), width: 260)

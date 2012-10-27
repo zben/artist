@@ -1,11 +1,13 @@
 .row
-  .span8
-    %h2 Invite artist friends
-    = form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => {:method => :post} do |f|
-      %p
-        = f.label "Email"
-        %br/
-        = f.text_field :email, value: @emails, placeholder: "example@gmail.com, example@yahoo.com"
-        = f.label :message
-        = text_area_tag :message, nil, :rows => 10
-      %p= f.submit "Send invitation",:class=>'btn'
+  .span16.shadow
+    .row
+      .span8.offset1
+        %h2 Invite artist friends
+        = form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => {:method => :post} do |f|
+          %p
+            = f.label "Email"
+            %br/
+            = f.text_field :email, value: @emails, placeholder: "example@gmail.com, example@yahoo.com"
+            = f.label :message
+            = text_area_tag :message, nil, :rows => 10
+          %p= f.submit "Send invitation",:class=>'btn'

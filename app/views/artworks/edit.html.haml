@@ -1,51 +1,25 @@
 .row
   .span16.shadow
-    %h2 Edit Artwork
+    %h2="Ready-for-Sale Artwork (#{@ready_artworks.count})"
+    %p
+      For an artwork to be ready for sale, it needs to have all the fields filled. You also need to mark it as "for sale".
+    %p
+      You are advised to have
+      %b 4-8 pieces of work
+      for sale at a time so that you can have a flow of new artwork to be displayed on the site.
     .row
       .span16
-        -current_user.artworks.each do |artwork|
-          .row
-            .span2
-              .artwork_image=link_to image_tag(artwork.photos.first.photo(:thumb)), artwork
-            .span14
-              =semantic_nested_form_for artwork, remote: true do |a|
-                .list_item_box
-                  .row
-                    .span4= a.input :title
-                    .span1= a.input :year, placeholder: "YYYY"
-                    .span2= a.input :type, as: :select, collection: Artwork::PAINTING_TYPES
-                    .span2= a.input :base, placeholder: "eg. paper, canvas"
-                    .span2= a.input :is_framed, label: "Frame Included", as: :select
-                  .row
-                    .span2
-                      =a.label "Price"
-                      %span.add-on US$
-                      .price.with_addon= a.input :price, label: false
-                      %span.add-on .00
-                    -if current_user.admin?
-                      .span2
-                        =a.label "Sale Price #{@artwork.generate_sale_price}"
-                        %span.add-on RMB
-                        .price.with_addon= a.input :sale_price, label: false
+        -@ready_artworks.each do |artwork|
+          =render "artworks/artwork_form", artwork: artwork
 
-                    .span2
-                      = a.label "Dimensions"
-                      .dimension.with_addon= a.input :height, label: false, placeholder: "H"
-                      %span.add-on " x
+    %h2="Not-Ready-for-Sale Artwork (#{@unready_artworks.count})"
+    .row
+      .span16
+        -@unready_artworks.each do |artwork|
+          =render "artworks/artwork_form", artwork: artwork
 
-                      .dimension.with_addon= a.input :width, label: false, placeholder: "W"
-                      %span.add-on "
-
-                    .span2
-                      = a.label "Weight"
-                      .price.with_addon= a.input :weight, label: false
-                      %span.add-on lb.
-
-                    .span2= a.input :for_sale, label: "For Sale", as: :select
-
-                    -# .span3
-                    -#   = a.semantic_fields_for :photos do |p|
-                    -#     =p.input :photo, required: true, input_html: {size: 20}
-                    .span3
-                      =a.submit "Update artwork", class: "btn primary"
-                      .message{id: "message_#{artwork.id}"}
+    %h2="Sold Artwork (#{@sold_artworks.count})"
+    .row
+      .span16
+        -@sold_artworks.each do |artwork|
+          =render "artworks/artwork_sold", artwork: artwork

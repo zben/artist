@@ -328,7 +328,6 @@ table td {
 }
 
 .main{
-  min-height:550px;
   padding-top: 10px;
 }
 .tabs{
@@ -365,6 +364,7 @@ a.remove_nested_fields, a.add_nested_fields{
   margin:10px 0px;
 }
 .list_item_box{
+  border-radius: 5px;
   background-color:#C7EEFE;
   padding: 0px 10px;
   padding-bottom: 0px;
@@ -372,6 +372,7 @@ a.remove_nested_fields, a.add_nested_fields{
   width: 760px;
   height: 150px;
 }
+
 .left{
   float:left;
   padding-left:5px;
@@ -457,7 +458,6 @@ li.no_dot{
   .topbar-inner input#user_email{width: 180px;}
 input.login{display:inline-block;}
 .nav.login{
-  margin-left:50px;
 }
 
 .topbar div > ul.login a, .nav.login a{padding-top:5px;}
@@ -585,6 +585,7 @@ li .name{
 }
 
 .brand{
+  height: 55px;
   img{
     padding-top: 10px;
   }
@@ -594,6 +595,10 @@ li .name{
 }
 .topbar ul.main_nav{
   font-size: 20px;
+  margin-left: 0px;
+  a{
+    padding-top: 10px;
+  }
 }
 #feedback{
   position: fixed;
@@ -775,6 +780,9 @@ li.fragment{
 ol.fragments-group{
   height: 40px;
 }
+#image_blocks{
+  margin: 0 auto;
+}
 .image_block{
   background-color: white;
   box-shadow: rgba(34, 25, 25, 0.4) 0px 1px 3px 0px;
@@ -808,13 +816,20 @@ ol.fragments-group{
     }
     .name{
       text-align: left;
-      width: 200px;
+      width: 120px;
       padding-left: 5px;
       float:left;
       font-size: 12px;
       .image_footer{
         display: block;
       }
+    }
+    .price{
+      display: inline-block;
+      font-size:20px;
+      padding-top:10px;
+      text-align: right;
+      width: 80px;
     }
   }
 }
@@ -934,8 +949,10 @@ body.ind_users.show{
 
 .slogan{
   margin: 5px 5px;
+  margin-top: 0px;
   padding: 0px 10px;;
-  width: 890px;
+  width: 970px;
+  margin-left: -30px;
   background-color: orange;
 
   h2{
@@ -1058,10 +1075,12 @@ float: left;
   background-color: rgba(255,255,255,0);
 }
 #artwork_photos_attributes_0_photo{width: 40px}
+
 .artwork_image{
-  margin: 0px -15px 0px 10px;
+  border-radius:5px;
+  background-color:#C7EEFE;
+  margin: 0px -25px 0px 10px;
   height: 150px;
-  background-color: #aaa;
   text-align: center;
   img{
     margin-top: 20px;
@@ -1074,8 +1093,45 @@ float: left;
 .message.failure{color: red}
 a.remove_nested_fields{margin-top:-10px;}
 .span16.shadow > h2{padding-left:10px;}
+.span16.shadow > p{padding:0 10px;}
+
 li.fragment select.date{
   width: 100px;
   display: block;
   width: 100%;
+}
+.topbar-inner{
+  position: relative;
+}
+.topbar-inner .container{
+  width: 1000px;
+  height: 50px;
+}
+#infscr-loading {
+  left: 50%;
+  text-align :center;
+  background-color: rgba(0, 0, 0, 1);
+  padding: 10px;
+  color: #fff;
+  border-radius: 10px;
+  width: 200px;
+  margin-left: -100px;
+  position: fixed;
+  bottom: 50px;
+}
+.topbar-inner ul.nav li.language{
+  a{
+    padding: 0 5px;
+    margin: 0px;
+    margin-top: 5px;
+  }
+}
+.topbar a:hover, .topbar-inner .container .nav.main_nav li a:hover{
+   color: black;
+}
+.footer{
+  margin-top: 30px;
+}
+.quote_box input.btn.primary{
+  margin-top: 0px;
 }

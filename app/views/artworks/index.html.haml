@@ -14,8 +14,8 @@
         =link_to new_user_session_path do
           .btn.primary=t("sign_up")
 
-.row
-  .span16#image_blocks
+-content_for :widescreen do
+  #image_blocks
     -@artworks.each do |a|
       =link_to a do
         .image_block
@@ -25,4 +25,9 @@
             =image_tag a.ind_user.avatar.url(:small)
             .name
               %b=link_to a.ind_user.name, a.ind_user
-              .image_footer="#{t("submitted")} #{time_ago_in_words a.created_at} #{t("ago")}"
+              .image_footer="#{time_ago_in_words a.created_at} #{t("ago")}"
+            .price= a.price_in_yuan if I18n.locale == :ch || current_user.try(:admin?)
+
+  .pagination
+    %li.next_page
+      =link_to "next", "/artworks/page/2"

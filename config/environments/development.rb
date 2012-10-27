@@ -34,7 +34,7 @@ Talent::Application.configure do
   ActionMailer::Base.smtp_settings = {
     :address              => "smtp.gmail.com",
     :port                 => 587,
-    :user_name            => "i5kongtalent@gmail.com",
+    :user_name            => "support@canvvas.com",
     :domain               => "localhost:3000",
     :password             => 'wrong-password',
     :authentication       => "plain",

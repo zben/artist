@@ -7,13 +7,13 @@
           =f.semantic_fields_for :artworks do |a|
             .list_item_box
               .row
-                .span4= a.input :title
+                .span5= a.input :title
                 .span1= a.input :year, placeholder: "YYYY"
-                .span2= a.input :type, as: :select, collection: Artwork::PAINTING_TYPES
+                .span2= a.input :type, as: :select, collection: Artwork::PAINTING_TYPES, include_blank: false
                 .span3= a.input :base, placeholder: "eg. paper, canvas, wood"
-                .span2= a.input :is_framed, label: "Frame Included", as: :select
+                .span2= a.input :is_framed, label: "Frame Included", as: :select, include_blank: false
               .row
-                .span2
+                .span3
                   =a.label "Price"
                   %span.add-on US$
                   .price.with_addon= a.input :price, label: false
@@ -38,7 +38,7 @@
                   = a.semantic_fields_for :photos do |p|
                     =p.input :photo, required: true
                 .span2
-                  =a.input :for_sale, as: :select
+                  =a.input :for_sale, as: :select, include_blank: false
               .row
                 .span7=a.link_to_remove "Remove this artwork"
           .row

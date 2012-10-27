@@ -131,13 +131,13 @@ class User
 
   def headers_for(action)
     if action == :invitation_instructions
-      {:subject => "您的朋友#{self.invited_by.name}邀请你加入悟空人才网！"}
+      {:subject => "Your friend #{self.invited_by.name} invites you to join Canvvas.com"}
     else
       super
     end
   end
 
   def is_artist?
-    self._type="IndUser" && !self.admin?
+    self._type == "IndUser" && !self.admin?
   end
 end

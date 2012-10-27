@@ -2,10 +2,12 @@
 class Artwork
   include Mongoid::Document
   include Mongoid::Timestamps
+  include ActionView::Helpers
 
   has_many :photos, autosave: true, dependent: :destroy, as: :attachable
   has_many :orders
   belongs_to :ind_user
+
   field :title
   field :description
   field :type
@@ -21,6 +23,7 @@ class Artwork
   field :weight, type: Float
   field :sold, type: Boolean, default: false
   field :for_sale, type: Boolean, default: true
+  field :ready, type: Boolean, default: false
   auto_increment :number, seed: 1000
 
   PAINTING_TYPES = %w{
@@ -35,8 +38,15 @@ class Artwork
   accepts_nested_attributes_for :photos, allow_destroy: true
 
   default_scope self.desc(:created_at)
+  scope :ready, where(ready: true).where(sold: false)
+  scope :not_ready, where(ready: false).where(sold: false)
 
   before_save :update_price_timestamps
+  before_save :update_readiness
+
+  def update_readiness
+    self.ready = true if self.info_complete? && self.for_sale
+  end
 
   def update_price_timestamps
     if price_changed?
@@ -59,7 +69,7 @@ class Artwork
 
   def price_in_yuan(original=true)
     if sale_price
-      "¥#{sale_price}"
+      "¥#{number_with_delimiter(sale_price, delimiter: ',')}"
     else
       "暂缺"
     end
@@ -75,5 +85,11 @@ class Artwork
 
   def copy_ordered_by user
     orders.where(org_user_id: user.id, is_for_real: false).present?
+  end
+
+  def info_complete?
+    [:price,:height,:width, :weight, :is_framed, :title, :type, :base, :year].all? do |p|
+      self.send(p).present?
+    end
   end
 end

@@ -28,7 +28,8 @@
               = f.password_field :password,:placeholder=> t("password")
               = link_to t("forgot_password")+"?", new_password_path(:user),class: "forgot_password"
             %li= submit_tag t('Sign in'), :class=>"btn primary login"
-
+            %li.language=link_to "中文","/buyer_entrance"
+            %li.language=link_to "English","/artists_entrance"
 :javascript
   $(".dropdown-toggle").hover(
     function () {

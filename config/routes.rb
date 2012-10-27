@@ -117,4 +117,6 @@ Talent::Application.routes.draw do
   namespace :manage do
     resources :artworks
   end
+
+  match "artworks/page/:page" => "artworks#index"
 end

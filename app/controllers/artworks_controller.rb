@@ -1,10 +1,12 @@
 class ArtworksController < ApplicationController
+  before_filter :authenticate!, except: [:index]
+
   def index
     if params[:artist_id]
       @artist = IndUser.find(params[:artist_id])
-      @artworks = Artwork.where(ind_user_id: params[:artist_id])
+      @artworks = @artist.artworks.ready.page(params[:page]).per(15)
     else
-      @artworks = Artwork.all
+      @artworks = Artwork.ready.page(params[:page]).per(15)
     end
   end
 
@@ -34,6 +36,10 @@ class ArtworksController < ApplicationController
 
   def edit
     @user = current_user
+    @user = Artwork.find(params[:id]).ind_user if current_user.admin?
+    @ready_artworks = @user.artworks.ready
+    @unready_artworks = @user.artworks.not_ready
+    @sold_artworks = @user.artworks.where(sold: true)
   end
 
   def update

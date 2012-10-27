@@ -1,0 +1,9 @@
+=link_to artwork do
+  .image_block
+    =image_tag(artwork.photos.first.photo.url(:medium))
+    .title=artwork.title == "" ? "Untitled" : artwork.title
+    .artist
+      =image_tag artwork.ind_user.avatar.url(:small)
+      .name
+        %b=link_to artwork.ind_user.name, artwork.ind_user
+        .image_footer="#{t("submitted")} #{time_ago_in_words artwork.created_at} #{t("ago")}"

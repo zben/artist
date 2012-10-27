@@ -8,8 +8,8 @@ class InvitationsController < Devise::InvitationsController
       emails.each{|email| resource_class.invite!({email: email}, current_inviter)}
       new_emails = emails.select{|email| User.where(:email=>email).first.encrypted_password == nil}
       old_emails = emails - new_emails
-      flash[:success] = "邀请信发至: #{new_emails.join(',')}" unless new_emails.empty?
-      flash[:warning] = "他们已经加入: #{old_emails.join(',')}" unless old_emails.empty?
+      flash[:success] = "Invitaion successfully wsa sent to: #{new_emails.join(',')}" unless new_emails.empty?
+      flash[:warning] = "The following user is already signed up: #{old_emails.join(',')}" unless old_emails.empty?
       redirect_to :back
     elsif params[:job_post_id]
       session[:emails] = params[:user][:email]

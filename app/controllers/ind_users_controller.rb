@@ -4,7 +4,7 @@ class IndUsersController < ApplicationController
   before_filter :authenticate!
   
   def index
-    @ind_users = IndUser.with_ind_profile.page(params[:page]).per(10)
+    @ind_users = IndUser.with_ind_profile.where(admin: false).page(params[:page]).per(10)
   end
   
   def overview
@@ -16,8 +16,9 @@ class IndUsersController < ApplicationController
     @status_update = current_user.related_shouts.limit(20)
   end
   
-  def show 
+  def show
     @user = params[:id].nil? ? current_user : User.find(params[:id])
+    @artworks = @user.artworks.ready
   end
   
   def new 

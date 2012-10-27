@@ -1,0 +1,45 @@
+.row
+  .span2
+    .artwork_image=link_to image_tag(artwork.photos.first.photo(:thumb)), artwork
+  .span14
+    =semantic_nested_form_for artwork, remote: true do |a|
+      .list_item_box
+        .row
+          .span4= a.input :title
+          .span1= a.input :year, placeholder: "YYYY"
+          .span2= a.input :type, as: :select, collection: Artwork::PAINTING_TYPES , include_blank: false
+          .span2= a.input :base, placeholder: "eg. paper, canvas"
+          .span2= a.input :is_framed, label: "Frame Included", as: :select , include_blank: false
+        .row
+          .span2
+            =a.label "Price"
+            %span.add-on US$
+            .price.with_addon= a.input :price, label: false
+            %span.add-on .00
+          -if current_user.admin?
+            .span2
+              =a.label "Sale Price #{a.object.generate_sale_price}"
+              %span.add-on RMB
+              .price.with_addon= a.input :sale_price, label: false
+
+          .span2
+            = a.label "Dimensions"
+            .dimension.with_addon= a.input :height, label: false, placeholder: "H"
+            %span.add-on " x
+
+            .dimension.with_addon= a.input :width, label: false, placeholder: "W"
+            %span.add-on "
+
+          .span2
+            = a.label "Weight"
+            .price.with_addon= a.input :weight, label: false
+            %span.add-on lb.
+
+          .span2= a.input :for_sale, label: "For Sale", as: :select , include_blank: false
+
+          -# .span3
+          -#   = a.semantic_fields_for :photos do |p|
+          -#     =p.input :photo, required: true, input_html: {size: 20}
+          .span3
+            =a.submit "Update artwork", class: "btn primary"
+            .message{id: "message_#{artwork.id}"}
