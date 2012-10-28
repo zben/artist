@@ -5,7 +5,7 @@
         %h2 Upload artwork photos
         =semantic_nested_form_for @user, url: artworks_path, method: :post do |f|
           =f.semantic_fields_for :artworks do |a|
-            .list_item_box
+            .list_item_box.with_link
               .row
                 .span5= a.input :title
                 .span1= a.input :year, placeholder: "YYYY"
@@ -39,9 +39,9 @@
                     =p.input :photo, required: true
                 .span2
                   =a.input :for_sale, as: :select, include_blank: false
-              .row
+              .row.link
                 .span7=a.link_to_remove "Remove this artwork"
-          .row
+          .row.add_link
             .span16=f.link_to_add "Add artwork", :artworks
           .row
             .span2=f.submit "Upload photos", class: "btn primary"

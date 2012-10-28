@@ -364,20 +364,34 @@ a.remove_nested_fields, a.add_nested_fields{
   margin:10px 0px;
 }
 .list_item_box{
-  border-radius: 5px;
   background-color:#C7EEFE;
   padding: 0px 10px;
   padding-bottom: 0px;
   margin-bottom:10px;
   width: 760px;
-  height: 150px;
+  height: 120px;
+  clear: both;
+  box-shadow: rgba(34, 25, 25, 0.4) 0px 1px 3px 0px;
+  .row{
+    height:50px;
+    margin-bottom:10px;
+  }
+  .row.link{
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    height:30px;
+  }
+  label{
+    font-style: italic;
+  }
 }
+.list_item_box.with_link{height: 150px}
 
 .left{
   float:left;
   padding-left:5px;
-  }
-  
+}
+
 .side .module{
   border-radius: 5px;
   background-color:#AFCBF3;
@@ -1077,13 +1091,12 @@ float: left;
 #artwork_photos_attributes_0_photo{width: 40px}
 
 .artwork_image{
-  border-radius:5px;
-  background-color:#C7EEFE;
   margin: 0px -25px 0px 10px;
   height: 150px;
   text-align: center;
   img{
-    margin-top: 20px;
+    box-shadow: rgba(34, 25, 25, 0.4) 0px 1px 3px 0px;
+    border: 5px solid white;
   }
 }
 .update_artwork{
@@ -1091,7 +1104,7 @@ float: left;
 }
 .message.success{color: green}
 .message.failure{color: red}
-a.remove_nested_fields{margin-top:-10px;}
+a.remove_nested_fields{margin-top:10px;}
 .span16.shadow > h2{padding-left:10px;}
 .span16.shadow > p{padding:0 10px;}
 
@@ -1135,3 +1148,13 @@ li.fragment select.date{
 .quote_box input.btn.primary{
   margin-top: 0px;
 }
+.artworks.index .pagination{
+  display: none;
+}
+.hint{
+  width: 850px;
+  background: #eee;
+  padding: 10px;
+  margin: 10px;
+}
+

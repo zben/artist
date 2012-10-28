@@ -9,7 +9,6 @@
 
 
         = semantic_nested_form_for @user do |f|
-          = f.error_messages  
           = hidden_field_tag :current_step, 'profile' 
           = hidden_field_tag :is_new, 'false' if @is_new
 
@@ -20,13 +19,13 @@
                 .span3= p.input :lastname, label: "Last Name"
                 .span2
                   =p.label "Birth year*"
-                  =select_tag "ind_user[profile_attributes][birthday(1i)]", options_for_select((1900..1990).to_a, @user.profile.birthday.year)
+                  =select_tag "ind_user[profile_attributes][birthday(1i)]", options_for_select((1900..1990).to_a, @user.profile.try(:birthday).try(:year))
                 .span2= p.input :gender, :as=>:select,:collection => Profile.genders_for_select,:prompt => t("Select one") 
               .row
                 -# .span3= p.input :residence_country, label: "Residence", :as=>:select, :collection => Country.all, :prompt => t("Select one")
                 .span5= p.input :address
                 .span2= p.input :city
-                .span3= p.input :province_id, required: true, label: "State", :as=>:select, :collection => Province.all, :prompt => t("Select one")
+                .span3= p.input :province_id, required: true, label: "State", :as=>:select, :collection => Country.where(name_en: "United States").first.provinces.all, :prompt => t("Select one")
 
               .row
                 .span3

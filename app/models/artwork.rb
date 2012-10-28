@@ -24,6 +24,7 @@ class Artwork
   field :sold, type: Boolean, default: false
   field :for_sale, type: Boolean, default: true
   field :ready, type: Boolean, default: false
+  field :disabled, type: Boolean, default: false
   auto_increment :number, seed: 1000
 
   PAINTING_TYPES = %w{
@@ -37,7 +38,7 @@ class Artwork
   }
   accepts_nested_attributes_for :photos, allow_destroy: true
 
-  default_scope self.desc(:created_at)
+  default_scope self.where(:disabled.ne => true).desc(:created_at)
   scope :ready, where(ready: true).where(sold: false)
   scope :not_ready, where(ready: false).where(sold: false)
 
@@ -45,7 +46,8 @@ class Artwork
   before_save :update_readiness
 
   def update_readiness
-    self.ready = true if self.info_complete? && self.for_sale
+    self.ready = (self.info_complete? && self.for_sale)
+    nil
   end
 
   def update_price_timestamps

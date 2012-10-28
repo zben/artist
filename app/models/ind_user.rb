@@ -5,7 +5,7 @@ class IndUser < User
     has_many :tech_applications
     has_and_belongs_to_many :industries
     scope :with_ind_profile, where(:profile.ne=>nil)
-    has_many :artworks, autosave: true
+    has_many :artworks, autosave: true, dependent: :destroy
 
   accepts_nested_attributes_for :educations,:allow_destroy => true
   accepts_nested_attributes_for :experiences,:allow_destroy => true
@@ -14,7 +14,7 @@ class IndUser < User
   accepts_nested_attributes_for :profile,:allow_destroy => true
   accepts_nested_attributes_for :org_profile,:allow_destroy => true
   accepts_nested_attributes_for :usage,:allow_destroy => true
-  accepts_nested_attributes_for :artworks, :alow_destroy => true
+  accepts_nested_attributes_for :artworks, :allow_destroy => true
 
   perform_search_on :profile=>[:name,:intro,:intro_title],
     :educations=>[:degree_type,:school,:program,:comment],
@@ -57,25 +57,6 @@ class IndUser < User
 
   def prev_step step
     steps[steps.index(step)-1]
-  end
-
-  def self.gen
-    x=IndUser.create({email: Faker::Internet.email,password: 'password'})
-    x.confirmed_at=Time.now
-    x.build_profile({
-          firstname: Faker::Name.first_name,
-          lastname: Faker::Name.last_name,
-          birthday: Date.new(1990-Random.rand(20),Random.rand(11)+1,Random.rand(20)+1),
-          gender_cd: Random.rand(2),
-          citizenship: Random.rand(2)+1,
-          residence_country: Random.rand(2)+1,
-          intro: Faker::Lorem.paragraph,
-          intro_title: Faker::Lorem.sentence,
-          province_id: Province.all.shuffle.first.id
-        })
-    x.skills << Skill.all.shuffle[0..5]
-    x.build_usage({find_job:true,find_project: Random.rand(2)==1,find_partner: Random.rand(2)==1, find_money: Random.rand(2)==1})
-    x.save
   end
 
   def matching_companies

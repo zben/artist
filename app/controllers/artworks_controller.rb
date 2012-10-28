@@ -25,8 +25,8 @@ class ArtworksController < ApplicationController
       @user.artworks = @artworks.map{|a| Artwork.new(a)}
       render :new
     else
-      @artworks.each { |a| @user.artworks.create(a) }
-      redirect_to artist_artworks_path(current_user.id)
+      @artworks.each { |a| @user.artworks.create!(a) }
+      redirect_to edit_artist_artworks_path(@user)
     end
   end
 
@@ -55,6 +55,9 @@ class ArtworksController < ApplicationController
   end
 
   def destroy
+    @artwork = Artwork.find(params[:id])
+    @artwork.update_attributes(disabled: true)
+    render js: "$('#edit_#{@artwork.id}').hide();"
   end
 
 end

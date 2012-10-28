@@ -16,7 +16,7 @@
             .span2= f.label :password_confirmation, t("password_confirmation")
             .span4= f.password_field :password_confirmation, placeholder: t("password_confirmation_prompt")
           .row
-            .span4= hidden_field_tag "user[_type]", I18n.default_locale == :en ? "IndUser" : "OrgUser"
+            .span4= hidden_field_tag "user[_type]", I18n.locale == :en ? "IndUser" : "OrgUser"
           .row
             .span4.offset2= f.submit t("sign_up"), :class => "btn"
 
