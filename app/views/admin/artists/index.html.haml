@@ -1,0 +1,38 @@
+.row
+  .span16.shadow
+    %h2 Manage Artists
+    %table.table.zebra-striped.order
+      %tr
+        %td{width: 40} Name
+        %td{width: 40} Joined
+        %td{width: 40} Location
+        %td{width: 50} Items on Sale
+        %td{width: 100} Total Items
+        %td{width: 40} Items sold
+      -@artists.each do |artist|
+        %tr
+          %td=link_to artist.name, artist
+          %td=l artist.created_at.to_date, format: :short
+          %td=artist.profile.citystate if artist.profile
+          %td=artist.artworks.ready.count
+          %td=artist.artworks.where(:sold.ne => true).count
+          %td=artist.artworks.where(:sold => true).count
+          -# %td=link_to order.artwork.ind_user.name, order.artwork.ind_user
+          -# %td=link_to order.org_user.org_profile.contact_person, order.org_user
+          -# %td=best_in_place order, :status, type: :select,
+          -#   collection: Order.statuses_for_select.map{|x| [x[1],x[1]]},
+          -#   path: admin_order_path(order),
+          -#   ok_button: "OK", cancel_button: "Cancel"
+
+          -# %td=order.artwork.sale_price
+
+          -# %td=best_in_place order, :payment,
+          -#   path: admin_order_path(order),
+          -#   nil: "Same as quote"
+
+          -# %td=best_in_place order, :comment,
+          -#   path: admin_order_path(order), type: :textarea,
+          -#   nil: "click to add comment",
+          -#   ok_button: "OK",
+          -#   cancel_button: "Cancel"
+

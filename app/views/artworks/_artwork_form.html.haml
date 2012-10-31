@@ -10,6 +10,7 @@
           .span2= a.input :type, as: :select, collection: Artwork::PAINTING_TYPES , include_blank: false
           .span2= a.input :base, placeholder: "eg. paper, canvas"
           .span2= a.input :is_framed, label: "Frame Included", as: :select , include_blank: false
+          .span2= a.input :for_sale, label: "For Sale", as: :select , include_blank: false
         .row
           .span2
             =a.label "Price"
@@ -30,12 +31,11 @@
             .dimension.with_addon= a.input :width, label: false, placeholder: "W"
             %span.add-on "
 
-          .span2
+          .span1
             = a.label "Weight"
             .price.with_addon= a.input :weight, label: false
             %span.add-on lb.
 
-          .span2= a.input :for_sale, label: "For Sale", as: :select , include_blank: false
 
           -# .span3
           -#   = a.semantic_fields_for :photos do |p|

@@ -110,7 +110,7 @@ Talent::Application.routes.draw do
   namespace :admin do
     resources :artworks
     resources :orders
-    resources :ind_users
+    resources :artists
     resources :org_users
   end
 

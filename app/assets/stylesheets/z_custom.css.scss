@@ -1123,7 +1123,7 @@ li.fragment select.date{
 #infscr-loading {
   left: 50%;
   text-align :center;
-  background-color: rgba(0, 0, 0, 1);
+  background-color: rgba(0, 0, 0, 0.2);
   padding: 10px;
   color: #fff;
   border-radius: 10px;
@@ -1131,6 +1131,10 @@ li.fragment select.date{
   margin-left: -100px;
   position: fixed;
   bottom: 50px;
+  img{
+   opacity:0.2;
+   filter:alpha(opacity=20);
+  }
 }
 .topbar-inner ul.nav li.language{
   a{

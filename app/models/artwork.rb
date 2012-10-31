@@ -91,7 +91,7 @@ class Artwork
 
   def info_complete?
     [:price,:height,:width, :weight, :is_framed, :title, :type, :base, :year].all? do |p|
-      self.send(p).present?
+      !self.send(p).nil?
     end
   end
 end

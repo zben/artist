@@ -86,9 +86,9 @@ $(document).ready(function() {
         nextSelector : 'li.next_page a',  // selector for the NEXT link (to page 2)
         itemSelector : '.image_block',     // selector for all items you'll retrieve
         loading: {
-            finishedMsg: 'Log in to see more',
+            finishedMsg: 'End of page',
             msgText: 'Loading more artwork for you...',
-            img: 'http://i.imgur.com/6RMhx.gif'
+            img: "/assets/spinner.gif"
           }
         },
         // trigger Masonry as a callback

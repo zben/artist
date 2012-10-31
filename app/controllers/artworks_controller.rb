@@ -36,7 +36,7 @@ class ArtworksController < ApplicationController
 
   def edit
     @user = current_user
-    @user = Artwork.find(params[:id]).ind_user if current_user.admin?
+    @user = IndUser.find(params[:artist_id]) if current_user.admin?
     @ready_artworks = @user.artworks.ready
     @unready_artworks = @user.artworks.not_ready
     @sold_artworks = @user.artworks.where(sold: true)

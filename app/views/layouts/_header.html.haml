@@ -6,20 +6,26 @@
         %li{class: "#{is_active?("ind_users#")}"}=link_to t("Artists"),ind_users_path
         %li{class: "#{is_active?("artworks#index")}"}=link_to t("Artwork"), artworks_path
         %li{class: "#{is_active?("pages#company")}"}=link_to t("About"), "/company"
-        %li=link_to t("Manage"), admin_orders_path if current_user && current_user.admin?
       -if user_signed_in?
         %ul{class: "nav", style: "float: right;"}
-          -if current_user.is_a? IndUser
+          -if current_user.is_artist?
             %li{:class=>"#{is_active?("work#new")}"}=link_to "Upload work", new_artwork_path
             %li{:class=>"#{is_active?("invitation#new")}"}=link_to "Invite Artists", new_invitation_path(:user)
           %li{:class=>"dropdown #{is_active?("users#edit")}",:"data-dropdown"=>"dropdown"}
-            =link_to current_user.name, "", :class=>"dropdown-toggle" 
+            =link_to_function current_user.name, "", :class=>"dropdown-toggle" 
             %ul.dropdown-menu.setting
-              %li=link_to t("see_profile"),current_user
-              %li=link_to t("manage_artwork"), edit_artist_artworks_path(current_user.id) if current_user.is_artist?
-              %li=link_to t("update_info"),user_edit_path(current_user.id,'profile')
-              %li=link_to t("update_password"),user_edit_path(current_user.id,'account') 
-              %li=link_to t("logout"),destroy_user_session_path,:method => :delete if user_signed_in?
+              -if current_user.admin?
+                %li=link_to "Manage Artists", admin_artists_path
+                %li=link_to "Manage Artwork", ""
+                %li=link_to "Manage Orders", admin_orders_path
+                %li=link_to "Change Password",user_edit_path(current_user.id,'account')
+                %li=link_to "Logout",destroy_user_session_path,:method => :delete if user_signed_in?
+              -else
+                %li=link_to t("see_profile"),current_user
+                %li=link_to t("manage_artwork"), edit_artist_artworks_path(current_user.id) if current_user.is_artist?
+                %li=link_to t("update_info"),user_edit_path(current_user.id,'profile')
+                %li=link_to t("update_password"),user_edit_path(current_user.id,'account')
+                %li=link_to t("logout"),destroy_user_session_path,:method => :delete if user_signed_in?
       -else
         = form_for User.new, :url => '/users/sign_in' do |f|
           %ul.nav.login
