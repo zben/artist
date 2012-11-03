@@ -23,8 +23,6 @@ class ApplicationController < ActionController::Base
     end
 
     def after_sign_in_path_for(resource)
-      cookies[:locale] = resource.is_a?(OrgUser) ? :ch : :en
-      I18n.locale = cookies[:locale]
       stored_location_for(resource) || user_specific_path(resource)
     end
 
@@ -50,7 +48,7 @@ class ApplicationController < ActionController::Base
 
     def set_locale
       cookies[:locale] = params[:locale] if params[:locale]
-      I18n.locale = params[:locale] if params[:locale]
+      I18n.locale = cookies[:locale]
     end
 
     rescue_from CanCan::AccessDenied do |exception|
