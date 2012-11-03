@@ -30,7 +30,7 @@ class Profile
 
 #  }
 
-  validates :firstname, :lastname, :birthday, :gender, :province_id, :phone, :address, :city, :province_id, :presence=>true
+  validates :firstname, :lastname, :birthday, :gender, :province_id, :phone, :city, :province_id, :presence=>true
   #validates :intro, :intro_title, :presence=>true
   validates_length_of :firstname, :maximum => 20
   validates_length_of :lastname, :maximum => 20
@@ -80,5 +80,9 @@ class Profile
 
   def citystate
     (self.city || "Unknown") + ", " + self.province.name[0..3]
+  end
+
+  def full_location
+    (self.city || "Unknown") + ", " + self.province.name + ", " + self.province.country.name
   end
 end

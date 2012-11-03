@@ -7,7 +7,10 @@
       =image_tag(@artwork.ind_user.avatar.url(:medium))
       .artist_info
         %p=link_to @artwork.ind_user.name, @artwork.ind_user
-        %p="美国麻省"
+        %p.small
+          =@artwork.ind_user.profile.city
+          %br
+          =@artwork.ind_user.profile.province.name
     -if buyer?
       .quote_box.shadow
         %p
@@ -36,32 +39,39 @@
               #real_order=f.submit "询问", class: "btn primary"
         %p#copy_message
 
+    -elsif I18n.locale == :ch && current_user.nil?
+      .quote_box.shadow
+        %p
+          ="查看价格或购买,"
+          %br
+          =raw "请先#{link_to '注册', new_user_session_path}或登录。"
+
     %table.table.table-striped
       %tr
-        %td 作品名称
+        %td=t('artwork.title')
         %td=@artwork.title
       %tr
-        %td 作品编号
+        %td=t('artwork.number')
         %td
           %b="##{@artwork.number}"
       %tr
-        %td 作品类型
+        %td=t('artwork.type')
         %td=@artwork.type
       %tr
-        %td 创作年份
+        %td=t('artwork.year')
         %td=@artwork.year
       %tr
-        %td 创作地点
-        %td 美国
+        %td=t('artwork.place')
+        %td=@artwork.ind_user.profile.province.country.name
       %tr
-        %td 作品规格
+        %td=t('artwork.dimensions')
         %td="#{@artwork.height}\" x #{@artwork.width}\"" + " (#{@artwork.height.to_i*2.54.to_i}cm x #{@artwork.width.to_i*2.54.to_i}cm)" if @artwork.height && @artwork.weight
       %tr
-        %td 作品重量
+        %td=t('artwork.weight')
         %td="#{@artwork.weight.to_f} lb." + " (#{@artwork.weight.to_f*0.454} kg.)"
       %tr
-        %td 画框
-        %td=@artwork.is_framed? ? "含框" : "不含框"
+        %td=t('artwork.is_framed')
+        %td=@artwork.is_framed? ? t('artwork.framed') : t('artwork.unframed')
 
     =render 'shared/share', artwork: @artwork if I18n.locale == :ch
     =link_to "Edit this artwork", edit_artwork_path(@artwork, anchor: "edit_artwork_#{@artwork.id}") if can_edit?(@artwork)

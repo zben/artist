@@ -410,3 +410,17 @@ ch:
   update_password: "更改密码"
   update_info: "更新买家信息"
   logout: "退出"
+
+  artwork:
+    title: "作品名称"
+    number: "作品编号"
+    type: "作品类别"
+    year: "作品年份"
+    place: "创作地点"
+    dimensions: "作品规格"
+    weight: "作品重量"
+    is_framed: "画框"
+    framed: "含画框"
+    unframed: "不含画框"
+  profile:
+    introduction: "画家介绍"

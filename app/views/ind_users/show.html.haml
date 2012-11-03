@@ -19,8 +19,8 @@
       %h1=@user.name
       .share_button
         =render 'shared/share_artist' if I18n.locale == :ch
-      %p="美国 / #{@user.profile.province.name_en} / #{@user.profile.city}"
-      画家简介
+      %p="#{@user.profile.full_location}"
+      =t('profile.introduction')
       -if @user.profile.intro_ch.present?
         %p=@user.profile.intro_ch
       -else

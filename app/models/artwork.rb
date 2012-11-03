@@ -26,8 +26,9 @@ class Artwork
   field :ready, type: Boolean, default: false
   field :disabled_at, type: DateTime
   field :real_order_count, default: 0
-  as_enum :status, :nothing => 0, :asked => 1, :placed => 2, :cancelled => 3, :paid => 4, :shipped => 5, :delivered => 6, :field => { :default => 0 }
   field :copy_order_count, default: 0
+  as_enum :status,
+    :nothing => 0, :asked => 1, :placed => 2, :cancelled => 3, :paid => 4, :shipped => 5, :delivered => 6
   auto_increment :number, seed: 1000
 
   PAINTING_TYPES = %w{

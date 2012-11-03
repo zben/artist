@@ -20,7 +20,7 @@
                 .span2
                   =p.label "Birth year*"
                   =select_tag "ind_user[profile_attributes][birthday(1i)]", options_for_select((1900..1990).to_a, @user.profile.try(:birthday).try(:year))
-                .span2= p.input :gender, :as=>:select,:collection => Profile.genders_for_select,:prompt => t("Select one") 
+                .span2= p.input :gender, label: "Gender", :as=>:select,:collection => Profile.genders_for_select,:prompt => t("Select one") 
               .row
                 -# .span3= p.input :residence_country, label: "Residence", :as=>:select, :collection => Country.all, :prompt => t("Select one")
                 .span5= p.input :address

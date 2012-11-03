@@ -105,4 +105,19 @@ en:
               blank: "Password cannot be blank"
               too_short: "Passwors is too short"  
             password_confirmation:
-              blank: "Password is inconsistent" 
+              blank: "Password is inconsistent"
+
+  artwork:
+    title: "Title"
+    number: "ID"
+    type: "Type"
+    year: "Year"
+    place: "Location"
+    dimensions: "Size"
+    weight: "Weight"
+    is_framed: "Framing"
+    framed: "with frame"
+    unframed: "without frame"
+
+  profile:
+    introduction: "Artist Introduction"
