@@ -42,8 +42,8 @@ class Artwork
   accepts_nested_attributes_for :photos, allow_destroy: true
 
   default_scope self.where(disabled_at: nil).desc(:created_at)
-  scope :ready, where(ready: true).where(sold: false)
-  scope :not_ready, where(ready: false).where(sold: false)
+  scope :ready, where(ready: true).where(:status_cd.lt => 3)
+  scope :not_ready, where(ready: false).where(:status_cd.lt => 3)
 
   before_save :update_price_timestamps
   before_save :update_readiness
