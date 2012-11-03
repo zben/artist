@@ -1,0 +1,27 @@
+.row
+  .span16.shadow
+    %h2 Manage Artworks
+    =paginate @artworks
+    %table.table.zebra-striped.order
+      %tr
+        %td{width: 40} ID
+        %td{width: 40} Title
+        %td{width: 30}
+        %td{width: 40} Artist Price
+        %td{width: 40} Sale Price
+        %td{width: 40} Artist Name
+        %td{width: 40} Created on
+        %td{width: 30} Order #
+        %td{width: 30} Status
+      -@artworks.each do |artwork|
+        %tr
+          %td=artwork.number
+          %td=link_to artwork.title, artwork
+          %td=link_to "edit", edit_artwork_path(artwork, anchor: "edit_artwork_#{artwork.id}")
+          %td=best_in_place artwork, :price, path: admin_artwork_path(artwork), :display_with => :number_to_currency, :helper_options => {precision: 0}
+          %td=best_in_place artwork, :sale_price, path: admin_artwork_path(artwork),:display_with => :number_to_currency, :helper_options => {:unit => "¥", precision: 0}
+          %td=link_to artwork.ind_user.name, artwork.ind_user
+          %td=l artwork.created_at.to_date, format: :short
+          %td="#{artwork.real_order_count} / #{artwork.copy_order_count}"
+          %td=artwork.status
+    =paginate @artworks

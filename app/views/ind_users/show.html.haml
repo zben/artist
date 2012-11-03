@@ -25,8 +25,10 @@
         %p=@user.profile.intro
 
 -if current_user == @user && @user.artworks.empty?
-  You don't have any artwork presented yet,
-  =link_to "Start upload some artwork. It is easy and quick", new_artwork_path
+  .row
+    .span15
+      You don't have any artwork presented yet,
+      =link_to "Start upload some artwork. It is easy and quick.", new_artwork_path
 
 -content_for :widescreen do
   #image_blocks
@@ -38,5 +40,4 @@
           .artist
             .name
               .image_footer="Submitted #{time_ago_in_words a.created_at} ago"
-              =link_to "  Edit details", edit_artwork_path(a), class: "edit_artwork" if current_user == @user
-
+              =link_to "  Edit details", edit_artwork_path(a), class: "edit_artwork" if can_edit?(a)

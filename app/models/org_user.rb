@@ -14,6 +14,8 @@ class OrgUser < User
   accepts_nested_attributes_for :org_profile,:allow_destroy => true
   accepts_nested_attributes_for :usage,:allow_destroy => true
 
+  delegate :contact_person, :phone_number, :city, :province, :address, :company_name, :website, to: :org_profile
+
     scope :with_org_profile, where(:org_profile.ne=>nil)
     if Rails.env.production?  
       has_mongoid_attached_file :logo,

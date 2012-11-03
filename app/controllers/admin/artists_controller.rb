@@ -1,6 +1,6 @@
 class Admin::ArtistsController < AdminBaseController
   def index
-    @artists = IndUser.where(:admin.ne => false).all
+    @artists = IndUser.where(:admin.ne => false).page(params[:page]).per(20)
   end
 
   def update

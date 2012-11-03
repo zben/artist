@@ -22,8 +22,8 @@ class UsersController < ApplicationController
   
   def edit
     @user = User.find(params[:id])
-    redirect_to ind_user_edit_path(params[:id],params[:info]) if current_user.is_a? IndUser
-    redirect_to org_user_edit_path(params[:id],params[:info]) if current_user.is_a? OrgUser
+    redirect_to ind_user_edit_path(params[:id],params[:info]) if @user.is_a? IndUser
+    redirect_to org_user_edit_path(params[:id],params[:info]) if @user.is_a? OrgUser
   end
 
 

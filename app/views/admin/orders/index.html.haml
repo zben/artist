@@ -1,13 +1,13 @@
 .row
   .span16.shadow
     %h2 Manage Orders
+    =paginate @orders
     %table.table.zebra-striped.order
       %tr
         %td{width: 40} Order ID
         %td{width: 50}
-        %td{width: 100} Artwork
+        %td{width: 200} Artwork
         %td{width: 40} Type
-        %td{width: 100} Artist
         %td{width: 60} Buyer
         %td{width: 100} Status
         %td{width: 60} Quote
@@ -19,10 +19,11 @@
           %td
             =image_tag order.artwork.photos.first.photo(:thumb), height: 50
           %td
-            =link_to order.artwork.title, order.artwork
+            =link_to "#{order.artwork.title}(##{order.artwork.number})", order.artwork
+            %br
+            =link_to order.artwork.ind_user.name, order.artwork.ind_user
           %td=order.is_for_real ? "Original" : "Copy"
-          %td=link_to order.artwork.ind_user.name, order.artwork.ind_user
-          %td=link_to order.org_user.org_profile.contact_person, order.org_user
+          %td=link_to order.org_user.org_profile.contact_person, org_user_edit_path(order.org_user.id, :profile)
           %td=best_in_place order, :status, type: :select,
             collection: Order.statuses_for_select.map{|x| [x[1],x[1]]},
             path: admin_order_path(order),
@@ -39,3 +40,4 @@
             nil: "click to add comment",
             ok_button: "OK",
             cancel_button: "Cancel"
+    =paginate @orders

@@ -397,7 +397,8 @@ ch:
   join_now_for_free: "现在就加入吧!"
   contact_us: "联系我们"
   aboutus: "关于我们"
-  
+
+  asked: "询问中"
   placed: "处理中"
   cancelled: "已取消"
   paid: "已支付"

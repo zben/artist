@@ -36,10 +36,10 @@ class ArtworksController < ApplicationController
 
   def edit
     @user = current_user
-    @user = IndUser.find(params[:artist_id]) if current_user.admin?
+    @user = Artwork.find(params[:id]).ind_user if current_user.admin?
     @ready_artworks = @user.artworks.ready
     @unready_artworks = @user.artworks.not_ready
-    @sold_artworks = @user.artworks.where(sold: true)
+    @sold_artworks = @user.artworks.where(status: :sold)
   end
 
   def update
@@ -56,7 +56,7 @@ class ArtworksController < ApplicationController
 
   def destroy
     @artwork = Artwork.find(params[:id])
-    @artwork.update_attributes(disabled: true)
+    @artwork.update_attributes(disabled_at: lambda{Time.now})
     render js: "$('#edit_#{@artwork.id}').hide();"
   end
 

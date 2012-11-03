@@ -1,6 +1,7 @@
 .row
   .span16.shadow
     %h2 Manage Artists
+    =paginate @artists
     %table.table.zebra-striped.order
       %tr
         %td{width: 40} Name
@@ -17,22 +18,4 @@
           %td=artist.artworks.ready.count
           %td=artist.artworks.where(:sold.ne => true).count
           %td=artist.artworks.where(:sold => true).count
-          -# %td=link_to order.artwork.ind_user.name, order.artwork.ind_user
-          -# %td=link_to order.org_user.org_profile.contact_person, order.org_user
-          -# %td=best_in_place order, :status, type: :select,
-          -#   collection: Order.statuses_for_select.map{|x| [x[1],x[1]]},
-          -#   path: admin_order_path(order),
-          -#   ok_button: "OK", cancel_button: "Cancel"
-
-          -# %td=order.artwork.sale_price
-
-          -# %td=best_in_place order, :payment,
-          -#   path: admin_order_path(order),
-          -#   nil: "Same as quote"
-
-          -# %td=best_in_place order, :comment,
-          -#   path: admin_order_path(order), type: :textarea,
-          -#   nil: "click to add comment",
-          -#   ok_button: "OK",
-          -#   cancel_button: "Cancel"
-
+    =paginate @artists

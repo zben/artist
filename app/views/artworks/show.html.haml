@@ -42,6 +42,10 @@
         %td 作品名称
         %td=@artwork.title
       %tr
+        %td 作品编号
+        %td
+          %b="##{@artwork.number}"
+      %tr
         %td 作品类型
         %td=@artwork.type
       %tr
@@ -60,4 +64,5 @@
         %td 画框
         %td=@artwork.is_framed? ? "含框" : "不含框"
 
-    =link_to "Edit this artwork", edit_artwork_path(@artwork, anchor: "edit_artwork_#{@artwork.id}") if current_user == @artwork.ind_user
+    =render 'shared/share', artwork: @artwork
+    =link_to "Edit this artwork", edit_artwork_path(@artwork, anchor: "edit_artwork_#{@artwork.id}") if can_edit?(@artwork)

@@ -20,10 +20,6 @@
           .row
             .span4.offset2= f.submit t("sign_up"), :class => "btn"
 
-        = render :partial => "devise/shared/links" 
-
-
-
 :javascript
   $("input[name=agreement]").click(function(){
   if ($("input[name=agreement]").is(":checked"))

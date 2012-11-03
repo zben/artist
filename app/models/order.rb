@@ -9,7 +9,7 @@ class Order
 
   field :comment
   field :is_for_real, type: Boolean, default: true
-  as_enum :status, :placed => 0, :cancelled => 1, :paid => 2, :shipped => 3, :delivered => 4
+  as_enum :status, :asked => 0, :placed => 1, :cancelled => 2, :paid => 3, :shipped => 4, :delivered => 5
   field :payment, type: Float
   field :quantity, type: Integer, default: 1
   field :address
@@ -19,12 +19,17 @@ class Order
   auto_increment :number, seed: 1000
 
   default_scope desc(:created_at)
+  scope :active, where(:status_cd.ne => 2)
+  scope :real, where(is_for_real: true)
+  scope :copy, where(is_for_real: false)
 
   after_save :update_artwork
 
   def update_artwork
-    if self.status == :paid
-      artwork.update_attribute :sold, true
-    end
+    @artwork = self.artwork
+    @artwork.status_cd = @artwork.orders.active.real.map(&:status_cd).max
+    @artwork.real_order_count = @artwork.orders.active.real.count
+    @artwork.copy_order_count = @artwork.orders.active.copy.count
+    @artwork.save
   end
 end

@@ -108,11 +108,13 @@ class User
   end
 
   def name
-    if is_a? IndUser
-      profile.try(:name) || "YOU"
+    if self.admin?
+      "#{profile.try(:name)} (Admin)"
+    elsif is_a? IndUser
+      profile.try(:name) || "New User"
     elsif is_a? OrgUser
-      org_profile.try(:company_name) || "您"
-    end  
+      org_profile.try(:company_name) || "新用户"
+    end
   end
 
   def related_shouts including_self=true

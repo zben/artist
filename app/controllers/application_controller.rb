@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
 
     def after_sign_in_path_for(resource)
       cookies[:locale] = resource.is_a?(OrgUser) ? :ch : :en
-      I18n.default_locale = cookies[:locale]
+      I18n.locale = cookies[:locale]
       stored_location_for(resource) || user_specific_path(resource)
     end
 
@@ -49,6 +49,7 @@ class ApplicationController < ActionController::Base
     end
 
     def set_locale
+      I18n.locale = cookies[:locale] if cookies[:locale]
       I18n.locale = params[:locale] if params[:locale]
     end
 

@@ -16,7 +16,7 @@
             %ul.dropdown-menu.setting
               -if current_user.admin?
                 %li=link_to "Manage Artists", admin_artists_path
-                %li=link_to "Manage Artwork", ""
+                %li=link_to "Manage Artwork", admin_artworks_path
                 %li=link_to "Manage Orders", admin_orders_path
                 %li=link_to "Change Password",user_edit_path(current_user.id,'account')
                 %li=link_to "Logout",destroy_user_session_path,:method => :delete if user_signed_in?

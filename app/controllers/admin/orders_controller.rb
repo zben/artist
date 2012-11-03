@@ -1,6 +1,6 @@
 class Admin::OrdersController < AdminBaseController
   def index
-    @orders = Order.all
+    @orders = Order.page(params[:page]).per(20)
   end
 
   def update

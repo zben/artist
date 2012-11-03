@@ -79,6 +79,18 @@ module ApplicationHelper
   def controller_action
     params["controller"].gsub("/","-") + " " + params["action"]
   end
+
+  def can_edit?(item)
+    current_user && ( current_user.admin? || current_user == owner(item))
+  end
+
+  def owner(item)
+    item.try(:ind_user) || item.try(:org_user)
+  end
+
+  def admin?
+    current_user && current_user.admin?
+  end
 end
 
 

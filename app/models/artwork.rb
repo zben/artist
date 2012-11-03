@@ -3,6 +3,7 @@ class Artwork
   include Mongoid::Document
   include Mongoid::Timestamps
   include ActionView::Helpers
+  include SimpleEnum::Mongoid
 
   has_many :photos, autosave: true, dependent: :destroy, as: :attachable
   has_many :orders
@@ -21,10 +22,12 @@ class Artwork
   field :width, type: Integer
   field :is_framed, type: Boolean
   field :weight, type: Float
-  field :sold, type: Boolean, default: false
   field :for_sale, type: Boolean, default: true
   field :ready, type: Boolean, default: false
-  field :disabled, type: Boolean, default: false
+  field :disabled_at, type: DateTime
+  field :real_order_count, default: 0
+  as_enum :status, :asked => 0, :placed => 1, :cancelled => 2, :paid => 3, :shipped => 4, :delivered => 5
+  field :copy_order_count, default: 0
   auto_increment :number, seed: 1000
 
   PAINTING_TYPES = %w{
@@ -38,7 +41,7 @@ class Artwork
   }
   accepts_nested_attributes_for :photos, allow_destroy: true
 
-  default_scope self.where(:disabled.ne => true).desc(:created_at)
+  default_scope self.where(disabled_at: nil).desc(:created_at)
   scope :ready, where(ready: true).where(sold: false)
   scope :not_ready, where(ready: false).where(sold: false)
 
@@ -66,7 +69,12 @@ class Artwork
 
   def generate_sale_price
     yuan = (price.to_i * 6.3)
-    rounded = yuan.round(-2) -1
+    with_markup = yuan * 1.5 + 1000
+    rounded = with_markup.round(-2) -1
+  end
+
+  def copy_default_sale_price
+    update_attribute :sale_price, generate_sale_price
   end
 
   def price_in_yuan(original=true)

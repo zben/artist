@@ -47,3 +47,62 @@ en:
   update_info: "Update Artist Profile"
   update_password: "Change Password"
   logout: "Logout"
+
+  mongoid:
+    models:
+      user: "user"
+      profile: "profile"
+      usage: "usage"
+      photo: "photo"
+    attributes:
+      profile:
+        firstname: "first name"
+        lastname: "last name"
+        birthday: "birth date"
+        gender: "gender"
+        citizenship: "citizenship"
+        province_id: "state"
+        residence_country: "country of residence"
+        province: "state"  
+        intro: "introduction"
+        intro_title: "introduction"
+      org_profile:
+        company_name: "company name"
+        company_type: "company type"
+        short_description: "short description"
+        long_description: "long description"
+        people_count: "people"
+        province_id: "state"
+        contact_person: "contact person"
+        email: "email"
+        phone_number: "phone number"
+        avatar: "avatar"
+        website: "website"
+        industry_id: "industry"
+        city_id: "city"
+        address: "address"
+
+      user:
+        email: "Email"
+        password: "Password"
+        password_confirmation: "password confirmation" 
+        avatar: "avatar"
+        logo: "logo"
+      photo:
+        photo: "photo"
+
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              taken: "Email is already taken"
+              blank: "Email cannot be blank"
+              too_short: "Email is too short"
+              invalid: "Email is invalid"  
+            password:
+              confirmation: "Please enter password again for confirmation"
+              blank: "Password cannot be blank"
+              too_short: "Passwors is too short"  
+            password_confirmation:
+              blank: "Password is inconsistent" 

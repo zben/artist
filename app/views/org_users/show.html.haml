@@ -2,17 +2,51 @@
   .span16.shadow
     .row
       .span15.offset1
-        %h2 订单纪录
+        %h2 买家信息
+      .span1.offset1
+        姓名
+        %br=@user.contact_person
+      .span2
+        电话
+        %br=@user.phone_number
+      .span4
+        电子邮件
+        %br=@user.email
+      .span2
+        城市
+        %br="#{@user.province.name} #{@user.city.name}"
+      .span5
+        邮寄地址
+        %br=@user.address
+    -if @user.company_name.present?
+      .row
+        .span3.offset1
+          公司名
+          %br=@user.company_name.presence
+        .span3
+          公司网站
+          %br=@user.website.presence
+    .row
+      .span15.offset1
+        .hint2
+          温馨提示: 如果您的以上信息不准确，请
+          =link_to "即时更新", org_user_edit_path(@user.id, 'profile')
+          以确保畅通的联系和及时的寄送。
+    .row
+      .span15.offset1
+        %h2 订单询问纪录
         -if @user.orders.empty?
           =link_to "感谢您的加入。现在就去看看我们的作品吧", artworks_path
         -else
           %table.table.zebra-striped
             %tr
-              %td 作品
-              %td
-              %td 时间
-              %td 状态
-              %td 取消
+              %td{width:30} 服务编号
+              %td{width:30} 作品编号
+              %td{width: 200} 作品名称
+              %td{width: 50} 价格
+              %td{width: 100} 时间
+              %td{width: 100} 状态
+              %td{width: 100} 取消
             -@user.orders.each do |order|
               =render order
 
