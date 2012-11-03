@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.1'
+gem 'rails', '3.2.8'
 gem 'haml-rails'
 gem 'devise',           '~> 2.0.0'
 gem 'devise_invitable', '~> 1.0.0'
@@ -24,8 +24,8 @@ gem 'toPinyin'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails', "  ~> 3.1.0"
-  gem 'coffee-rails', "~> 3.1.0"
+  gem 'sass-rails', "  ~> 3.2.0"
+  gem 'coffee-rails', "~> 3.2.0"
   gem 'uglifier'
   #gem 'jquery-datatables-rails', :git => 'git://github.com/rweng/jquery-datatables-rails'
   gem 'jquery-ui-rails'
@@ -33,11 +33,11 @@ end
 gem 'jquery-rails'
 gem 'tinymce-rails',:git => 'git://github.com/spohlenz/tinymce-rails.git'
 #gem "paperclip", "~> 2.0"
-gem 'mongoid'
-gem 'bson_ext'
-gem 'mongoid_fulltext'
+gem 'mongoid','2.4.1'
+gem 'bson_ext', '1.5.2'
+gem 'mongoid_fulltext','0.5.7'
 gem 'cancan'
-gem 'simple_enum', :git => 'git://github.com/lwe/simple_enum.git'
+gem 'simple_enum',:git => 'git://github.com/lwe/simple_enum.git'
 gem "mongoid-paperclip", :require => "mongoid_paperclip"
 gem "aws-sdk",            :require => "aws/s3"
 gem 'thin'

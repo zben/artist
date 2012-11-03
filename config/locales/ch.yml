@@ -384,7 +384,7 @@ ch:
   forgot_password: "忘记密码"
   slogan: "走近美国当代艺术家 订购高品质的画作"
   password_confirmation: "确认密码"
-  sign_up: "免费注册会员"
+  sign_up: "注册"
   password_prompt: "至少6位字符，包含至少一个数字"
   password_confirmation_prompt: "请再次输入密码"
   old_password: "旧密码"
@@ -404,7 +404,7 @@ ch:
   paid: "已支付"
   shipped: "已发货"
   delivered: "已收到"
-  forgot_password: "重设密码"
+  forgot_password: "忘记密码"
 
   see_profile: "订单纪录"
   update_password: "更改密码"
