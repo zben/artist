@@ -91,6 +91,10 @@ module ApplicationHelper
   def admin?
     current_user && current_user.admin?
   end
+
+  def buyer?
+    current_user && (current_user.is_a? OrgUser || current_user.admin?)
+  end
 end
 
 

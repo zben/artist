@@ -36,6 +36,10 @@
             %li= submit_tag t('Sign in'), :class=>"btn primary login"
             %li.language=link_to "中文","/buyer_entrance"
             %li.language=link_to "English","/artists_entrance"
+-if params[:action] == "index"
+  .share_button_home
+    =render "shared/share_site"
+
 :javascript
   $(".dropdown-toggle").hover(
     function () {

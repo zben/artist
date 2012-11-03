@@ -1,5 +1,5 @@
 class ArtworksController < ApplicationController
-  before_filter :authenticate!, except: [:index]
+  before_filter :authenticate!, except: [:index, :show]
 
   def index
     if params[:artist_id]

@@ -1,12 +1,12 @@
 # encoding: UTF-8
 class IndUsersController < ApplicationController
   include ApplicationHelper
-  before_filter :authenticate!
-  
+  before_filter :authenticate!, except: [:index, :show]
+
   def index
     @ind_users = IndUser.with_ind_profile.where(:admin.ne => true)
   end
-  
+
   def overview
     redirect_to org_user_job_posts_path(current_user.id) if current_user.is_a? OrgUser
     @user = current_user 
@@ -15,12 +15,12 @@ class IndUsersController < ApplicationController
     @matching_jobs = current_user.matches[0..10] 
     @status_update = current_user.related_shouts.limit(20)
   end
-  
+
   def show
     @user = params[:id].nil? ? current_user : User.find(params[:id])
     @artworks = @user.artworks.ready
   end
-  
+
   def new 
     @user = User.find(params[:id])
     @user.build_profile if @user.profile.nil?
@@ -28,7 +28,7 @@ class IndUsersController < ApplicationController
     @is_new = true
     render "ind_users/edit/#{params[:info]}"
   end
- 
+
   
   def edit
     @user = User.find(params[:id])

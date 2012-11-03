@@ -17,6 +17,8 @@
 
     .user_mainbar.shadow
       %h1=@user.name
+      .share_button
+        =render 'shared/share_artist'
       %p="美国 / #{@user.profile.province.name_en} / #{@user.profile.city}"
       画家简介
       -if @user.profile.intro_ch.present?
