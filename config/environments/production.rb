@@ -40,7 +40,7 @@ Talent::Application.configure do
   # config.cache_store = :mem_cache_store
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server
-   config.action_controller.asset_host = "http://artist.herokuapp.com"
+  # config.action_controller.asset_host = "http://www.canvvas.com"
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
   # config.assets.precompile += %w( search.js )
