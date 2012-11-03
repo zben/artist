@@ -49,7 +49,7 @@ class ApplicationController < ActionController::Base
     end
 
     def set_locale
-      I18n.locale = cookies[:locale] if cookies[:locale]
+      cookies[:locale] = params[:locale] if params[:locale]
       I18n.locale = params[:locale] if params[:locale]
     end
 

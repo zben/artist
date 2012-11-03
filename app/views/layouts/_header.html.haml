@@ -36,7 +36,8 @@
             %li= submit_tag t('Sign in'), :class=>"btn primary login"
             %li.language=link_to "中文","/buyer_entrance"
             %li.language=link_to "English","/artists_entrance"
--if params[:action] == "index"
+
+-if (params[:action] == "index") && (I18n.locale == :ch)
   .share_button_home
     =render "shared/share_site"
 

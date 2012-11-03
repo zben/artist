@@ -5,6 +5,7 @@ class IndUsersController < ApplicationController
 
   def index
     @ind_users = IndUser.with_ind_profile.where(:admin.ne => true)
+    @ind_users = @ind_users.limit(10) unless current_user
   end
 
   def overview

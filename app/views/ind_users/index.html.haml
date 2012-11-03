@@ -8,3 +8,8 @@
         .artist_block.shadow
           =image_tag artist.avatar.url(:large)
           %h4=artist.name
+.row
+  .span16.center
+    %h1
+      =raw "要查看更多优秀的美国画家, 现在就#{link_to '注册', new_user_session_path}并登录吧。" if I18n.locale == :ch
+      =raw "Wanna see more artists and their work, #{link_to 'sign up', new_user_session_path} and sign in now." if I18n.locale == :en

@@ -63,5 +63,5 @@
         %td 画框
         %td=@artwork.is_framed? ? "含框" : "不含框"
 
-    =render 'shared/share', artwork: @artwork
+    =render 'shared/share', artwork: @artwork if I18n.locale == :ch
     =link_to "Edit this artwork", edit_artwork_path(@artwork, anchor: "edit_artwork_#{@artwork.id}") if can_edit?(@artwork)
