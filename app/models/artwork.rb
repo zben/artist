@@ -26,7 +26,7 @@ class Artwork
   field :ready, type: Boolean, default: false
   field :disabled_at, type: DateTime
   field :real_order_count, default: 0
-  as_enum :status, :asked => 0, :placed => 1, :cancelled => 2, :paid => 3, :shipped => 4, :delivered => 5
+  as_enum :status, :nothing => 0, :asked => 1, :placed => 2, :cancelled => 3, :paid => 4, :shipped => 5, :delivered => 6, :field => { :default => 0 }
   field :copy_order_count, default: 0
   auto_increment :number, seed: 1000
 
@@ -42,8 +42,8 @@ class Artwork
   accepts_nested_attributes_for :photos, allow_destroy: true
 
   default_scope self.where(disabled_at: nil).desc(:created_at)
-  scope :ready, where(ready: true).where(:status_cd.lt => 3)
-  scope :not_ready, where(ready: false).where(:status_cd.lt => 3)
+  scope :ready, where(ready: true).where(:status_cd.in => [nil, 0, 1, 2, 3])
+  scope :not_ready, where(ready: false).where(:status_cd.in => [nil, 0, 1, 2, 3])
 
   before_save :update_price_timestamps
   before_save :update_readiness
