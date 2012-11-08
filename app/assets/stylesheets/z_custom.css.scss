@@ -830,7 +830,7 @@ ol.fragments-group{
     }
     .name{
       text-align: left;
-      width: 130px;
+      width: 170px;
       padding-left: 5px;
       float:left;
       font-size: 12px;
@@ -840,10 +840,13 @@ ol.fragments-group{
     }
     .price{
       display: inline-block;
-      width: 80px;
+      position: absolute;
+      width: 70px;
+      font-family: 'Lato','sans-serif';
       font-size:20px;
-      padding-top:10px;
-      padding-right: 10px;
+      padding-right:20px;
+      bottom: 10px;
+      right: 0;
       text-align: right;
     }
   }
@@ -878,6 +881,7 @@ body.artworks.show, body.ind_users.show{
   }
   .quote_box{
     .price{
+      font-family:'Lato', 'sans-serif';
       font-size: 49px;
       margin-bottom: 5px;
       padding-left: 20px;
@@ -958,7 +962,6 @@ body.ind_users.show{
     padding-bottom: 0px;
     text-decoration: none;
     color: black;
-    .image_footer{padding-left:15px;}
   }
 }
 
@@ -1180,4 +1183,23 @@ li.fragment select.date{
   position: absolute;
   right: 30px;
   top: 10px;
+}
+.likes, .tiny_button a{
+  background-color: green;
+  display: inline-block;
+  color: white;
+  padding:0 3px;
+  margin:0px;
+}
+.tiny_button{
+  display:inline-block;
+  a{
+    text-align: center;
+    background-color: red;
+    margin-left: -3px;
+  }
+  a.hidden{
+    display: none;
+  }
+
 }

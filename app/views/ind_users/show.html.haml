@@ -19,7 +19,9 @@
       %h1=@user.name
       .share_button
         =render 'shared/share_artist' if I18n.locale == :ch
-      %p="#{@user.profile.full_location}"
+      %p
+        ="#{@user.profile.full_location}"
+        =" / #{@user.visit_counter} visits" if current_user && current_user == @user
       =t('profile.introduction')
       -if @user.profile.intro_ch.present?
         %p=@user.profile.intro_ch
@@ -40,6 +42,13 @@
           =image_tag(a.photos.first.photo.url(:medium), width: 260)
           .title=a.title == "" ? "Untitled" : a.title
           .artist
+            =image_tag a.ind_user.avatar.url(:small)
             .name
-              .image_footer="Submitted #{time_ago_in_words a.created_at} ago"
-              =link_to "  Edit details", edit_artwork_path(a), class: "edit_artwork" if can_edit?(a)
+              %b=link_to a.ind_user.name, a.ind_user
+              .image_footer
+                ="#{time_ago_in_words a.created_at} #{t("ago")}"
+                .likes
+                  %span{class: "counter #{a.id}"}=a.likes_counter
+                  likes
+                =link_to "Edit", edit_artwork_path(a, anchor: "edit_artwork_#{a.id}"),class: "edit_artwork" if can_edit?(a)
+            .price= a.price_in_yuan if I18n.locale == :ch || current_user.try(:admin?)

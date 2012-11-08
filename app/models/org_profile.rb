@@ -32,6 +32,12 @@ class OrgProfile
 
   validates :contact_person,:phone_number, :province_id, :presence=>true
 
+  after_save :update_user_full_name
+
+  def update_user_full_name
+    user.update_attribute :full_name, self.name
+  end
+
   def name
     contact_person
   end

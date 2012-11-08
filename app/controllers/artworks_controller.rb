@@ -32,6 +32,9 @@ class ArtworksController < ApplicationController
 
   def show
     @artwork = Artwork.find(params[:id])
+    unless current_user && (current_user.admin? || current_user == @artwork.ind_user)
+      @artwork.inc(:visit_counter, 1)
+    end
   end
 
   def edit
@@ -56,7 +59,7 @@ class ArtworksController < ApplicationController
 
   def destroy
     @artwork = Artwork.find(params[:id])
-    @artwork.update_attributes(disabled_at: lambda{Time.now})
+    @artwork.update_attributes(disabled_at: Time.now)
     render js: "$('#edit_#{@artwork.id}').hide();"
   end
 

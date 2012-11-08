@@ -4,12 +4,15 @@ class Artwork
   include Mongoid::Timestamps
   include ActionView::Helpers
   include SimpleEnum::Mongoid
+  include Mongoid::Slug
 
   has_many :photos, autosave: true, dependent: :destroy, as: :attachable
   has_many :orders
+  has_many :bookmarkings,:class_name=>"Bookmark", as: :bookmarkable
   belongs_to :ind_user
 
   field :title
+  slug :title, history: true
   field :description
   field :type
   field :base
@@ -27,6 +30,8 @@ class Artwork
   field :disabled_at, type: DateTime
   field :real_order_count, default: 0
   field :copy_order_count, default: 0
+  field :likes_counter, default: 0
+  field :visit_counter, default: 0
   as_enum :status,
     :nothing => 0, :asked => 1, :placed => 2, :cancelled => 3, :paid => 4, :shipped => 5, :delivered => 6
   auto_increment :number, seed: 1000
@@ -102,5 +107,9 @@ class Artwork
     [:price,:height,:width, :weight, :is_framed, :title, :type, :base, :year].all? do |p|
       !self.send(p).nil?
     end
+  end
+
+  def self.find slug_or_id
+    self.find_by_slug(slug_or_id) || self.where(_id: slug_or_id).try(:first)
   end
 end

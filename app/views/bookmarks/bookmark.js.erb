@@ -1,5 +1,6 @@
 <% if @is_bookmarked%> 
-$("a.<%=@bookmarkable.id=%>").text("取消关注");
+$("a.<%=@bookmarkable.id=%>").text("unlike").addClass("hidden");
 <% else %>
-$("a.<%=@bookmarkable.id%>").text("关注");
+$("a.<%=@bookmarkable.id%>").text("like");
 <% end %>
+$("span.counter.<%=@bookmarkable.id%>").html(<%=@bookmarkable.likes_counter%>);

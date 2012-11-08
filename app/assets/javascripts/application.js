@@ -59,9 +59,9 @@ $(document).ready(function() {
       hoverPause: true
     });
 
-  $('a.bookmark').bind('click',function(){
-    $(this).text('加载中...');
-  });
+  // $('a.bookmark').bind('click',function(){
+  //   $(this).text('Updating');
+  // });
 
   $('#modal-from-dom').modal({
     backdrop: "static"

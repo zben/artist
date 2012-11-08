@@ -2,6 +2,7 @@
 class User
   include Mongoid::Document
   include Mongoid::Timestamps
+  include Mongoid::Slug
 
   attr_accessor :invitation_message
 
@@ -36,7 +37,7 @@ class User
   field :confirmed_at,         :type => Time
   field :confirmation_sent_at, :type => Time
   field :unconfirmed_email,    :type => String # Only if using reconfirmable
-
+  field :full_name
   devise :invitable, :database_authenticatable, :registerable,
     :recoverable, :rememberable, :trackable, :validatable #  :confirmable
 
@@ -81,6 +82,8 @@ class User
   accepts_nested_attributes_for :usage,:allow_destroy => true
   accepts_nested_attributes_for :artworks,:allow_destroy => true
 
+  slug :full_name, history: true
+
   def matches
     jobs = skills.map{|skill| skill.job_posts.current}.flatten.uniq
     jobs += industries.map{|industry| industry.job_posts.current}.flatten.uniq
@@ -109,11 +112,11 @@ class User
 
   def name
     if self.admin?
-      "#{profile.try(:name)} (Admin)"
+      "#{profile.try(:name)} Admin"
     elsif is_a? IndUser
       profile.try(:name) || "New User"
     elsif is_a? OrgUser
-      org_profile.try(:company_name) || "新用户"
+      org_profile.try(:contact_person) || "新用户"
     end
   end
 
@@ -141,5 +144,9 @@ class User
 
   def is_artist?
     self._type == "IndUser" && !self.admin?
+  end
+
+  def self.find slug_or_id
+    self.find_by_slug(slug_or_id) || self.where(_id: slug_or_id).try(:first)
   end
 end

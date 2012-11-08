@@ -83,4 +83,8 @@ class OrgUser < User
     def name
       org_profile.present? ? org_profile.contact_person : "您"
     end
+
+    def profile
+      org_profile
+    end
 end

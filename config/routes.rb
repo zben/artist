@@ -40,8 +40,8 @@ Talent::Application.routes.draw do
   devise_for :users, :controllers => {:registrations => "registrations", :invitations => 'invitations'}
 
   resources :users
-  resources :ind_users
-  resources :org_users
+  resources :ind_users, path: "artists"
+  resources :org_users, path: "buyers"
   resources :shouts
   match 'weibo(/:type)'=>'shouts#index', :as=>'myshouts'
 

@@ -20,6 +20,9 @@ class IndUsersController < ApplicationController
   def show
     @user = params[:id].nil? ? current_user : User.find(params[:id])
     @artworks = @user.artworks.ready
+    unless current_user && (current_user.admin? || current_user == @user)
+      @user.inc(:visit_counter, 1)
+    end
   end
 
   def new 

@@ -37,6 +37,7 @@ gem 'tinymce-rails',:git => 'git://github.com/spohlenz/tinymce-rails.git'
 gem 'mongoid','2.4.1'
 gem 'bson_ext', '1.5.2'
 gem 'mongoid_fulltext','0.5.7'
+gem 'mongoid_slug', '0.10.0'
 gem 'cancan'
 gem 'simple_enum',:git => 'git://github.com/lwe/simple_enum.git'
 gem "mongoid-paperclip", :require => "mongoid_paperclip"

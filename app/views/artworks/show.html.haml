@@ -2,24 +2,27 @@
   .span12
     .image_block
       =image_tag(@artwork.photos.first.photo.url(:large), width: 670)
+    .comments=render 'shared/disqus'
   .span4
     .quote_box.shadow.artist_info_box
       =image_tag(@artwork.ind_user.avatar.url(:medium))
       .artist_info
         %p=link_to @artwork.ind_user.name, @artwork.ind_user
-        %p.small
-          =@artwork.ind_user.profile.city
-          %br
-          =@artwork.ind_user.profile.province.name
-    -if buyer?
+        -if I18n.locale == :ch
+          %p=link_to "共 #{@artwork.ind_user.artworks.ready.count} 副作品", @artwork.ind_user
+        -else
+          %p=link_to "#{@artwork.ind_user.artworks.ready.count} Artworks", @artwork.ind_user
+    -if buyer? || current_user.nil?
       .quote_box.shadow
         %p
           原画价格
-          ="OFD" if @artwork.price_out_of_date && current_user.admin?
+          ="OFD" if @artwork.price_out_of_date && admin?
         .price=@artwork.price_in_yuan
         %p 售价包含原作证书和运费
         #real_order
-          -if @artwork.real_ordered_by current_user
+          -if current_user.nil?
+            %p=raw "订购请先#{link_to '注册', new_user_session_path}或登录。"
+          -elsif @artwork.real_ordered_by current_user
             %p 谢谢您 请等候我们的电话
           -else
             =form_for Order.new, remote: true do |f|
@@ -30,7 +33,9 @@
       .quote_box{style: "height:90px;"}
         %p 授权限量版复制品
         #copy_order
-          -if @artwork.copy_ordered_by current_user
+          -if current_user.nil?
+            %p= raw "订购请先#{link_to '注册', new_user_session_path}或登录。"
+          -elsif @artwork.copy_ordered_by current_user
             %p 谢谢您 请等候我们的电话
           -else
             =form_for Order.new, remote: true do |f|
@@ -38,13 +43,6 @@
               =f.hidden_field :is_for_real, value: false
               #real_order=f.submit "询问", class: "btn primary"
         %p#copy_message
-
-    -elsif I18n.locale == :ch && current_user.nil?
-      .quote_box.shadow
-        %p
-          ="查看价格或购买,"
-          %br
-          =raw "请先#{link_to '注册', new_user_session_path}或登录。"
 
     %table.table.table-striped
       %tr
@@ -68,10 +66,13 @@
         %td="#{@artwork.height}\" x #{@artwork.width}\"" + " (#{@artwork.height.to_i*2.54.to_i}cm x #{@artwork.width.to_i*2.54.to_i}cm)" if @artwork.height && @artwork.weight
       %tr
         %td=t('artwork.weight')
-        %td="#{@artwork.weight.to_f} lb." + " (#{@artwork.weight.to_f*0.454} kg.)"
+        %td="#{"%0.2f" % @artwork.weight.to_f} lb" + " (#{"%0.2f" % (@artwork.weight.to_f*0.454)} kg)"
       %tr
         %td=t('artwork.is_framed')
         %td=@artwork.is_framed? ? t('artwork.framed') : t('artwork.unframed')
+      %tr
+        %td=t('artwork.visits')
+        %td=@artwork.visit_counter
 
     =render 'shared/share', artwork: @artwork if I18n.locale == :ch
     =link_to "Edit this artwork", edit_artwork_path(@artwork, anchor: "edit_artwork_#{@artwork.id}") if can_edit?(@artwork)
