@@ -7,38 +7,16 @@
           =f.semantic_fields_for :artworks do |a|
             .list_item_box.with_link
               .row
-                .span5= a.input :title
+                .span3= a.input :title
                 .span1= a.input :year, placeholder: "YYYY"
                 .span2= a.input :type, as: :select, collection: Artwork::PAINTING_TYPES, include_blank: false
                 .span3= a.input :base, placeholder: "eg. paper, canvas, wood"
-                .span2= a.input :is_framed, label: "Frame Included", as: :select, include_blank: false
-              .row
-                .span3
-                  =a.label "Price"
-                  %span.add-on US$
-                  .price.with_addon= a.input :price, label: false
-                  %span.add-on .00
-
-                .span2
-                  = a.label "Dimensions"
-                  .dimension.with_addon= a.input :height, label: false, placeholder: "H"
-                  %span.add-on " x
-
-                  .dimension.with_addon= a.input :width, label: false, placeholder: "W"
-                  %span.add-on "
-
-                .span2
-                  = a.label "Weight"
-                  .price.with_addon= a.input :weight, label: false
-                  %span.add-on lb.
 
 
                 -a.object.photos.build if a.object.photos.empty?
                 .span4
                   = a.semantic_fields_for :photos do |p|
                     =p.input :photo, required: true
-                .span2
-                  =a.input :for_sale, as: :select, include_blank: false
               .row.link
                 .span7=a.link_to_remove "Remove this artwork"
           .row.add_link
