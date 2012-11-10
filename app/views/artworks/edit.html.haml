@@ -1,23 +1,72 @@
 .row
   .span16.shadow
-    %h2="Ready-for-Sale Artwork (#{@ready_artworks.count})"
-    .hint
-      For an artwork to be ready for sale, it needs to have all the fields filled. You also need to mark it as "for sale". You are advised to have
-      %b 4-8 pieces of work
-      for sale at a time so that you can have a flow of new artwork to be displayed on the site.
     .row
-      .span16
-        -@ready_artworks.each do |artwork|
-          =render "artworks/artwork_form", artwork: artwork
-
-    %h2="Not-Ready-for-Sale Artwork (#{@unready_artworks.count})"
-    .row
-      .span16
-        -@unready_artworks.each do |artwork|
-          =render "artworks/artwork_form", artwork: artwork
-
-    %h2="Sold Artwork (#{@sold_artworks.count})"
-    .row
-      .span16
-        -@sold_artworks.each do |artwork|
-          =render "artworks/artwork_sold", artwork: artwork
+      .span4.offset1
+        %h2 Artwork Info
+        =semantic_form_for @artwork do |f|
+          .row
+            .span2
+              .image_block.small=link_to image_tag(@artwork.photos.first.photo(:thumb)), @artwork
+            .span2
+              .row
+                .span2=f.input :type, as: :select, include_blank: false, collection: Artwork::PAINTING_TYPES
+                .span2=f.input :base
+          .row
+            .span3=f.input :title
+            .span1=f.input :year
+          =f.semantic_fields_for :photos do |p|
+            =p.input :photo, required: true
+          =f.submit "Save Artwork", class: "btn"
+          =link_to "Return to list", edit_artist_artworks_path(@artwork.ind_user.slug)
+      .span4.offset1
+        %h2 Original Info
+        =link_to_function "Sell original", "$(this).hide();$('.original_form').show();" if @original_sellable.new?
+        .original_form{style: "display:#{@original_sellable.new? ? 'none' : 'default'}"}
+          =semantic_form_for @original_sellable do |f|
+            =f.input :is_original, value: true, as: :hidden
+            =f.input :artwork_id, value: @artwork.id, as: :hidden
+            .row
+              .span2
+                =f.input :for_sale, as: :select, include_blank: false
+              .span2
+                =f.input :price
+            =f.input :sale_price if current_user.admin?
+            .row
+              .span2
+                =f.input :height
+              .span2
+                =f.input :width
+            .row
+              .span2
+                =f.input :is_framed, as: :select, include_blank: false
+              .span2
+                =f.input :weight
+            =f.input :note, as: :text, input_html: { :class => 'autogrow', :rows => 2 }
+            =f.submit "Save Original", class: "btn"
+            =link_to "Return to list", edit_artist_artworks_path(@artwork.ind_user.slug)
+      .span4.offset1
+        %h2 Copy Info
+        =link_to_function "Sell copy", "$(this).hide();$('.copy_form').show();" if @copy_sellable.new?
+        .copy_form{style: "display:#{@copy_sellable.new? ? 'none' : 'default'}"}
+          =semantic_form_for @copy_sellable do |f|
+            =f.input :is_original, value: false, as: :hidden
+            =f.input :artwork_id, value: @artwork.id, as: :hidden
+            .row
+              .span2
+                =f.input :for_sale, as: :select
+              .span2
+                =f.input :price
+            =f.input :sale_price if current_user.admin?
+            .row
+              .span2
+                =f.input :height
+              .span2
+                =f.input :width
+            .row
+              .span2
+                =f.input :is_framed, as: :select
+              .span2
+                =f.input :weight
+            =f.input :note, as: :text, input_html: { :class => 'autogrow', :rows => 2 }
+            =f.submit "Save Copy", class: "btn"
+            =link_to "Return to list", edit_artist_artworks_path(@artwork.ind_user.slug)

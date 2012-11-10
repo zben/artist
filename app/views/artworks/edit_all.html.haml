@@ -1,0 +1,10 @@
+.row
+  .span16.shadow
+    %h2 Manage Artworks
+    %ul
+      -@user.artworks.each do |a|
+        =link_to edit_artwork_path(a.slug) do
+          .image_block.small
+            =image_tag a.photos.first.photo(:thumb)
+            .price="Original: #{a.original_available? ? number_to_currency(a.original_price, precision: 0) : 'N/A'}"
+            .price="Copy: #{a.copy_available? ? number_to_currency(a.copy_price, precision: 0) : 'N/A'}"

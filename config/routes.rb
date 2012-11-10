@@ -13,8 +13,9 @@ Talent::Application.routes.draw do
   get "orders/destroy"
 
   resources :artworks
+  resources :sellables
   match 'artworks/by/:artist_id' => "artworks#index", as: "artist_artworks"
-  match 'artworks/by/:artist_id/edit' => "artworks#edit", as: "edit_artist_artworks"
+  match 'artworks/by/:artist_id/edit' => "artworks#edit_all", as: "edit_artist_artworks"
   #mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
   resources :parks

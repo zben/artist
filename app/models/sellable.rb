@@ -4,12 +4,13 @@ class Sellable
   include Mongoid::Timestamps
   include SimpleEnum::Mongoid
   include Mongoid::Paranoia
+  include ActionView::Helpers
 
   belongs_to :artwork
   belongs_to :order
 
   auto_increment :number, seed: 1000
-  field :is_original, tyoe: Boolean
+  field :is_original, type: Boolean
 
   field :price, type: Integer
   field :price_updated_at, type: DateTime
@@ -18,13 +19,19 @@ class Sellable
 
   field :height, type: Integer
   field :width, type: Integer
-  field :is_framed, type: Boolean
+  field :is_framed, type: Boolean, default: false
   field :weight, type: Float
   field :note
 
   field :for_sale, type: Boolean, default: true
   field :ready, type: Boolean, default: false
   field :order_count
+
+  scope :original, where(is_original: true)
+  scope :copy, where(is_original: false)
+
+
+  validates_presence_of :price, :height, :width, :weight
 
   before_save :update_price_timestamps
   after_save :save_artwork

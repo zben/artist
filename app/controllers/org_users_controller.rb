@@ -12,7 +12,7 @@ class OrgUsersController < ApplicationController
     @user = OrgUser.find(params[:id])
   end
 
-  def new 
+  def new
     @user = OrgUser.find(params[:id])
     @user.build_org_profile if @user.org_profile.nil?
     @is_new = true

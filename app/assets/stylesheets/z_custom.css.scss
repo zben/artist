@@ -81,7 +81,7 @@ form{
   
 }
 select{
-  width:95%;
+  width:110%;
   margin-bottom: 15px;
 }
 select.date{
@@ -862,7 +862,6 @@ body.artworks.show, body.ind_users.show{
     padding-bottom: 20px;
   }
   table{
-    box-shadow: rgba(34, 25, 25, 0.4) 0px 1px 3px 0px;
     background: #FFF;
     width: 100%;
     tr{
@@ -887,7 +886,6 @@ body.artworks.show, body.ind_users.show{
       padding-left: 20px;
     }
     background-color: #fff;
-    height: 150px;
     box-shadow: rgba(34, 25, 25, 0.4) 0px 1px 3px 0px;
     margin: 5px 0;
     margin-bottom: 10px;
@@ -910,7 +908,8 @@ body.artworks.show, body.ind_users.show{
   }
 
   .artist_info_box{
-    height: 70px;
+    float: left;
+    width: 200px;
     padding: 10px 10px;
     img{
       float:left;
@@ -1092,7 +1091,6 @@ float: left;
 .topbar input[type='submit']:hover{
   background-color: rgba(255,255,255,0);
 }
-#artwork_photos_attributes_0_photo{width: 40px}
 
 .artwork_image{
   margin: 0px -25px 0px 10px;
@@ -1202,4 +1200,22 @@ li.fragment select.date{
     display: none;
   }
 
+}
+input{
+  height: 20px;
+}
+.image_block.small{
+  width: 100px;
+  padding-bottom:10px;
+  .price{
+    width: 100%;
+    font-family: 'Lato','sans-serif';
+    color: black;
+    font-size:13px;
+  }
+}
+.share{
+  margin-top:10px;
+  float: left;
+  width: 200px;
 }
