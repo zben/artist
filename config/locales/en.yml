@@ -27,7 +27,7 @@ en:
   forgot_password: "Forgot password"
   slogan: "We bridge artists and art buyers in China"
   password_confirmation: "Confirmation"
-  sign_up: "Submit"
+  sign_up: "Sign up"
   password_prompt: "6 or more characters. 1+ numbers"
   password_confirmation_prompt: "Enter the password again"
   old_password: "Old Password"
