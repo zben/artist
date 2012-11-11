@@ -14,7 +14,7 @@ set :application, "artist"
 set :user, "deployer"
 set :deploy_to, "/var/www/#{application}"
 set :deploy_via, :remote_cache
-set :use_sudo, true
+set :use_sudo, false
 
 set :scm, "git"
 set :repository, "git@github.com:zben/#{application}.git"
@@ -29,7 +29,7 @@ namespace :deploy do
   %w[start stop restart].each do |command|
     desc "#{command} passenger server"
     task command, roles: :app, except: {no_release: true} do
-      run "sudo service nginx #{command}"
+      run "#{sudo} /etc/init.d/nginx #{command}"
     end
   end
 
