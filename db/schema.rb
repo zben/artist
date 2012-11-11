@@ -20,8 +20,8 @@ ActiveRecord::Schema.define(:version => 20120603184453) do
     t.string   "table"
     t.integer  "month",      :limit => 2
     t.integer  "year",       :limit => 5
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
   end
 
   add_index "rails_admin_histories", ["item", "table", "month", "year"], :name => "index_rails_admin_histories"
