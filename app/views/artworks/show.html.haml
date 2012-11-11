@@ -30,7 +30,7 @@
       %tr
         %td=t('artwork.visits')
         %td=@artwork.visit_counter
-    -if buyer? || current_user.nil?
+    -if buyer? || (current_user.nil? && I18n.locale == :ch)
       -if @original_sellable
         .quote_box.shadow
           %p
@@ -41,11 +41,9 @@
           #real_order
             -if current_user.nil?
               %p=raw "订购请先#{link_to '注册', new_user_session_path}或登录。"
-            -elsif @artwork.real_ordered_by current_user
-              %p 谢谢您 请等候我们的电话
             -else
               =form_for Order.new, remote: true do |f|
-                =f.hidden_field :artwork_id, value: @artwork.id.to_s
+                =f.hidden_field :sellable_id, value: @original_sellable.id.to_s
                 #real_order=f.submit "询问", class: "btn primary"
           %p#real_message
           %table.table.table-striped
@@ -56,6 +54,9 @@
             %tr
               %td=t('artwork.dimensions')
               %td="#{@original_sellable.height}\" x #{@original_sellable.width}\"" + " (#{@original_sellable.height.to_i*2.54.to_i}cm x #{@original_sellable.width.to_i*2.54.to_i}cm)" if @original_sellable.height && @original_sellable.weight
+            %tr
+              %td=t('artwork.base')
+              %td=@original_sellable.base
             %tr
               %td=t('artwork.weight')
               %td="#{"%0.2f" % @original_sellable.weight.to_f} lb" + " (#{"%0.2f" % (@original_sellable.weight.to_f*0.454)} kg)"
@@ -72,11 +73,9 @@
           #copy_order
             -if current_user.nil?
               %p= raw "订购请先#{link_to '注册', new_user_session_path}或登录。"
-            -elsif @artwork.copy_ordered_by current_user
-              %p 谢谢您 请等候我们的电话
             -else
               =form_for Order.new, remote: true do |f|
-                =f.hidden_field :artwork_id, value: @artwork.id.to_s
+                =f.hidden_field :sellable_id, value: @copy_sellable.id.to_s
                 =f.hidden_field :is_for_real, value: false
                 #real_order=f.submit "询问", class: "btn primary"
           %p#copy_message
@@ -89,6 +88,9 @@
             %tr
               %td=t('artwork.dimensions')
               %td="#{@copy_sellable.height}\" x #{@copy_sellable.width}\"" + " (#{@copy_sellable.height.to_i*2.54.to_i}cm x #{@copy_sellable.width.to_i*2.54.to_i}cm)" if @copy_sellable.height && @copy_sellable.weight
+            %tr
+              %td=t('artwork.base')
+              %td=@copy_sellable.base
             %tr
               %td=t('artwork.weight')
               %td="#{"%0.2f" % @copy_sellable.weight.to_f} lb" + " (#{"%0.2f" % (@copy_sellable.weight.to_f*0.454)} kg)"

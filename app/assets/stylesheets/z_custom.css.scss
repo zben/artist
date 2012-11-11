@@ -368,7 +368,7 @@ a.remove_nested_fields, a.add_nested_fields{
   padding: 0px 10px;
   padding-bottom: 0px;
   margin-bottom:10px;
-  width: 760px;
+  width: 800px;
   height: 120px;
   clear: both;
   box-shadow: rgba(34, 25, 25, 0.4) 0px 1px 3px 0px;
@@ -385,7 +385,7 @@ a.remove_nested_fields, a.add_nested_fields{
     font-style: italic;
   }
 }
-.list_item_box.with_link{height: 150px}
+.list_item_box.with_link{height: 100px}
 
 .left{
   float:left;
@@ -1206,7 +1206,14 @@ input{
 }
 .image_block.small{
   width: 100px;
+  padding: 10px;
   padding-bottom:10px;
+  &.smaller{
+    width: 90px;
+    img{
+      width:85px;
+    }
+  }
   .price{
     width: 100%;
     font-family: 'Lato','sans-serif';

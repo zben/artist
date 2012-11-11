@@ -5,15 +5,14 @@
         %h2 Artwork Info
         =semantic_form_for @artwork do |f|
           .row
+            .span4=f.input :title
+          .row
             .span2
-              .image_block.small=link_to image_tag(@artwork.photos.first.photo(:thumb)), @artwork
+              .image_block.small.smaller=link_to image_tag(@artwork.photos.first.photo(:thumb)), @artwork
             .span2
               .row
                 .span2=f.input :type, as: :select, include_blank: false, collection: Artwork::PAINTING_TYPES
-                .span2=f.input :base
-          .row
-            .span3=f.input :title
-            .span1=f.input :year
+                .span2=f.input :year, placeholder: "YYYY"
           =f.semantic_fields_for :photos do |p|
             =p.input :photo, required: true
           =f.submit "Save Artwork", class: "btn"
@@ -32,10 +31,12 @@
                 =f.input :price
             =f.input :sale_price if current_user.admin?
             .row
-              .span2
+              .span1
                 =f.input :height
-              .span2
+              .span1
                 =f.input :width
+              .span2
+                =f.input :base, placeholder: "paper, canvas.."
             .row
               .span2
                 =f.input :is_framed, as: :select, include_blank: false
@@ -58,10 +59,12 @@
                 =f.input :price
             =f.input :sale_price if current_user.admin?
             .row
-              .span2
+              .span1
                 =f.input :height
-              .span2
+              .span1
                 =f.input :width
+              .span2
+                =f.input :base, placeholder: "paper, canvas.."
             .row
               .span2
                 =f.input :is_framed, as: :select

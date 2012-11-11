@@ -17,11 +17,11 @@
         %tr
           %td=order.number
           %td
-            =image_tag order.artwork.photos.first.photo(:thumb), height: 50
+            =image_tag order.sellable.artwork.photos.first.photo(:thumb), height: 50
           %td
-            =link_to "#{order.artwork.title}(##{order.artwork.number})", order.artwork
+            =link_to "#{order.sellable.artwork.title}(##{order.sellable.number})", order.sellable.artwork
             %br
-            =link_to order.artwork.ind_user.name, order.artwork.ind_user
+            =link_to order.sellable.artwork.ind_user.name, order.sellable.artwork.ind_user
           %td=order.is_for_real ? "Original" : "Copy"
           %td=link_to order.org_user.org_profile.contact_person, org_user_edit_path(order.org_user.id, :profile)
           %td=best_in_place order, :status, type: :select,
@@ -29,7 +29,7 @@
             path: admin_order_path(order),
             ok_button: "OK", cancel_button: "Cancel"
 
-          %td=order.artwork.sale_price
+          %td=order.sellable.sale_price
 
           %td=best_in_place order, :payment,
             path: admin_order_path(order),

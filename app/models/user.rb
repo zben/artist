@@ -43,8 +43,8 @@ class User
   before_save :update_full_name
 
   def update_full_name
-    if self.full_name != self.correct_profile.name
-      self.full_name = self.correct_profile.name
+    if self.full_name != self.correct_profile.try(:name)
+      self.full_name = self.correct_profile.try(:name)
       self.save
     end
   end

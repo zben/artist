@@ -24,7 +24,7 @@
                 .likes
                   %span{class: "counter #{a.id}"}=a.likes_counter
                   likes
-                .tiny_button=bookmark_code(a) if current_user
+                .tiny_button=bookmark_code(a) if current_user && (a.ind_user != current_user)
                 =link_to "Edit Artwork", edit_artwork_path(a, anchor: "edit_artwork_#{a.id}"),class: "edit_artwork" if admin?
             -# .price= a.price_in_yuan if I18n.locale == :ch || current_user.try(:admin?)
 

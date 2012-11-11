@@ -7,16 +7,9 @@
           =f.semantic_fields_for :artworks do |a|
             .list_item_box.with_link
               .row
-                .span5= a.input :title
+                .span4= a.input :title
                 .span1= a.input :year, placeholder: "YYYY"
                 .span2= a.input :type, as: :select, collection: Artwork::PAINTING_TYPES, include_blank: false
-                .span3= a.input :base, placeholder: "eg. paper, canvas, wood"
-              .row
-                .span3
-
-                .span2
-
-                .span2
 
 
                 -a.object.photos.build if a.object.photos.empty?

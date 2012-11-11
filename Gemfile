@@ -8,7 +8,7 @@ gem 'devise_invitable', '~> 1.0.0'
 gem "nifty-generators", :group => :development
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
-gem 'nested_form',:git => 'git://github.com/ryanb/nested_form.git'
+gem 'nested_form', '0.2.3'
 gem 'thin'
 gem 'faker'
 gem 'formtastic',:git => 'https://github.com/justinfrench/formtastic.git'

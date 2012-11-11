@@ -25,7 +25,7 @@ class ArtworksController < ApplicationController
       @user.artworks = @artworks.map{|a| Artwork.new(a)}
       render :new
     else
-      @artworks.each { |a| @user.artworks.create!(a) }
+      @artworks.each { |a| @user.artworks.create(a) }
       redirect_to edit_artist_artworks_path(@user)
     end
   end

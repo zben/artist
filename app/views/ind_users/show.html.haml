@@ -51,4 +51,3 @@
                   %span{class: "counter #{a.id}"}=a.likes_counter
                   likes
                 =link_to "Edit", edit_artwork_path(a, anchor: "edit_artwork_#{a.id}"),class: "edit_artwork" if can_edit?(a)
-            .price= a.price_in_yuan if I18n.locale == :ch || current_user.try(:admin?)

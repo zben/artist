@@ -419,6 +419,7 @@ ch:
     place: "创作地点"
     dimensions: "作品规格"
     weight: "作品重量"
+    base: "底板"
     is_framed: "画框"
     framed: "含画框"
     unframed: "不含画框"

@@ -1,11 +1,11 @@
 %tr
   %td= order.number
-  %td= order.artwork.number
+  %td= order.sellable.number
   %td
-    =link_to image_tag(order.artwork.photos.first.photo.url(:thumb),width:25), order.artwork
-    =order.artwork.title
-    =order.is_for_real? ? "真品" : '授权限量版'
-  %td=number_to_currency (order.payment || order.artwork.sale_price), unit: "¥", precision: 0
+    =link_to image_tag(order.sellable.artwork.photos.first.photo.url(:thumb),width:25), order.sellable.artwork
+    =order.sellable.artwork.title
+    =order.sellable.is_original? ? "真品" : '授权限量版'
+  %td=number_to_currency (order.payment || order.sellable.sale_price), unit: "¥", precision: 0
   %td=l order.created_at, format: :short
   %td=t(order.status.to_s)
   %td

@@ -4,7 +4,6 @@ class Artwork
   include Mongoid::Timestamps
   include ActionView::Helpers
   include SimpleEnum::Mongoid
-  include Mongoid::Paranoia
   include Mongoid::Slug
 
   has_many :photos, autosave: true, dependent: :destroy, as: :attachable
@@ -16,7 +15,6 @@ class Artwork
   slug :title, history: true
   field :description
   field :type
-  field :base
   field :year
 
   field :likes_counter, default: 0
@@ -39,6 +37,7 @@ class Artwork
   default_scope desc(:created_at)
   scope :ready, where(for_display: true)
   scope :not_ready, where(for_display: false)
+
 
   before_save :update_availability
 

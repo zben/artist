@@ -78,6 +78,14 @@ $(document).ready(function() {
     });
   });
 
+  var $container2 = $('#image_blocks.small');
+  $container2.imagesLoaded(function(){
+    $container2.masonry({
+      itemSelector : '.image_block',
+      columnWidth : 130,
+      isFitWidth: true,
+    });
+  });
 
 
    $container.infinitescroll({
