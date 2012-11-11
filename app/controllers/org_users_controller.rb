@@ -5,7 +5,7 @@ class OrgUsersController < ApplicationController
   before_filter :authenticate!
 
   def index
-    @users = OrgUser.all.with_org_profile.page(params[:page]).per(10)
+    @users = OrgUser.with_org_profile.page(params[:page]).per(10)
   end
 
   def show
@@ -28,13 +28,12 @@ class OrgUsersController < ApplicationController
   def update
     @user =  OrgUser.find(params[:id])
     authorize! :manage, @user
-    @user.update_attributes(params[:org_user])
-    if @user.save
+    if @user.update_attributes(params[:org_user])
       remove_avatar(@user) unless params["remove_avatar"].nil?
       update_skills(@user,params) unless params[:skills].nil?
       next_step = params[:is_new].nil? ? nil : @user.next_step(params[:current_step])   
       if next_step.nil?
-        redirect_to @user, :success=>"修改成功"
+        redirect_to @user, :success=>"修改成功"  
       else
         @is_new = true
         redirect_to org_user_new_path(@user.id,"#{next_step}")

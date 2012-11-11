@@ -1,5 +1,5 @@
 source "https://rubygems.org"
-ruby "1.9.3"
+ruby "1.9.2"
 
 gem 'rails', '3.2.8'
 gem 'haml-rails'
@@ -36,6 +36,8 @@ gem 'tinymce-rails',:git => 'git://github.com/spohlenz/tinymce-rails.git'
 #gem "paperclip", "~> 2.0"
 gem 'mongoid','2.4.1'
 gem 'bson_ext', '1.5.2'
+gem 'bson', '1.5.2'
+gem 'mongo', '1.5.2'
 gem 'mongoid_fulltext','0.5.7'
 gem 'mongoid_slug', '0.10.0'
 gem 'cancan'

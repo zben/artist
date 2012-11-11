@@ -23,7 +23,7 @@
               -else
                 %li=link_to t("see_profile"),current_user
                 %li=link_to t("manage_artwork"), edit_artist_artworks_path(current_user.slug) if current_user.is_artist?
-                %li=link_to t("update_info"),user_edit_path(current_user.id,'profile')
+                %li=link_to t("update_info"),user_edit_path(current_user.slug,'profile')
                 %li=link_to t("update_password"),user_edit_path(current_user.id,'account')
                 %li=link_to t("logout"),destroy_user_session_path,:method => :delete if user_signed_in?
       -else

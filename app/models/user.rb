@@ -3,10 +3,10 @@ class User
   include Mongoid::Document
   include Mongoid::Timestamps
   include Mongoid::Slug
-
   attr_accessor :invitation_message
 
   default_scope all(sort: [[ :created_at, :desc ]])
+
   ## Database authenticatable
   field :email,              :type => String, :null => false
   field :encrypted_password, :type => String, :null => false
@@ -38,6 +38,17 @@ class User
   field :confirmation_sent_at, :type => Time
   field :unconfirmed_email,    :type => String # Only if using reconfirmable
   field :full_name
+  slug :full_name, history: true
+
+  before_save :update_full_name
+
+  def update_full_name
+    if self.full_name != self.correct_profile.name
+      self.full_name = self.correct_profile.name
+      self.save
+    end
+  end
+
   devise :invitable, :database_authenticatable, :registerable,
     :recoverable, :rememberable, :trackable, :validatable #  :confirmable
 
@@ -81,8 +92,6 @@ class User
   accepts_nested_attributes_for :org_profile,:allow_destroy => true
   accepts_nested_attributes_for :usage,:allow_destroy => true
   accepts_nested_attributes_for :artworks,:allow_destroy => true
-
-  slug :full_name, history: true
 
   def matches
     jobs = skills.map{|skill| skill.job_posts.current}.flatten.uniq
@@ -148,5 +157,9 @@ class User
 
   def self.find slug_or_id
     self.find_by_slug(slug_or_id) || self.where(_id: slug_or_id).try(:first)
+  end
+
+  def correct_profile
+    self.is_a?(IndUser) ? profile : org_profile
   end
 end

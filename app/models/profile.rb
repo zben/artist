@@ -44,7 +44,7 @@ class Profile
     user.update_attribute :full_name, self.name
   end
 
-  def name user = nil
+  def name
     firstname + " " + lastname
   end
 

@@ -1,12 +1,13 @@
 class IndUser < User
-    include Mongoid::BasicSearch
-    has_many :bookmarks, :foreign_key=>"user_id"
-    has_many :bookmarkings, :class_name=>"Bookmark", as: :bookmarkable
-    has_many :tech_applications
-    has_and_belongs_to_many :industries
-    scope :with_ind_profile, where(:profile.ne=>nil)
-    has_many :artworks, autosave: true, dependent: :destroy
-    field :visit_counter, default: 0
+  # include Mongoid::Slug
+  include Mongoid::BasicSearch
+  has_many :bookmarks, :foreign_key=>"user_id"
+  has_many :bookmarkings, :class_name=>"Bookmark", as: :bookmarkable
+  has_many :tech_applications
+  has_and_belongs_to_many :industries
+  scope :with_ind_profile, where(:profile.ne=>nil)
+  has_many :artworks, autosave: true, dependent: :destroy
+  field :visit_counter, default: 0
   accepts_nested_attributes_for :educations,:allow_destroy => true
   accepts_nested_attributes_for :experiences,:allow_destroy => true
   accepts_nested_attributes_for :exams,:allow_destroy => true
@@ -15,6 +16,16 @@ class IndUser < User
   accepts_nested_attributes_for :org_profile,:allow_destroy => true
   accepts_nested_attributes_for :usage,:allow_destroy => true
   accepts_nested_attributes_for :artworks, :allow_destroy => true
+
+
+  # slug :full_name, history: true
+
+  # before_save :update_full_name
+
+  # def update_full_name
+  #   self.full_name = self.profile.try(:name) if self.is_a? IndUser
+  #   self.full_name = self.org_profile.try(:name) if self.is_a? OrgUser
+  # end
 
   perform_search_on :profile=>[:name,:intro,:intro_title],
     :educations=>[:degree_type,:school,:program,:comment],

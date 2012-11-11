@@ -1,11 +1,12 @@
 #encoding: UTF-8
 class OrgUser < User
   include Mongoid::Paperclip
-    has_many :orders
-    has_many :bookmarks, :foreign_key=>"user_id"
-    has_many :bookmarkings, :class_name=>"Bookmark", as: :bookmarkable
+  # include Mongoid::Slug
+  has_many :orders
+  has_many :bookmarks, :foreign_key=>"user_id"
+  has_many :bookmarkings, :class_name=>"Bookmark", as: :bookmarkable
 
-    has_many :bookmarks, :foreign_key=>"user_id"
+  has_many :bookmarks, :foreign_key=>"user_id"
   accepts_nested_attributes_for :educations,:allow_destroy => true
   accepts_nested_attributes_for :experiences,:allow_destroy => true
   accepts_nested_attributes_for :exams,:allow_destroy => true
@@ -15,6 +16,13 @@ class OrgUser < User
   accepts_nested_attributes_for :usage,:allow_destroy => true
 
   delegate :contact_person, :phone_number, :city, :province, :address, :company_name, :website, to: :org_profile
+
+  # before_save :update_full_name
+
+  # def update_full_name
+  #   self.full_name = self.profile.try(:name) if self.is_a? IndUser
+  #   self.full_name = self.org_profile.try(:name) if self.is_a? OrgUser
+  # end
 
     scope :with_org_profile, where(:org_profile.ne=>nil)
     if Rails.env.production?  
@@ -82,9 +90,5 @@ class OrgUser < User
 
     def name
       org_profile.present? ? org_profile.contact_person : "您"
-    end
-
-    def profile
-      org_profile
     end
 end
