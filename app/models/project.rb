@@ -31,7 +31,7 @@ class Project
   as_enum :has_patent, :"有"=>"1", :"无"=>"2", :"申请中"=>"3"
   scope :public, where(visibility_cd: "1")
 
-    if Rails.env.production?  
+    if Rails.env.production? || Rails.env.staging?
       has_mongoid_attached_file :logo,
         :path => ':project_logo/:id/:style.:extension',
         :default_url => '/assets/project_logo/:style/missing.jpg',

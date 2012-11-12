@@ -6,6 +6,9 @@ test:
   host: localhost
   database: artist_test
 
-# set these environment variables on your prod server
-production:
+staging:
   uri: <%= ENV['MONGOHQ_URL'] %>
+
+production:
+  host: localhost
+  database: artist_production

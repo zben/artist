@@ -5,7 +5,7 @@ class Download < Attachment
   include Mongoid::Paperclip
 
 
-  if Rails.env.production?
+  if Rails.env.production? || Rails.env.staging?
     has_mongoid_attached_file :download,
       :path => ':download/:id/:file_name',
       :storage => :s3,

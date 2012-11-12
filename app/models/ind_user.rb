@@ -33,7 +33,7 @@ class IndUser < User
     :skills=>[:name_en,:name_ch]
 
     include Mongoid::Paperclip
-    if Rails.env.production?  
+    if Rails.env.production? || Rails.env.staging?
       has_mongoid_attached_file :avatar,
         :path => ':avatar/:id/:style.:extension',
         :default_url => '/assets/avatars/:style/missing.png',

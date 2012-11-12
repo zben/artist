@@ -19,7 +19,7 @@ class Park
   belongs_to :city
   field :city_id, type: Integer
   validates_presence_of :name_ch, :province_id, :city_id
-  if Rails.env.production?  
+  if Rails.env.production? || Rails.env.staging?
       has_mongoid_attached_file :logo,
         :path => ':park_logo/:id/:style.:extension',
         :storage => :s3,

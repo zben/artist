@@ -13,3 +13,6 @@ production:
   database: artist_production
   host: localhost
 
+staging:
+  uri: <%= HEROKU_POSTGRESQL_PINK_URL %>
+

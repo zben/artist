@@ -5,7 +5,7 @@ class Photo < Attachment
   include Mongoid::Paperclip
 
 
-  if Rails.env.production?  
+  if Rails.env.production? || Rails.env.staging?
     has_mongoid_attached_file :photo,
       :path => ':photo/:id/:style.:extension',
       :storage => :s3,
