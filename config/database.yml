@@ -14,5 +14,5 @@ production:
   host: localhost
 
 staging:
-  uri: <%= HEROKU_POSTGRESQL_PINK_URL %>
+  uri: <%= ENV['HEROKU_POSTGRESQL_PINK_URL'] %>
 
