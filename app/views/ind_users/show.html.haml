@@ -22,11 +22,12 @@
       %p
         ="#{@user.profile.full_location}"
         =" / #{@user.visit_counter} visits" if current_user && current_user == @user
-      =t('profile.introduction')
-      -if @user.profile.intro_ch.present?
-        %p=@user.profile.intro_ch
-      -else
-        %p=@user.profile.intro
+      %b=t('profile.introduction')
+      .introduction
+        -if @user.profile.intro_ch.present?
+          %p=@user.profile.intro_ch
+        -else
+          %p=@user.profile.intro
 
 -if current_user == @user && @user.artworks.empty?
   .row

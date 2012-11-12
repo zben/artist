@@ -56,7 +56,7 @@ en:
       photo: "photo"
     attributes:
       sellable:
-        base: "medium"
+        base: "Medium"
       profile:
         firstname: "first name"
         lastname: "last name"
@@ -91,7 +91,7 @@ en:
         avatar: "avatar"
         logo: "logo"
       photo:
-        photo: "photo"
+        photo: "Photo"
 
     errors:
       models:

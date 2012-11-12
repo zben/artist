@@ -955,6 +955,11 @@ body.ind_users.show{
        text-align: center;
      }
      h1{margin-bottom: 4px;}
+     .introduction{
+       p{font-size: 12px;line-height:15px;color:#888}
+       height: 60px;
+       overflow: scroll;
+     }
    }
   .image_block{
     width: 290px;
