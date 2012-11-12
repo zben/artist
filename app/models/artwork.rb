@@ -12,7 +12,6 @@ class Artwork
   belongs_to :ind_user
 
   field :title
-  slug :title, history: true
   field :description
   field :type
   field :year
@@ -29,6 +28,8 @@ class Artwork
 
   field :copy_price, type: Integer
   field :copy_sale_price, type: Integer
+
+  slug :title, reserve: [""], history: true
 
   PAINTING_TYPES = %w{ Oil Pastel Acrylic Watercolor Ink Sprary Paint Other }
 
