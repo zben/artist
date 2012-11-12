@@ -55,6 +55,8 @@ en:
       usage: "usage"
       photo: "photo"
     attributes:
+      sellable:
+        base: "medium"
       profile:
         firstname: "first name"
         lastname: "last name"
