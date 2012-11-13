@@ -38,7 +38,7 @@ class User
   field :confirmation_sent_at, :type => Time
   field :unconfirmed_email,    :type => String # Only if using reconfirmable
   field :full_name
-  slug :full_name, history: true
+  slug :full_name, reversed: [""], history: true
 
   before_save :update_full_name
 

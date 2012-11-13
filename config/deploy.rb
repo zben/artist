@@ -3,6 +3,7 @@ require "bundler/capistrano"
 
 # Load RVM's capistrano plugin.    
 require "rvm/capistrano"
+load 'deploy/assets'
 
 set :rvm_ruby_string, '1.9.2'
 set :rvm_type, :user  # Don't use system-wide RVM
@@ -32,6 +33,7 @@ namespace :deploy do
       run "#{sudo} /etc/init.d/nginx #{command}"
     end
   end
+
 namespace :deploy do
   namespace :assets do
     task :precompile, :roles => :web, :except => { :no_release => true } do
