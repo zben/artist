@@ -120,4 +120,7 @@ Talent::Application.routes.draw do
   end
 
   match "artworks/page/:page" => "artworks#index"
+
+  match "/error" => "pages#error"
+  match "*path" => "artworks#index"
 end

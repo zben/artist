@@ -28,4 +28,8 @@ class PagesController < ApplicationController
 
   def services
   end
+
+  def error
+    ErrorMailer.send_error.deliver
+  end
 end
