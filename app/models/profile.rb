@@ -6,7 +6,7 @@ class Profile
   include SimpleEnum::Mongoid
   include Mongoid::Search
 
-  as_enum :gender, :"Female" => 1, :"Male" => 0
+  as_enum :gender, :"Male" => 0, :"Female" => 1
 
   field :firstname
   field :lastname

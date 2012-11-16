@@ -1,23 +1,30 @@
 .row
   .span16.shadow
-    %h2 Manage Artworks
+    %h2 Manage Sellables
     =paginate @sellables
     %table.table.zebra-striped.order
       %tr
         %td{width: 40} ID
-        %td{width: 40} Title
+        %td{width: 150} Title
+        %td{width: 80} Artist Name
         %td{width: 30}
-        %td{width: 40} Artist Price
-        %td{width: 40} Sale Price
-        %td{width: 40} Artist Name
+        %td.right{width: 40} AP($)
+        %td.right{width: 40} SP(Yuan)
+        %td.right{width: 40} SP($)
+        %td.right{width: 40} Margin($)
         %td{width: 40} Created on
       -@sellables.each do |s|
         %tr
           %td=s.number
-          %td=link_to s.artwork.title, s.artwork
-          %td=link_to "edit", edit_artwork_path(s.artwork)
-          %td=best_in_place s, :price, path: admin_artwork_path(s), :display_with => :number_to_currency, :helper_options => {precision: 0}
-          %td=best_in_place s, :sale_price, path: admin_artwork_path(s),:display_with => :number_to_currency, :helper_options => {:unit => "¥", precision: 0}
+          %td{style: "background-color: #{s.is_original? ? '#ddd': 'inherit'}"}=link_to s.artwork.title, s.artwork
           %td=link_to s.artwork.ind_user.name, s.artwork.ind_user
+          %td=link_to "edit", edit_artwork_path(s.artwork)
+          %td.right=best_in_place s, :price, path: admin_artwork_path(s), :display_with => :number_to_currency, :helper_options => {precision: 0}
+          %td.right=best_in_place s, :sale_price, path: admin_artwork_path(s),:display_with => :number_to_currency, :helper_options => {:unit => "¥", precision: 0}
+
+          -sale_dollar = s.sale_price/6.22
+          %td.right=number_to_currency(sale_dollar, precision: 0)
+          %td.right=number_to_currency(sale_dollar - s.price, precision: 0)
+
           %td=l s.created_at.to_date, format: :short
     =paginate @sellables

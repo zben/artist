@@ -11,6 +11,8 @@ class RegistrationsController < Devise::RegistrationsController
     if user!=nil && user.invitation_sent_at!=nil && user.invitation_accepted_at.nil?
       redirect_to accept_user_invitation_path+"?invitation_token=#{user.invitation_token}"
     else
+      params[:user][:_type]
+      I18n.locale = cookies[:locale] = params[:user][:_type] == "IndUser" ? :en : :ch
       super
     end
   end

@@ -10,7 +10,7 @@ class Artwork
   has_many :sellables
   has_many :bookmarkings,:class_name=>"Bookmark", as: :bookmarkable
   belongs_to :ind_user
-
+  belongs_to :theme
   field :title
   field :description
   field :type

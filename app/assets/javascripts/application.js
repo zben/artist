@@ -11,6 +11,7 @@
 //= require best_in_place
 //= require best_in_place.purr
 //= require jquery.remotipart
+//= require jquery.tooltips
 
 $(document).ready(function() {
   $('#skill_picker').click(function(event){ 

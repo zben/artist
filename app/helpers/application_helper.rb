@@ -97,5 +97,3 @@ module ApplicationHelper
   end
 end
 
-
-

@@ -19,6 +19,9 @@
         %td=t('artwork.title')
         %td=@artwork.title
       %tr
+        %td=t('artwork.theme')
+        %td=@artwork.theme.try(:name)
+      %tr
         %td=t('artwork.type')
         %td=@artwork.type
       %tr
@@ -66,7 +69,7 @@
       -if @copy_sellable
         .quote_box
           %p
-            授权限量版
+            ="授权限量版  (现仅存 #{@copy_sellable.inventory} 副)"
             ="Update!" if @copy_sellable.price_out_of_date && admin?
           .price=@copy_sellable.price_in_yuan
           %p 售价包含授权证书和运费

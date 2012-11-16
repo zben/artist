@@ -394,7 +394,7 @@ ch:
   ago: "以前"
   submitted: ""
   learn_more: "了解详情"
-  join_now_for_free: "现在就加入吧!"
+  join_now_for_free: "买家注册"
   contact_us: "联系我们"
   aboutus: "关于我们"
 
@@ -415,6 +415,7 @@ ch:
     title: "作品名称"
     number: "作品编号"
     type: "作品类别"
+    theme: "作品主题"
     year: "作品年份"
     place: "创作地点"
     dimensions: "作品规格"

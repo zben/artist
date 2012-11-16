@@ -2,7 +2,7 @@
   .span16.shadow
     .row
       .span4.offset1
-        %h2 Artwork Info
+        %h2 About artwork
         =semantic_form_for @artwork do |f|
           .row
             .span4=f.input :title
@@ -12,64 +12,77 @@
             .span2
               .row
                 .span2=f.input :type, as: :select, include_blank: false, collection: Artwork::PAINTING_TYPES
-                .span2=f.input :year, placeholder: "YYYY"
+                .span2=f.input :theme, as: :select, include_blank: false
+                .span2=f.input :year, label: "Year of Creation", placeholder: "YYYY"
           =f.semantic_fields_for :photos do |p|
             =p.input :photo, required: true
           =f.submit "Save Artwork", class: "btn"
           =link_to "Return to list", edit_artist_artworks_path(@artwork.ind_user.slug)
       .span4.offset1
-        %h2 Original Info
-        =link_to_function "Sell original", "$(this).hide();$('.original_form').show();" if @original_sellable.new?
+        %h2 Sell original artwork
+        %p=link_to_function "Enter original artwork information", "$(this).hide();$('.original_form').show();" if @original_sellable.new?
         .original_form{style: "display:#{@original_sellable.new? ? 'none' : 'default'}"}
           =semantic_form_for @original_sellable do |f|
             =f.input :is_original, value: true, as: :hidden
             =f.input :artwork_id, value: @artwork.id, as: :hidden
             .row
               .span2
-                =f.input :for_sale, as: :select, include_blank: false
+                =f.input :for_sale, as: :select, include_blank: false, hint: "If both original and copies are not for sale, we will hide this artwork from buyers."
               .span2
-                =f.input :price
+                =f.input :price, label: "Price in US$", hint: "This price is what you want to be paid for. Final price to buyer includes cost of shipping, packaging and operation cost"
             =f.input :sale_price if current_user.admin?
             .row
               .span1
-                =f.input :height
+                =f.input :height, label: "H", placeholder: "in inch", hint: "Total height"
               .span1
-                =f.input :width
+                =f.input :width, label: "W", placeholder: "in inch", hint: "Total width"
               .span2
                 =f.input :base, placeholder: "paper, canvas.."
             .row
               .span2
-                =f.input :is_framed, as: :select, include_blank: false
+                =f.input :is_framed, as: :select, include_blank: false, hint: "Frames may increase the cost of shipping significantly. Include frame if you think it is important for the artwork to be shipped with the frame."
               .span2
-                =f.input :weight
-            =f.input :note, as: :text, input_html: { :class => 'autogrow', :rows => 2 }
+                =f.input :weight, label: "Weight (lb)", hint: "Please estimate the weight in pounds. If it is really light, put in 0"
+            =f.input :note, as: :text, input_html: { :class => 'autogrow', :rows => 2 }, placeholder: "This note is for your own reference. You can also tell us anything we should know about this artwork"
+
             =f.submit "Save Original", class: "btn"
             =link_to "Return to list", edit_artist_artworks_path(@artwork.ind_user.slug)
+        %p If you want to sell the original artwork, click on the link above to fill in the information. You will be able to mark the artwork as "not for sale" any time.
+        %p If you just want to sell prints/copies, you can skip this section.
+
       .span4.offset1
-        %h2 Copy Info
-        =link_to_function "Sell copy", "$(this).hide();$('.copy_form').show();" if @copy_sellable.new?
+        %h2 Sell prints or copies
+        %p=link_to_function "Enter prints/copies information", "$(this).hide();$('.copy_form').show();" if @copy_sellable.new?
+
         .copy_form{style: "display:#{@copy_sellable.new? ? 'none' : 'default'}"}
           =semantic_form_for @copy_sellable do |f|
             =f.input :is_original, value: false, as: :hidden
             =f.input :artwork_id, value: @artwork.id, as: :hidden
             .row
               .span2
-                =f.input :for_sale, as: :select
+                =f.input :for_sale, as: :select,hint: "If both original and copies are not for sale, we will hide this artwork from buyers."
               .span2
-                =f.input :price
+                =f.input :price, label: "Price in US$", hint: "This price is what you want to be paid for. Final price to buyer includes cost of shipping, packaging and operation cost"
             =f.input :sale_price if current_user.admin?
             .row
               .span1
-                =f.input :height
+                =f.input :height, label: "H", placeholder: "in inch", hint: "Total height"
               .span1
-                =f.input :width
+                =f.input :width, label: "W", placeholder: "in inch", hint: "Total width"
               .span2
                 =f.input :base, placeholder: "paper, canvas.."
             .row
               .span2
-                =f.input :is_framed, as: :select
+                =f.input :is_framed, as: :select, include_blank: false, hint: "Frames may increase the cost of shipping significantly. Include frame if you think it is important for the artwork to be shipped with the frame."
               .span2
-                =f.input :weight
-            =f.input :note, as: :text, input_html: { :class => 'autogrow', :rows => 2 }
+                =f.input :weight, label: "Weight (lb)", hint: "Please estimate the weight in pounds. If it is really light, put in 0"
+            =f.input :inventory, required: true, hint: "This tells us how many copies are available for sale."
+            =f.input :note, as: :text, input_html: { :class => 'autogrow', :rows => 2 }, placeholder: "Tell us if your copies are limited editions"
+
             =f.submit "Save Copy", class: "btn"
             =link_to "Return to list", edit_artist_artworks_path(@artwork.ind_user.slug)
+        %p At this point, Canvvas.com is not responsible for making the prints/copies so you will have to produce them when the orders come in. We will handle international shipping and packaging for you. When we start in-house printing service, we will let you know.
+
+        %p You can mark prints/copies as "not for sale" at any time.
+
+        %p If you just want to sell the original, you can skip this section.

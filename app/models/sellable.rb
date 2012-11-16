@@ -26,12 +26,13 @@ class Sellable
   field :for_sale, type: Boolean, default: true
   field :ready, type: Boolean, default: false
   field :order_count
-
+  field :inventory, type: Integer
   scope :original, where(is_original: true)
   scope :copy, where(is_original: false)
   default_scope asc(:_id)
 
   validates_presence_of :price, :base, :height, :width, :weight
+  validates_presence_of :inventory, if: "is_original == false"
 
   before_save :update_price_timestamps
   after_save :save_artwork

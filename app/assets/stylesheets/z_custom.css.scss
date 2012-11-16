@@ -956,9 +956,9 @@ body.ind_users.show{
      }
      h1{margin-bottom: 4px;}
      .introduction{
-       p{font-size: 12px;line-height:15px;color:#888}
+       p{font-size: 14px;line-height:15px;color:#888}
        height: 60px;
-       overflow: scroll;
+       overflow: auto;
      }
    }
   .image_block{
@@ -1230,4 +1230,8 @@ input{
   margin-top:10px;
   float: left;
   width: 200px;
+}
+a.hint_modal{
+  text-decoration: none;
+  color: red;
 }

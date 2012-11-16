@@ -3,7 +3,10 @@
   %head
     =favicon_link_tag
     %meta{"http-equiv"=> "content-type", "content"=> "text/html;charset=gb2312"}
-    %title CANVVAS
+    %title Fine Art | Artwork | Paintings | CANVVAS.com
+    %meta{name: "description", content: "Internationl market place for artists in America and buyers in China."}
+
+
     =stylesheet_link_tag    "application", :debug => false
     %link{href: 'http://fonts.googleapis.com/css?family=Carrois+Gothic', rel: 'stylesheet', type: 'text/css'}
     %link{href: 'http://fonts.googleapis.com/css?family=Lato:400', rel: 'stylesheet', type: 'text/css'}
@@ -18,5 +21,4 @@
     = yield :widescreen
     =render 'layouts/footer'
     =debug(params) if Rails.env.development?
-    =I18n.locale.to_s
     =render "layouts/olark_#{I18n.locale.to_s}"
