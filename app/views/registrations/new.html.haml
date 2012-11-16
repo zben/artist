@@ -15,8 +15,11 @@
           .row
             .span2= f.label :password_confirmation, t("password_confirmation")
             .span4= f.password_field :password_confirmation, placeholder: t("password_confirmation_prompt")
-          .row
-            .span4= hidden_field_tag "user[_type]", I18n.locale == :en ? "IndUser" : "OrgUser"
+          -if I18n.locale == :en
+            .row
+              .span2= f.label :invitation_code, t("invitation_code")
+              .span4= f.text_field :invitation_code, placeholder: "Email us to be invited"
+          .span4= hidden_field_tag "user[_type]", I18n.locale == :en ? "IndUser" : "OrgUser"
           .row
             .span4.offset2= f.submit t("sign_up"), :class => "btn"
 

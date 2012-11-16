@@ -162,4 +162,7 @@ class User
   def correct_profile
     self.is_a?(IndUser) ? profile : org_profile
   end
+
+  def invitation_code
+  end
 end
