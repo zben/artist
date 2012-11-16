@@ -32,7 +32,7 @@ class ApplicationController < ActionController::Base
           if current_user.profile
             artworks_path
           else
-            ind_user_new_path(current_user.slug,'profile')
+            ind_user_new_path(current_user.id,'profile')
           end
       else
         if current_user.org_profile
