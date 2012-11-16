@@ -7,8 +7,7 @@
         -else
           %h2 Update Artist Profile
 
-
-        = semantic_nested_form_for @user do |f|
+        = semantic_nested_form_for @user, url: ind_user_path(@user.slug_or_id) do |f|
           = hidden_field_tag :current_step, 'profile' 
           = hidden_field_tag :is_new, 'false' if @is_new
 

@@ -164,5 +164,10 @@ class User
   end
 
   def invitation_code
+    #for form validation
+  end
+
+  def slug_or_id
+    slug.presence || id
   end
 end
