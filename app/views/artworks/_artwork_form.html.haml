@@ -7,7 +7,7 @@
         .row
           .span4= a.input :title
           .span1= a.input :year, placeholder: "YYYY"
-          .span2= a.input :type, as: :select, collection: Artwork::PAINTING_TYPES , include_blank: false
+          .span2= a.input :type, as: :select, collection: Artwork.types_for_select , include_blank: false
           .span2= a.input :base, placeholder: "eg. paper, canvas"
         -#   .span2= a.input :is_framed, label: "Frame Included", as: :select , include_blank: false
         -#   .span2= a.input :for_sale, label: "For Sale", as: :select , include_blank: false

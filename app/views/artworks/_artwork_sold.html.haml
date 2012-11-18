@@ -8,7 +8,7 @@
           .span4= a.input :title, input_html: {disabled: true}
           .span1= a.input :year, placeholder: "YYYY", input_html: {disabled: true}
 
-          .span2= a.input :type, as: :select, collection: Artwork::PAINTING_TYPES , include_blank: false, input_html: {disabled: true}
+          .span2= a.input :type, as: :select, collection: Artwork.types_for_select , include_blank: false, input_html: {disabled: true}
 
           .span2= a.input :base, placeholder: "eg. paper, canvas", input_html: {disabled: true}
 

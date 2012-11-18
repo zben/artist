@@ -4,6 +4,25 @@ class ApplicationController < ActionController::Base
     protect_from_forgery
     before_filter :set_locale
 
+    unless Rails.application.config.consider_all_requests_local
+      rescue_from Exception, :with => :render_error
+      rescue_from ActiveRecord::RecordNotFound, :with => :render_not_found
+      rescue_from AbstractController::ActionNotFound, :with => :render_not_found
+      rescue_from ActionController::RoutingError, :with => :render_not_found
+      rescue_from ActionController::UnknownController, :with => :render_not_found
+      rescue_from ActionController::UnknownAction, :with => :render_not_found
+    end
+
+    def render_error exception
+      Rails.logger.error(exception)
+      redirect_to "/error", :status => 500
+    end
+
+    def render_not_found exception
+      Rails.logger.error(exception)
+      render "/error", :status => 404
+    end
+
     def authenticate!
         session[:user_return_to] = request.path
         if !user_signed_in?

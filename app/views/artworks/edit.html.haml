@@ -11,7 +11,7 @@
               .image_block.small.smaller=link_to image_tag(@artwork.photos.first.photo(:thumb)), @artwork
             .span2
               .row
-                .span2=f.input :type, as: :select, include_blank: false, collection: Artwork::PAINTING_TYPES
+                .span2=f.input :type, as: :select, include_blank: false, collection: Artwork.types_for_select
                 .span2=f.input :theme, as: :select, include_blank: false
                 .span2=f.input :year, label: "Year of Creation", placeholder: "YYYY"
           =f.semantic_fields_for :photos do |p|
@@ -49,7 +49,7 @@
             =link_to "Return to list", edit_artist_artworks_path(@artwork.ind_user.slug)
         -if @original_sellable.new?
           .original_note
-            %p If you want to sell the original artwork, click on the link above to fill in the information. You will be able to mark the artwork as "not for sale" any time.
+            %p If you want to sell the original artwork, click on the link above to fill in the information. You will be able to mark the artwork as "not for sale" any timefloat: left;.
             %p If you just want to sell prints/copies, you can skip this section.
 
       .span4.offset1
