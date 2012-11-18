@@ -6,7 +6,7 @@
     -@ind_users.each do |artist|
       =link_to artist do
         .artist_block.shadow
-          =image_tag artist.avatar.url(:large)
+          =image_tag artist.avatar.url(:large), width: 150, height: 150
           %h4=artist.name
 
 -unless current_user

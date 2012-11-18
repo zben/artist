@@ -3,8 +3,10 @@
     Hi there,
   %p
     =@resource.invited_by.name
-    invites you to join Canvvas.com.
-  -unless (message = @resource.invited_by.invitation_message).nil?
+    invites you to join Canvvas.com. Click
+    =link_to('here', accept_invitation_url(@resource, invitation_token: @resource.invitation_token))
+    to accept the invitation.
+  -unless (message = @resource.invited_by.invitation_message).presence.nil?
     %p{style: "background-color: #C7EEFE; padding: 10px; width: 600px;"}=word_wrap(message).gsub(/\n/, '<br/>').html_safe
   %p Canvvas.com is a web platform that bridges artists in the United States with growing art market in China. You post your artwork for sale. When an order comes through, you get paid immediately and we ship the artwork for you. Easy as that.
 
@@ -13,6 +15,4 @@
 
 Ben Zhang
 %br
-CEO
-%br
-Canvvas.com
+Founder, Canvvas.com

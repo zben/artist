@@ -8,6 +8,6 @@
             = f.label "Email"
             %br/
             = f.text_field :email, value: @emails, placeholder: "example@gmail.com, example@yahoo.com"
-            = f.label :message
+            = f.label :message, "Message (optional)"
             = text_area_tag :message, nil, :rows => 10
           %p= f.submit "Send invitation",:class=>'btn'

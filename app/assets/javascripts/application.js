@@ -11,7 +11,6 @@
 //= require best_in_place
 //= require best_in_place.purr
 //= require jquery.remotipart
-//= require jquery.tooltips
 
 $(document).ready(function() {
   $('#skill_picker').click(function(event){ 
@@ -112,5 +111,28 @@ $(document).ready(function() {
           });
         }
       );
-
+// formtastic.qtip2.min.js Copyright (C) 2012 Gyorgy Schreiber (gydotschreiberatmobilitydothu)  - MIT & GPL licenses apply
+$(".inline-hints").hide();
+$(".inline-hints").each(function () {
+    var input = $(this.parentNode);
+    var q = "<span class='q'> (?) </span>"
+    input.find('label').append(q);
+    input.find('label').qtip({
+        position: {
+            my: "bottom left",
+            at: "top right",
+            target: input.find('span.q')
+        },
+        content: {
+            text: function (api) {
+                var hinttext = $(input)[0].lastChild.firstChild.parentElement.attributes[0].nodeName == 'class' && $(input)[0].lastChild.firstChild.parentElement.attributes[0].nodeValue == 'inline-errors' ? $(input)[0].children[$(this)[0].children.length - 2].firstChild.wholeText : $(input)[0].lastChild.firstChild.wholeText;
+                return hinttext;
+            }
+        },
+        style: {
+                  classes: 'ui-tooltip-shadow ui-tooltip-rounded ui-tooltip-youtube'
+                }
+    });
+});
+ 
 });

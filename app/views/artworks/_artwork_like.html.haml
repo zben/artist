@@ -1,0 +1,11 @@
+-if liked = artwork.bookmarkings.where(:user_id=>current_user.try(:id)).present?
+  =link_to "", remote: true do
+    %div{class: "star #{artwork.id} liked" }
+-elsif (current_user && current_user != artwork.ind_user)
+  =link_to toggle_bookmark_path('Artwork', artwork.id.to_s), remote: true, class: "#{artwork.id}" do
+    %div{class: "star #{artwork.id} #{liked ? 'liked': ''}"}
+-else
+  =link_to "", remote: true do
+    .star
+
+%div{class: "like_count #{artwork.id}"}=artwork.likes_counter

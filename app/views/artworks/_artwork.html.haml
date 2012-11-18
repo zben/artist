@@ -1,9 +1,15 @@
 =link_to artwork do
   .image_block
     =image_tag(artwork.photos.first.photo.url(:medium))
-    .title=artwork.title == "" ? "Untitled" : artwork.title
+    .title
+      .words=artwork.title == "" ? "Untitled" : artwork.title
+      =render 'artworks/artwork_like', artwork: artwork
     .artist
       =image_tag artwork.ind_user.avatar.url(:small)
       .name
         %b=link_to artwork.ind_user.name, artwork.ind_user
-        .image_footer="#{t("submitted")} #{time_ago_in_words artwork.created_at} #{t("ago")}"
+        .image_footer
+          ="#{time_ago_in_words artwork.created_at} #{t("ago")}"
+          =link_to "Edit Artwork", edit_artwork_path(a, anchor: "edit_artwork_#{artwork.id}"),class: "edit_artwork" if can_edit?(artwork)
+          .price= artwork.sellables.original.first.price_in_yuan #if I18n.locale == :ch || current_user.try(:admin?)
+

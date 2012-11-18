@@ -9,11 +9,11 @@ class Artwork
   has_many :photos, autosave: true, dependent: :destroy, as: :attachable
   has_many :sellables
   has_many :bookmarkings,:class_name=>"Bookmark", as: :bookmarkable
-  belongs_to :ind_user
-  belongs_to :theme
+  belongs_to :ind_user, index: true
+  belongs_to :theme, index: true
   field :title
   field :description
-  field :type
+  as_enum :type, oil: 1, pastel: 2, acrylic: 3, watercolor: 4, ink: 5, spray: 6, pencil: 7, other: 8
   field :year
 
   field :likes_counter, default: 0
@@ -31,11 +31,19 @@ class Artwork
 
   slug :title, reserve: [""], history: true
 
-  PAINTING_TYPES = %w{ Oil Pastel Acrylic Watercolor Ink Sprary Paint Other }
+  index :title, background: true
+  index :type, background: true
+  index :likes_counter, background: true
+  index :visit_counter, background: true
+  index :original_avaiable, background: true
+  index :copy_available, background: true
+  index :for_display, background: true
+  index :original_sale_price, background: true
+  index :copy_sale_price, background: true
 
   accepts_nested_attributes_for :photos, allow_destroy: true
 
-  default_scope desc(:created_at)
+  default_scope desc(:_id)
   scope :ready, where(for_display: true)
   scope :not_ready, where(for_display: false)
 
@@ -69,5 +77,13 @@ class Artwork
 
   def self.find slug_or_id
     self.find_by_slug(slug_or_id) || self.where(_id: slug_or_id).try(:first)
+  end
+
+  def previous
+    ind_user.artworks.ready.where(:_id.lt => self._id).first || ind_user.artworks.ready.first
+  end
+
+  def next
+    ind_user.artworks.ready.where(:_id.gt => self._id).last || ind_user.artworks.ready.last
   end
 end

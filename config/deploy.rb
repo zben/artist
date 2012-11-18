@@ -33,6 +33,7 @@ namespace :deploy do
       run "#{sudo} /etc/init.d/nginx #{command}"
     end
   end
+end
 
 namespace :deploy do
   namespace :assets do
@@ -45,7 +46,6 @@ namespace :deploy do
       end
     end
   end
-
   # task :setup_config, roles: :app do
   #   sudo "ln -nfs #{current_path}/config/nginx.conf /etc/nginx/sites-enabled/#{application}"
   #   sudo "ln -nfs #{current_path}/config/unicorn_init.sh /etc/init.d/unicorn_#{application}"
@@ -58,7 +58,8 @@ namespace :deploy do
   task :symlink_config, roles: :app do
     run "ln -nfs #{shared_path}/config/constants.rb #{release_path}/config/initializers/constants.rb"
   end
-  after "deploy:finalize_update", "deploy:symlink_config"
+end
+after "deploy:finalize_update", "deploy:symlink_config"
 
   # desc "Make sure local git is in sync with remote."
   # task :check_revision, roles: :web do
@@ -69,5 +70,3 @@ namespace :deploy do
   #   end
   # end
   # before "deploy", "deploy:check_revision"
-end
-end

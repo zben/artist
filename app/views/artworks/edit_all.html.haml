@@ -2,7 +2,8 @@
   .span16.shadow
     .row
       .span14.offset1
-        %h2.center Manage Artworks
+        %h2 Manage Artworks
+        =link_to "upload your first artwork", new_artwork_path unless @user.artworks.present?
         %ul
           #image_blocks.small
             -@user.artworks.each do |a|

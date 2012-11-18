@@ -32,10 +32,10 @@
                 .span7
                   =p.input :website, placeholder: "http://www.yourname.com"
               .row
-                .span7= p.input :intro, label: "Introduction", :as=>:text,:input_html => { :class => 'autogrow', :rows => 5, :cols => 20, :maxlength => 500  },:hint=>"Describe your specialty in the themes and forms of your artwork. Mention any local, national and internationl recognition, awards or major art shows. Mention any notable galleries you have worked with. We will translate your introduction to Chinese for free."
-                .span3
-                  =f.input :avatar, label: "Face Photo"
-                  =image_tag @user.avatar(:large)
+                .span7= p.input :intro, label: "Introduction", :as=>:text,:input_html => { :class => 'autogrow', :rows => 12, :cols => 20, :maxlength => 1000  },:hint=>"Tell us your story. You can describe your specialty in the themes and forms of your artwork. Feel free to mention any local, national and internationl recognition, awards or major art shows. If applicable, mention any notable galleries you have worked with. We will translate your introduction to Chinese."
+                .span4
+                  =f.input :avatar, label: "Artist Photo", hint: "We encourage you to post proper face photo of yourself. If you prefer, you can also post one of your signature paintings to represent your avatar."
+                  .image_shadow=image_tag @user.avatar(:large)
               -if current_user.admin?
                 .row
                   .span10= p.input :intro_ch, label: "Chinese introduction", :as=>:text,:input_html => { :class => 'autogrow', :rows => 5, :cols => 20, :maxlength => 500  }

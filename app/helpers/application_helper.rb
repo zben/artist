@@ -60,6 +60,18 @@ module ApplicationHelper
         :class=>"bookmark hidden #{bookmarkable.id}",:remote=>true
     end
   end
+
+  def like_code bookmarkable
+    result = bookmarkable.bookmarkings.where(:user_id=>current_user.id)
+    if result.count==0
+      link_to "like",toggle_bookmark_path(bookmarkable.class.name,bookmarkable.id.to_s),
+        :class=>"spinner bookmark #{bookmarkable.id}",:remote=>true
+    else
+      link_to "unlike",toggle_bookmark_path(bookmarkable.class.name,bookmarkable.id.to_s),
+        :class=>"bookmark hidden #{bookmarkable.id}",:remote=>true
+    end
+  end
+
   
   def view_code bookmarkable
     link_to "查看",bookmarkable,:class=>"btn"

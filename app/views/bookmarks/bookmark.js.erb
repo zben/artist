@@ -1,6 +1,8 @@
 <% if @is_bookmarked%> 
-$("a.<%=@bookmarkable.id=%>").text("unlike").addClass("hidden");
+$(".star.<%=@bookmarkable.id%>").addClass("liked");
+$("a.<%=@bookmarkable.id%>").attr("href", "");
+
 <% else %>
-$("a.<%=@bookmarkable.id%>").text("like");
+$(".star.<%=@bookmarkable.id%>").removeClass("liked");
 <% end %>
-$("span.counter.<%=@bookmarkable.id%>").html(<%=@bookmarkable.likes_counter%>);
+$(".like_count.<%=@bookmarkable.id%>").html(<%=@bookmarkable.likes_counter%>);

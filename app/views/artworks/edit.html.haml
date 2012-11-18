@@ -20,7 +20,7 @@
           =link_to "Return to list", edit_artist_artworks_path(@artwork.ind_user.slug)
       .span4.offset1
         %h2 Sell original artwork
-        %p=link_to_function "Enter original artwork information", "$(this).hide();$('.original_form').show();" if @original_sellable.new?
+        %p=link_to_function "Enter original artwork information", "$(this).hide();$('.original_note').hide();$('.original_form').show();" if @original_sellable.new?
         .original_form{style: "display:#{@original_sellable.new? ? 'none' : 'default'}"}
           =semantic_form_for @original_sellable do |f|
             =f.input :is_original, value: true, as: :hidden
@@ -43,16 +43,18 @@
                 =f.input :is_framed, as: :select, include_blank: false, hint: "Frames may increase the cost of shipping significantly. Include frame if you think it is important for the artwork to be shipped with the frame."
               .span2
                 =f.input :weight, label: "Weight (lb)", hint: "Please estimate the weight in pounds. If it is really light, put in 0"
-            =f.input :note, as: :text, input_html: { :class => 'autogrow', :rows => 2 }, placeholder: "This note is for your own reference. You can also tell us anything we should know about this artwork"
+            =f.input :note, as: :text, input_html: { :class => 'autogrow', :rows => 5 }, placeholder: "This note is for your own reference. You can also tell us anything we should know about this artwork"
 
             =f.submit "Save Original", class: "btn"
             =link_to "Return to list", edit_artist_artworks_path(@artwork.ind_user.slug)
-        %p If you want to sell the original artwork, click on the link above to fill in the information. You will be able to mark the artwork as "not for sale" any time.
-        %p If you just want to sell prints/copies, you can skip this section.
+        -if @original_sellable.new?
+          .original_note
+            %p If you want to sell the original artwork, click on the link above to fill in the information. You will be able to mark the artwork as "not for sale" any time.
+            %p If you just want to sell prints/copies, you can skip this section.
 
       .span4.offset1
         %h2 Sell prints or copies
-        %p=link_to_function "Enter prints/copies information", "$(this).hide();$('.copy_form').show();" if @copy_sellable.new?
+        %p=link_to_function "Enter prints/copies information", "$(this).hide();$('.copy_note').hide();$('.copy_form').show();" if @copy_sellable.new?
 
         .copy_form{style: "display:#{@copy_sellable.new? ? 'none' : 'default'}"}
           =semantic_form_for @copy_sellable do |f|
@@ -81,8 +83,10 @@
 
             =f.submit "Save Copy", class: "btn"
             =link_to "Return to list", edit_artist_artworks_path(@artwork.ind_user.slug)
-        %p At this point, Canvvas.com is not responsible for making the prints/copies so you will have to produce them when the orders come in. We will handle international shipping and packaging for you. When we start in-house printing service, we will let you know.
+        -if @copy_sellable.new?
+          .copy_note
+            %p At this point, Canvvas.com is not responsible for making the prints/copies so you will have to produce them when the orders come in. We will handle international shipping and packaging for you. When we start in-house printing service, we will let you know.
 
-        %p You can mark prints/copies as "not for sale" at any time.
+            %p You can mark prints/copies as "not for sale" at any time.
 
-        %p If you just want to sell the original, you can skip this section.
+            %p If you just want to sell the original, you can skip this section.

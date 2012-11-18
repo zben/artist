@@ -5,7 +5,7 @@ class Sellable
   include SimpleEnum::Mongoid
   include ActionView::Helpers
 
-  belongs_to :artwork
+  belongs_to :artwork, index: true
   has_many :orders
 
   auto_increment :number, seed: 1000
@@ -24,9 +24,14 @@ class Sellable
   field :note
 
   field :for_sale, type: Boolean, default: true
-  field :ready, type: Boolean, default: false
   field :order_count
   field :inventory, type: Integer
+
+  index :sale_price, background: true
+  index :is_original, background: true
+  index :is_framed, background: true
+  index :for_sale, background: true
+
   scope :original, where(is_original: true)
   scope :copy, where(is_original: false)
   default_scope asc(:_id)

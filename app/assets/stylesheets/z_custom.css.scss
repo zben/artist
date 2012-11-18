@@ -1,3 +1,5 @@
+$blue: #3C8CE7;
+
 body.pages, body.devise-sessions{
   background:url('homepage_background.jpg')
 }
@@ -811,6 +813,16 @@ ol.fragments-group{
     color: black;
   }
   .title{
+    .words{
+      display: inline-block;
+      float: left;
+      width: 200px;
+      height:25px;
+      line-height: 25px;
+      overflow: hidden;
+    }
+    display: block;
+    height:25px;
     font-weight: bold;
     text-align: left;
     padding-left: 20px;
@@ -821,8 +833,8 @@ ol.fragments-group{
     background-color: #F2F0F0;
     img{
       float:left;
-      padding-left: 20px;
-      padding-top: 5px;
+      padding-left: 5px;
+      padding-top: 2px;
       margin-right: 0px;
       display:block;
       border: none;
@@ -841,9 +853,9 @@ ol.fragments-group{
     .price{
       display: inline-block;
       position: absolute;
-      width: 70px;
+      width: 90px;
       font-family: 'Lato','sans-serif';
-      font-size:20px;
+      font-size:22px;
       padding-right:20px;
       bottom: 10px;
       right: 0;
@@ -947,7 +959,7 @@ body.ind_users.show{
    .user_mainbar{
      padding:10px;
      margin-left: 10px;
-     width: 710px;
+     width: 735px;
      height: 150px;
      background-color: #FFF;
      float: left;
@@ -1087,7 +1099,6 @@ p{
   line-height: 20px;
 }
 h2{
-  color: green;
   display: block;
 }
 .join_now form{
@@ -1188,11 +1199,33 @@ li.fragment select.date{
   top: 10px;
 }
 .likes, .tiny_button a{
-  background-color: green;
   display: inline-block;
-  color: white;
-  padding:0 3px;
-  margin:0px;
+  float: left;
+  line-height: 40px;
+  height: 40px;
+  width: 30px;
+  text-align: right;
+}
+.like_count{
+  display:inline-block;
+  float: right;
+  line-height: 25px;
+  font-size: 14px;
+  font-family: 'Lato';
+  font-weight: normal;
+  
+}
+.star{
+  display: inline-block;
+  float: right;
+  width: 25px;
+  height: 25px;
+  margin:0 20px 0 10px;
+  background: url("star.png") no-repeat -25px 0px;
+}
+
+.star.liked{
+  background: url("star.png") no-repeat;
 }
 .tiny_button{
   display:inline-block;
@@ -1234,4 +1267,36 @@ input{
 a.hint_modal{
   text-decoration: none;
   color: red;
+}
+#error_explanation{
+  h2{display: none;}
+  ul{margin-left:0px;}
+  li{color: red;}
+}
+.image_shadow{
+  display: inline-block;
+  padding: 10px;
+  box-shadow: rgba(34, 25, 25, 0.4) 0px 1px 3px 0px;
+}
+span.ui-icon.ui-icon-close{
+  display: none;
+}
+span.q{
+  font-weight: bold;
+  color: $blue;
+}
+.prev_next{
+  text-align: center;
+  width: 220px;
+  padding: 10px 0;
+  a{
+    display: inline-block;
+    width: 90px;
+    padding: 5px;
+    background-color: #DDD;
+    text-align: center;
+  }
+}
+.artworks_show_like{
+float: left;
 }

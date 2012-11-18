@@ -9,7 +9,8 @@
       -if user_signed_in?
         %ul{class: "nav", style: "float: right;"}
           -if current_user.is_artist?
-            %li{:class=>"#{is_active?("work#new")}"}=link_to "Upload work", new_artwork_path
+            %li{:class=>"#{is_active?("work#edit")}"}=link_to "Manage artwork", edit_artist_artworks_path(current_user)
+            %li{:class=>"#{is_active?("work#new")}"}=link_to "New Upload", new_artwork_path
             %li{:class=>"#{is_active?("invitation#new")}"}=link_to "Invite Artists", new_invitation_path(:user)
           %li{:class=>"dropdown #{is_active?("users#edit")}",:"data-dropdown"=>"dropdown"}
             =link_to_function current_user.name, "", :class=>"dropdown-toggle" 
@@ -22,7 +23,6 @@
                 %li=link_to "Logout",destroy_user_session_path,:method => :delete if user_signed_in?
               -else
                 %li=link_to t("see_profile"),current_user
-                %li=link_to t("manage_artwork"), edit_artist_artworks_path(current_user.slug) if current_user.is_artist?
                 %li=link_to t("update_info"),user_edit_path(current_user.slug,'profile')
                 %li=link_to t("update_password"),user_edit_path(current_user.slug,'account')
                 %li=link_to t("logout"),destroy_user_session_path,:method => :delete if user_signed_in?
