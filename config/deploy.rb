@@ -61,12 +61,12 @@ namespace :deploy do
 end
 after "deploy:finalize_update", "deploy:symlink_config"
 
-  # desc "Make sure local git is in sync with remote."
-  # task :check_revision, roles: :web do
-  #   unless `git rev-parse HEAD` == `git rev-parse origin/master`
-  #     puts "WARNING: HEAD is not the same as origin/master"
-  #     puts "Run `git push` to sync changes."
-  #     exit
-  #   end
-  # end
-  # before "deploy", "deploy:check_revision"
+namespace :web do
+  task :disable, :roles => :web do
+    on_rollback { run "rm #{shared_path}/system/maintenance.html" }
+    run "if [[ !(-f #{shared_path}/system/maintenance.html) ]] ; then ln -s #{shared_path}/system/maintenance.html.not_active #{shared_path}/system/maintenance.html ; else echo 'maintenance page already up'; fi"
+  end
+  task :enable, :roles => :web do
+    run "rm #{shared_path}/system/maintenance.html"
+  end
+end
