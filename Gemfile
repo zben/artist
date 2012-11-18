@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 ruby "1.9.2"
 
-gem 'rails', '3.2.8'
+gem 'rails', '3.2.9'
 gem 'haml-rails'
 gem 'devise',           '~> 2.0.0'
 gem 'devise_invitable', '~> 1.0.0'

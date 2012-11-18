@@ -15,12 +15,12 @@ class ApplicationController < ActionController::Base
 
     def render_error exception
       Rails.logger.error(exception)
-      redirect_to "/error", :status => 500
+      redirect_to "/error"
     end
 
     def render_not_found exception
       Rails.logger.error(exception)
-      render "/error", :status => 404
+      redirect_to "/error"
     end
 
     def authenticate!
