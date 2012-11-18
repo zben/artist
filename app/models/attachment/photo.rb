@@ -9,7 +9,7 @@ class Photo < Attachment
     has_mongoid_attached_file :photo,
       :path => ':photo/:id/:style.:extension',
       :storage => :s3,
-      :bucket => 'canvvas-production',
+      :bucket => 'canvvas-art',
       :s3_credentials => {:access_key_id => ENV['S3_KEY'],:secret_access_key => ENV['S3_SECRET']},
       :styles => {
       :original => ['1920x1680>', :jpg],
