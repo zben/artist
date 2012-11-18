@@ -30,7 +30,7 @@ class OrgUser < User
         :path => ':logo/:id/:style.:extension',
         :default_url => "/assets/logo/:style/missing.jpg",
         :storage => :s3,
-        :bucket => 'canvvas',
+        :bucket => 'canvvas-production',
         :s3_credentials => {:access_key_id => ENV['S3_KEY'],:secret_access_key => ENV['S3_SECRET']},
         :styles => {
         :original => ['1920x1680>', :jpg],

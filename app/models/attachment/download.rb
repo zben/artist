@@ -9,7 +9,7 @@ class Download < Attachment
     has_mongoid_attached_file :download,
       :path => ':download/:id/:file_name',
       :storage => :s3,
-      :bucket => 'canvvas',
+      :bucket => 'canvvas-production',
       :s3_credentials => {:access_key_id => ENV['S3_KEY'],:secret_access_key => ENV['S3_SECRET']}
   else
     has_mongoid_attached_file :download
