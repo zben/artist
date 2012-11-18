@@ -10,6 +10,6 @@
         %b=link_to artwork.ind_user.name, artwork.ind_user
         .image_footer
           ="#{time_ago_in_words artwork.created_at} #{t("ago")}"
-          =link_to "Edit Artwork", edit_artwork_path(a, anchor: "edit_artwork_#{artwork.id}"),class: "edit_artwork" if can_edit?(artwork)
+          =link_to "Edit Artwork", edit_artwork_path(artwork, anchor: "edit_artwork_#{artwork.id}"),class: "edit_artwork" if can_edit?(artwork)
           .price= artwork.sellables.original.first.price_in_yuan #if I18n.locale == :ch || current_user.try(:admin?)
 
