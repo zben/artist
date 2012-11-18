@@ -14,9 +14,10 @@
           %p=link_to "#{@artwork.ind_user.artworks.ready.count} Artworks", @artwork.ind_user
       .share=render 'shared/share', artwork: @artwork if I18n.locale == :ch
     =link_to "Edit this artwork", edit_artwork_path(@artwork, anchor: "edit_artwork_#{@artwork.id}") if can_edit?(@artwork)
-    .prev_next
-      =link_to "< Previous", artwork_path(@artwork.previous)
-      =link_to "Next >", artwork_path(@artwork.next)
+    -if @artwork.for_display
+      .prev_next
+        =link_to "< Previous", artwork_path(@artwork.previous)
+        =link_to "Next >", artwork_path(@artwork.next)
     %h2=@artwork.title.presence || "Untitled"
     %table.table.table-striped
       %tr
