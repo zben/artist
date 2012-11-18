@@ -28,8 +28,9 @@ project_logo/small/missing.jpg: project_logo/small/missing-64028d627915bbe9db6b4
 projects_icon.jpg: projects_icon-0373d5de9e7d69b7d7d2ced661f05810.jpg
 rails.png: rails-be8732dac73d845ac5b142c8fb5f9fb0.png
 spinner.gif: spinner-e0ae018fdf0b8e9f091987f22637f5c5.gif
-application.js: application-256396812e838732d33d66165c23a568.js
-application.css: application-bbb383ec45704d357b8d6673bc2f6038.css
+star.png: star-7eb2fb2b8dda411eded556cc57c86e4d.png
+application.js: application-65ce53c6bf62a7c876c209d23e8a5b79.js
+application.css: application-aa79bd7c62d6a6e046eed3fd22cd9244.css
 images/ui-bg_diagonals-thick_18_b81900_40x40.png: images/ui-bg_diagonals-thick_18_b81900_40x40-c0074c9cbf446e98bb0bb8359cb9a305.png
 images/ui-bg_diagonals-thick_20_666666_40x40.png: images/ui-bg_diagonals-thick_20_666666_40x40-f7a8f6efeb8ab26a26161942fd679b9e.png
 images/ui-bg_flat_10_000000_40x100.png: images/ui-bg_flat_10_000000_40x100-f42b3c756e6e975074e882bd4052bea3.png
